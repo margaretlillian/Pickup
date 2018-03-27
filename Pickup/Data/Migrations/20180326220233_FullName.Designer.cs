@@ -11,9 +11,10 @@ using System;
 namespace Pickup.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180326220233_FullName")]
+    partial class FullName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,30 +129,6 @@ namespace Pickup.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Pickup.Models.Address", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AddressID");
-
-                    b.Property<string>("City");
-
-                    b.Property<int>("DonorID");
-
-                    b.Property<string>("Street");
-
-                    b.Property<string>("ZIP");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AddressID");
-
-                    b.HasIndex("DonorID");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("Pickup.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -205,79 +182,6 @@ namespace Pickup.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Pickup.Models.DonationPickup", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AddressID");
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<bool>("CallEnRoute");
-
-                    b.Property<DateTime>("PickupDateTime");
-
-                    b.Property<DateTime>("ScheduleDateTime");
-
-                    b.Property<string>("SpecialInstructions");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AddressID");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("DonationPickups");
-                });
-
-            modelBuilder.Entity("Pickup.Models.Donor", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("DonorID");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("PhoneNumberTwo");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DonorID");
-
-                    b.ToTable("Donors");
-                });
-
-            modelBuilder.Entity("Pickup.Models.Furniture", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Furnitures");
-                });
-
-            modelBuilder.Entity("Pickup.Models.FurnitureDonationPickup", b =>
-                {
-                    b.Property<int>("DonationPickupID");
-
-                    b.Property<int>("FurnitureID");
-
-                    b.HasKey("DonationPickupID", "FurnitureID");
-
-                    b.HasIndex("FurnitureID");
-
-                    b.ToTable("FurnitureDonationPickups");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -320,50 +224,6 @@ namespace Pickup.Data.Migrations
                     b.HasOne("Pickup.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Pickup.Models.Address", b =>
-                {
-                    b.HasOne("Pickup.Models.Address")
-                        .WithMany("Addresses")
-                        .HasForeignKey("AddressID");
-
-                    b.HasOne("Pickup.Models.Donor", "Donor")
-                        .WithMany()
-                        .HasForeignKey("DonorID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Pickup.Models.DonationPickup", b =>
-                {
-                    b.HasOne("Pickup.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Pickup.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("DonationPickups")
-                        .HasForeignKey("ApplicationUserId");
-                });
-
-            modelBuilder.Entity("Pickup.Models.Donor", b =>
-                {
-                    b.HasOne("Pickup.Models.Donor")
-                        .WithMany("Donors")
-                        .HasForeignKey("DonorID");
-                });
-
-            modelBuilder.Entity("Pickup.Models.FurnitureDonationPickup", b =>
-                {
-                    b.HasOne("Pickup.Models.DonationPickup", "DonationPickup")
-                        .WithMany("FurnitureDonationPickups")
-                        .HasForeignKey("DonationPickupID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Pickup.Models.Furniture", "Furniture")
-                        .WithMany("FurnitureDonationPickups")
-                        .HasForeignKey("FurnitureID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
