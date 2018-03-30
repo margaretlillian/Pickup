@@ -7,6 +7,14 @@ a {
     color: #4f9fbc;
 }
 
+label {width: 20%;
+       float:left;
+}
+
+input, textarea, select {width: 76%;
+                         font-size: 1em;
+}
+
 nav {float: left;
      width: 20%;
 }
@@ -23,7 +31,10 @@ nav button {
     border: none;
     background: #fff;
     color: #4f9fbc;
-    font: 1.25em sans-serif;
+    font: 1em sans-serif;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 footer {clear: both;}
@@ -39,3 +50,7 @@ footer {clear: both;}
 }
 
 .sat {background: #ccc;}
+
+.form-group {margin: 10px 0;
+             clear: both;
+}

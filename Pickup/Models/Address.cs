@@ -9,8 +9,10 @@ namespace Pickup.Models
     {
         public int ID { get; set; }
         public string Street { get; set; }
+        public string Apartment { get; set; }
         public string City { get; set; }
         public string ZIP { get; set; }
+        public string Neighborhood { get; set; }
 
         public int DonorID { get; set; }
         public Donor Donor { get; set; }
