@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.DonationPickupViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+//using System.Security.Principal;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,9 +18,13 @@ namespace Pickup.Controllers
         private readonly ApplicationDbContext context;
 
         public DonationPickupController(ApplicationDbContext applicationDbContext)
-        { context = applicationDbContext; }
+        { context = applicationDbContext;
+        }
 
-        // GET: /<controller>/
+
+
+    // GET: /<controller>/
+    [Authorize]
         public IActionResult PickupDonor()
         {
             ViewBag.Title = "Donor Information";
@@ -26,6 +32,7 @@ namespace Pickup.Controllers
             return View("Index", createNewPickupViewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult PickupDonor(DonorViewModel donorViewModel)
         {
@@ -49,12 +56,15 @@ namespace Pickup.Controllers
             return View(donorViewModel);
         }
 
+        [Authorize]
         public IActionResult Address(int donorId)
-        { Donor donor = context.Donors.Single(d => d.ID == donorId);
+        {
+            Donor donor = context.Donors.Single(d => d.ID == donorId);
             AddressViewModel addressViewModel = new AddressViewModel();
             return View("Index", addressViewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Address(AddressViewModel addressViewModel)
         {
@@ -72,9 +82,46 @@ namespace Pickup.Controllers
 
                 context.Add(newAddress);
                 context.SaveChanges();
-                return Redirect("/");
+                return Redirect("/DonationPickup/CreateNewPickup?addressId=" + newAddress.ID);
             }
             return View("Index", addressViewModel);
+        }
+
+        [Authorize]
+        public IActionResult CreateNewPickup(int addressId)
+        {
+            Address address = context.Addresses.Single(d => d.ID == addressId);
+            DonationPickupViewModel donationViewModel = new DonationPickupViewModel();
+            return View("Index", donationViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult CreateNewPickup(DonationPickupViewModel donationPickupViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                DateTime currentDate = DateTime.Now;
+                string scheduler = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                DonationPickup newPickup = new DonationPickup               
+
+                {
+                    ScheduleDateTime = currentDate,
+                    PickupDate = donationPickupViewModel.PickupDate,
+                    PickupTime = donationPickupViewModel.PickupTime,
+                    CallEnRoute = donationPickupViewModel.CallEnRoute,
+                    SpecialInstructions = donationPickupViewModel.SpecialInstructions,
+                    AddressID = donationPickupViewModel.AddressId,
+                    UserId = scheduler
+                };
+
+                context.Add(newPickup);
+                context.SaveChanges();
+                return Redirect("/");
+            }
+            return View("Index", donationPickupViewModel);
+
         }
     }
 }

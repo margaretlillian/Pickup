@@ -11,9 +11,10 @@ using System;
 namespace Pickup.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180402202906_PickupAddressUpdate")]
+    partial class PickupAddressUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,6 +219,8 @@ namespace Pickup.Data.Migrations
 
                     b.Property<int>("AddressID");
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<bool>("CallEnRoute");
 
                     b.Property<DateTime>("PickupDate")
@@ -230,13 +233,11 @@ namespace Pickup.Data.Migrations
 
                     b.Property<string>("SpecialInstructions");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("ID");
 
                     b.HasIndex("AddressID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("DonationPickups");
                 });
@@ -354,7 +355,7 @@ namespace Pickup.Data.Migrations
 
                     b.HasOne("Pickup.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("DonationPickups")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Pickup.Models.Donor", b =>

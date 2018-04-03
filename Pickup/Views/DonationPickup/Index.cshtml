@@ -1,15 +1,19 @@
-﻿<h2>@ViewBag.Title</h2>
+﻿
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<h2>@ViewBag.Title</h2>
 
 <form method="post">
-    @foreach(var property in ViewData.ModelMetadata.Properties)
-{
-    <div class="form-group">
-        <label for="@property.PropertyName">@(property.DisplayName ?? property.PropertyName)</label>
-        @Html.Editor(property.PropertyName)
-        @Html.ValidationMessage(property.PropertyName, new { @class = "help-block" })
-    </div>
+    <input type="hidden" name="scheduler" id="scheduler" value="@UserManager.GetUserName(User)" />
+    @foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        <div class="form-group">
+            <label asp-for="@property.PropertyName">@(property.DisplayName ?? property.PropertyName)</label>
+            @Html.Editor(property.PropertyName)
+            @Html.ValidationMessage(property.PropertyName, new { @class = "help-block" })
+        </div>
 
-}
+    }
     <input type="submit" value="Add @ViewBag.Title" />
-    </form>
+</form>
 

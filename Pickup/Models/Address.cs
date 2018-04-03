@@ -13,6 +13,7 @@ namespace Pickup.Models
         public string City { get; set; }
         public string ZIP { get; set; }
         public string Neighborhood { get; set; }
+        public string BottomFloor { get; set; }
 
         public int DonorID { get; set; }
         public Donor Donor { get; set; }
