@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models.DonationPickupViewModels
 {
-    public class DonationPickupViewModel
+    public class PickupDeliveryViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int AddressId { get; set; }

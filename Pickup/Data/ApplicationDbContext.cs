@@ -13,7 +13,7 @@ namespace Pickup.Data
     {
         public DbSet<Donor> Donors { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<DonationPickup> DonationPickups { get; set; }
+        public DbSet<PickupOrDelivery> PickupsDeliveries { get; set; }
         public DbSet<Furniture> Furnitures { get; set; }
         public DbSet<FurnitureDonationPickup> FurnitureDonationPickups { get; set; }
 

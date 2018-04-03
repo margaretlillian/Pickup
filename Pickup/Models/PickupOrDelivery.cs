@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models
 {
-    public class DonationPickup
+    public class PickupOrDelivery
     {
         public int ID { get; set; }
         public DateTime ScheduleDateTime { get; set; }
@@ -19,6 +19,7 @@ namespace Pickup.Models
 
         public bool CallEnRoute { get; set; }
         public string SpecialInstructions { get; set; }
+        public bool Delivery { get; set; }
 
         public int AddressID { get; set; }
         public Address Address { get; set; }

@@ -11,6 +11,6 @@ namespace Pickup.Models
     {
         public string FullName { get; set; }
 
-        public IList<DonationPickup> DonationPickups { get; set; }
+        public IList<PickupOrDelivery> DonationPickups { get; set; }
     }
 }

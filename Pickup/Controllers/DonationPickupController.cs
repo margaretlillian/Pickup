@@ -91,20 +91,20 @@ namespace Pickup.Controllers
         public IActionResult CreateNewPickup(int addressId)
         {
             Address address = context.Addresses.Single(d => d.ID == addressId);
-            DonationPickupViewModel donationViewModel = new DonationPickupViewModel();
+            PickupDeliveryViewModel donationViewModel = new PickupDeliveryViewModel();
             return View("Index", donationViewModel);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreateNewPickup(DonationPickupViewModel donationPickupViewModel)
+        public IActionResult CreateNewPickup(PickupDeliveryViewModel donationPickupViewModel)
         {
             if (ModelState.IsValid)
             {
                 DateTime currentDate = DateTime.Now;
                 string scheduler = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                DonationPickup newPickup = new DonationPickup               
+                PickupOrDelivery newPickup = new PickupOrDelivery               
 
                 {
                     ScheduleDateTime = currentDate,

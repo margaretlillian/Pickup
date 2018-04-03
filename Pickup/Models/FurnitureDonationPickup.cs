@@ -11,6 +11,6 @@ namespace Pickup.Models
         public Furniture Furniture { get; set; }
 
         public int DonationPickupID { get; set; }
-        public DonationPickup DonationPickup { get; set; }
+        public PickupOrDelivery DonationPickup { get; set; }
     }
 }
