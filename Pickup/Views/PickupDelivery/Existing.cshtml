@@ -1,0 +1,9 @@
+﻿@model List<Pickup.Models.Donor>
+
+<h3>This Donor May Already Exist!</h3>
+@foreach (var donor in Model)
+{
+    <p><a asp-controller="PickupDelivery" asp-action="Address?donorId=@donor.ID">@donor.FirstName @donor.LastName</a><br />
+    @donor.PhoneNumber<br />
+    @donor.PhoneNumberTwo </p>
+}

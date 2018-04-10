@@ -1,0 +1,47 @@
+﻿@model Pickup.Models.DonationPickupViewModels.SearchViewModel
+@{
+    Layout = null;
+}
+<h2>@ViewBag.Title</h2>
+
+<form asp-controller="PickupDelivery" asp-action="SearchResults">
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName" />
+
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName" />
+
+    <input type="submit" value="Search" />
+</form>
+
+@if (Model.Donors != null)
+{
+    @foreach (Donor donor in Model.Donors)
+    {
+        <h3>@donor.FirstName @donor.LastName</h3>
+        <ul>
+            <li>@donor.PhoneNumber</li>
+            <li>@donor.PhoneNumberTwo</li>
+            <li><a href="Address?DonorId=@donor.ID">Create new address for this donor.</a></li>
+        </ul>
+
+    }
+}
+@if (Model.Addresses != null)
+{
+    @foreach (Address address in Model.Addresses)
+    {
+        <h3>Address for: @address.Donor.FirstName @address.Donor.LastName</h3>
+        <ul>
+    <li>@address.Donor.PhoneNumber</li>
+            <li>@address.Donor.PhoneNumberTwo</li>
+    <li>@address.Street @address.Apartment, @address.City  @address.ZIP</li>
+            <li><a href="Pickup?AddressId=@address.ID">Create new pickup using this address.</a></li>
+</ul>
+
+    }
+
+}
+
+
+
