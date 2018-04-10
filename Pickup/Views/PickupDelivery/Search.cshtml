@@ -22,7 +22,7 @@
         <ul>
             <li>@donor.PhoneNumber</li>
             <li>@donor.PhoneNumberTwo</li>
-            <li><a href="Address?DonorId=@donor.ID">Create new address for this donor.</a></li>
+            <li><a href="JavaScript:void(0);" onclick="openInParent('Address?DonorId=@donor.ID');">Use new address for this donor.</a></li>
         </ul>
 
     }
@@ -33,15 +33,21 @@
     {
         <h3>Address for: @address.Donor.FirstName @address.Donor.LastName</h3>
         <ul>
-    <li>@address.Donor.PhoneNumber</li>
+            <li>@address.Donor.PhoneNumber</li>
             <li>@address.Donor.PhoneNumberTwo</li>
-    <li>@address.Street @address.Apartment, @address.City  @address.ZIP</li>
-            <li><a href="Pickup?AddressId=@address.ID">Create new pickup using this address.</a></li>
-</ul>
+            <li>@address.Street @address.Apartment, @address.City  @address.ZIP</li>
+            <li><a href="JavaScript:void(0);" onclick="openInParent('CreateNewPickup?AddressId=@address.ID');">Create new pickup using this address.</a></li>
+        </ul>
 
     }
 
 }
 
+<script>
+  function openInParent(url) {
+    window.opener.location.href = url;
+    window.close();
+  }
+</script>
 
 

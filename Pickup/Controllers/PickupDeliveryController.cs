@@ -147,10 +147,13 @@ namespace Pickup.Controllers
                     .ToList();
             searchViewModel.Addresses = new List<Address>();
             foreach (Donor donor in searchViewModel.Donors) {
-                Address donorAddress = context.Addresses.Where(a => a.DonorID == donor.ID).FirstOrDefault();
-                if (donorAddress != null)
-                {
-                    searchViewModel.Addresses.Add(donorAddress);
+                List<Address> donorAddresses = context.Addresses.Where(a => a.DonorID == donor.ID).ToList();
+
+                if (donorAddresses != null)
+                { foreach (Address donorAddress in donorAddresses)
+                    {
+                        searchViewModel.Addresses.Add(donorAddress);
+                    }
                 }
             }
             return View("Search", searchViewModel);
