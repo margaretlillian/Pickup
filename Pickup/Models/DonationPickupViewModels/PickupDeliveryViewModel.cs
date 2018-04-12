@@ -30,21 +30,11 @@ namespace Pickup.Models.DonationPickupViewModels
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
 
+        public int FurnitureID { get; set; }
+        public string FurnitureName { get; set; }
         public List<SelectListItem> Furniture { get; set; }
 
-        public PickupDeliveryViewModel(PickupOrDelivery pickupOrDelivery, IEnumerable<Furniture> furniture)
-        {
-            Furniture = new List<SelectListItem>();
-
-            foreach (var piece in furniture)
-            {
-                Furniture.Add(new SelectListItem
-                {
-                    Value = piece.ID.ToString(),
-                    Text = piece.Name
-                });
-            }
-        }
+        public ICollection<CheckBoxItem> Items { get; set; }
 
         public PickupDeliveryViewModel() {}
 

@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web;
 <form method="post">
     @foreach (var property in ViewData.ModelMetadata.Properties)
     {
@@ -9,6 +9,7 @@
             @Html.Editor(property.PropertyName)
             @Html.ValidationMessage(property.PropertyName, new { @class = "help-block" })
         </div>
+
 
     }
     <input type="submit" value="Add @ViewBag.Title" />
