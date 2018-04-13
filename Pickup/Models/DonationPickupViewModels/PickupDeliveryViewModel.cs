@@ -29,14 +29,7 @@ namespace Pickup.Models.DonationPickupViewModels
 
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
-
-        public int FurnitureID { get; set; }
-        public string FurnitureName { get; set; }
-        public List<SelectListItem> Furniture { get; set; }
-
-        public ICollection<CheckBoxItem> Items { get; set; }
-
-        public PickupDeliveryViewModel() {}
+        
 
     }
 }

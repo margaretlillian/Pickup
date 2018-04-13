@@ -101,17 +101,8 @@ namespace Pickup.Controllers
         {
             Address address = context.Addresses.Single(d => d.ID == addressId);
             //PickupDeliveryViewModel donationViewModel = new PickupDeliveryViewModel();
-            return View(new PickupDeliveryViewModel());
+            return View("Index", new PickupDeliveryViewModel());
         }
-
-        public IActionResult CheckBoxItem(int addressId)
-        {
-            Address address = context.Addresses.Single(d => d.ID == addressId);
-            List<Furniture> furniture = context.Furnitures.ToList();
-            //PickupDeliveryViewModel donationViewModel = new PickupDeliveryViewModel();
-            return View(new CheckBoxItem());
-        }
-
 
         [HttpPost]
         public IActionResult CreateNewPickup(PickupDeliveryViewModel donationPickupViewModel)

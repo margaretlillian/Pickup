@@ -1,53 +1,88 @@
 ﻿@model Pickup.Models.DonationPickupViewModels.SearchViewModel
 @{
-    Layout = null;
+    Layout = "_Popup";
 }
-<h2>@ViewBag.Title</h2>
+
+<h2>Search for Existing Donor</h2>
 
 <form asp-controller="PickupDelivery" asp-action="SearchResults">
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+    </div>
 
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+    </div>
 
     <input type="submit" value="Search" />
 </form>
 
 @if (Model.Donors != null)
+{@if (@Model.Donors.Count == 0)
+    {<h3>No Results</h3>}
+@foreach (Donor donor in Model.Donors)
 {
-    @foreach (Donor donor in Model.Donors)
-    {
-        <h3>@donor.FirstName @donor.LastName</h3>
-        <ul>
-            <li>@donor.PhoneNumber</li>
-            <li>@donor.PhoneNumberTwo</li>
-            <li><a href="JavaScript:void(0);" onclick="openInParent('Address?DonorId=@donor.ID');">Use new address for this donor.</a></li>
-        </ul>
 
-    }
+    <div class="donor-new-address">
+        <h4>@donor.FirstName @donor.LastName</h4>
+        <ul>
+            <li><span class="name">Phone Number: </span>@donor.PhoneNumber</li>
+            @if (donor.PhoneNumberTwo != null)
+            {
+                <li><span class="name">Phone #2: </span>@donor.PhoneNumberTwo</li>}
+        </ul>
+        <p>
+            <a href="JavaScript:void(0);"
+               onclick="openInParent('Address?DonorId=@donor.ID');">
+                Use new address for this donor.
+            </a>
+        </p>
+
+    </div>
+}
 }
 @if (Model.Addresses != null)
 {
     @foreach (Address address in Model.Addresses)
     {
-        <h3>Address for: @address.Donor.FirstName @address.Donor.LastName</h3>
+        <h4>Address for: @address.Donor.FirstName @address.Donor.LastName</h4>
         <ul>
-            <li>@address.Donor.PhoneNumber</li>
-            <li>@address.Donor.PhoneNumberTwo</li>
-            <li>@address.Street @address.Apartment, @address.City  @address.ZIP</li>
-            <li><a href="JavaScript:void(0);" onclick="openInParent('CreateNewPickup?AddressId=@address.ID');">Create new pickup using this address.</a></li>
+            <li>
+                <span class="name">Phone Number: </span>
+                @address.Donor.PhoneNumber
+            </li>
+            @if (address.Donor.PhoneNumberTwo != null)
+            {
+                <li>
+                    <span class="name">Phone #2: </span>
+                    @address.Donor.PhoneNumberTwo
+                </li>}
+
+            <li>
+                <span class="name">Address: </span>
+                @address.Street @address.Apartment <br /> @address.City  @address.ZIP
+            </li>
         </ul>
+
+        <p>
+            <a href="JavaScript:void(0);"
+               onclick="openInParent('CreateNewPickup?AddressId=@address.ID');">
+                Create new pickup using this address.
+            </a>
+        </p>
+
 
     }
 
 }
 
 <script>
-  function openInParent(url) {
-    window.opener.location.href = url;
-    window.close();
-  }
+    function openInParent(url) {
+        window.opener.location.href = url;
+        window.close();
+    }
 </script>
 
 

@@ -1,56 +1,247 @@
 ﻿body {
-    font: 1.25em sans-serif;
+    font: 1.25em arial, sans-serif;
     color: #000;
-}
-
-a {
-    color: #4f9fbc;
-}
-
-label {width: 20%;
-       float:left;
-}
-
-input, textarea, select {width: 76%;
-                         font-size: 1em;
-}
-
-nav {float: left;
-     width: 20%;
-}
-
-nav li {list-style: none;
-        margin: 8px 0;
-}
-
-#content {float: right;
-    width: 76%;
-}
-
-nav button {
-    border: none;
-    background: #fff;
-    color: #4f9fbc;
-    font: 1em sans-serif;
+    background: #b2a89e;
     padding: 0;
-    text-decoration: underline;
-    cursor: pointer;
+    margin: 0;
 }
 
-footer {clear: both;}
-
-#matrix {width: 100%;
-         border-collapse: collapse;
-         border: 1px solid #000;
+a, #side button {
+    color: #2ca3c1;
+    border-bottom: 1px solid #db9a20;
+    text-decoration: none;
 }
 
-#matrix td, #matrix th {width: 15%;
-                        padding: 8px;
-            border: 1px solid #000;
+label {
+    width: 20%;
+    float: left;
 }
 
-.sat {background: #ccc;}
 
-.form-group {margin: 10px 0;
-             clear: both;
+input, textarea, select, button {
+    font: 1em sans-serif;
+    height: 1.8em;
+    background: #c67b13;
+    border: none;
+    color: #fff;
+    box-shadow: 3px 3px 5px #3f2f0d;
+}
+
+button {
+    display: block;
+}
+
+h1 {
+    margin: 1px 0 0 150px;
+    font-size: 5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px #9e6a17;
+    padding: 13px 0 0 0;
+}
+
+h2 {
+    color: #60503e;
+    font: 3em arial, sans-serif;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 5px;
+}
+
+header {
+    background: #fff url('img/hep-logo.png') top left no-repeat;
+    height: 150px;
+    padding: 0;
+    margin: 0;
+    box-shadow: -3px -3px 5px #5e534c;
+}
+
+footer {
+    clear: both;
+    padding: 1px;
+    background: #826e51;
+    color: #fff;
+    box-shadow: 1px -1px 1px #6d5d45;
+}
+
+    footer p {
+        margin-left: 20px;
+        padding: 0;
+    }
+
+/* SIDEBAR STYLE */
+#side {
+    float: left;
+    width: 19%;
+    margin-left: 10px;
+}
+
+    #side ul {
+        margin-left: 0;
+    }
+
+    #side li {
+        list-style: none;
+        margin-bottom: 10px;
+    }
+
+    #side h2 {
+        font: 1em arial;
+        padding-left: 7px;
+        font-weight: bold;
+        text-shadow: 1px 1px #e5e1dc;
+    }
+
+
+    #side button {
+        background: #fff;
+        font: 1em sans-serif;
+        padding: 0;
+        cursor: pointer;
+        height: 1.2em;
+        box-shadow: none;
+    }
+
+.sidebar {
+    margin-bottom: 30px;
+}
+
+/* MULTIPLES */
+
+
+.sidebar, #content {
+    background: #fff;
+    border-top: 6px solid #c18441;
+    padding: 5px;
+    margin-top: 10px;
+    box-shadow: 3px 3px 5px #7a736e;
+}
+
+/* TOP NAV BAR */
+
+#top {
+    background: #443e33;
+    color: #e5dfd7;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 4px 4px 4px 4px #7a736e;
+}
+
+    #top ul, #top li {
+        display: inline;
+    }
+
+#searchme {
+    float: right;
+}
+
+
+/* CONTENT*/
+
+#content {
+    float: right;
+    width: 75%;
+    margin-right: 10px;
+    padding: 15px;
+}
+
+    #content input, #content textarea, #content select {
+        width: 66%;
+    }
+
+    #content h2 {
+        text-shadow: 3px 3px 3px #e5e1dc;
+    }
+
+/* OTHER */
+
+#matrix {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+    #matrix td, #matrix th {
+        width: 15%;
+        padding: 8px;
+        border: 1px solid #000;
+    }
+
+.sat {
+    background: #ccc;
+}
+
+.form-group {
+    margin: 10px 0;
+    clear: both;
+}
+
+a.special-attention {
+    color: #fff;
+    background: #d37d47;
+    border: 1px solid #000;
+    font-size: 1.5em;
+    padding: 7px;
+    text-decoration: none;
+}
+
+#AddressId, #DonorId {display: none;}
+
+
+/* SMALLER RESOLUTION SCREEN STYLE */
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    a.special-attention {
+        border: none;
+        background: transparent;
+        color: #2ca3c1;
+        text-decoration: none;
+    }
+
+    #side {
+        width: 28%;
+    }
+
+    #content {
+        width: 66%;
+    }
+}
+
+/* MOBILE SCREEN STYLE */
+
+@media only screen and (max-width: 1000px) {
+
+    header {
+        border-bottom: 5px solid #443e33;
+    }
+
+    h1 {
+        font-size: 1.3em;
+        margin: 0 0 0 140px;
+        padding: 36px 0 0 0;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    #top {
+        display: none;
+    }
+
+    #content, #side {
+        width: 98%;
+        margin: 0;
+        float: none;
+        padding: 3px;
+    }
+
+    label {
+        float: none;
+    }
+
+    input, textarea, select {
+        display: block;
+    }
 }
