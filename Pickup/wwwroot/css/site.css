@@ -27,6 +27,7 @@ input, textarea, select, button {
     box-shadow: 3px 3px 5px #3f2f0d;
 }
 
+
 button {
     display: block;
 }
@@ -150,6 +151,11 @@ footer {
     #content h2 {
         text-shadow: 3px 3px 3px #e5e1dc;
     }
+
+#content input[type="number"] {
+    width: 50px;
+    box-shadow: 1px 1px 1px;
+}
 
 /* OTHER */
 

@@ -11,9 +11,10 @@ using System;
 namespace Pickup.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180416024511_new_migration")]
+    partial class new_migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +247,7 @@ namespace Pickup.Data.Migrations
 
                     b.HasIndex("FurnitureCategoryID");
 
-                    b.ToTable("Furniture");
+                    b.ToTable("Furnitures");
                 });
 
             modelBuilder.Entity("Pickup.Models.FurnitureCategory", b =>
@@ -258,7 +259,7 @@ namespace Pickup.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("FurnitureCategories");
+                    b.ToTable("FurnitureCategory");
                 });
 
             modelBuilder.Entity("Pickup.Models.FurnitureDonationPickup", b =>

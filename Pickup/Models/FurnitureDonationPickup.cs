@@ -12,5 +12,7 @@ namespace Pickup.Models
 
         public int DonationPickupID { get; set; }
         public PickupOrDelivery DonationPickup { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

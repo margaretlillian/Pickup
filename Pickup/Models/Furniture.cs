@@ -10,6 +10,9 @@ namespace Pickup.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
+        public int FurnitureCategoryID { get; set; }
+        public  FurnitureCategory FurnitureCategory { get; set; }
+
         public IList<FurnitureDonationPickup> FurnitureDonationPickups { get; set; } = new List<FurnitureDonationPickup>();
     }
 }

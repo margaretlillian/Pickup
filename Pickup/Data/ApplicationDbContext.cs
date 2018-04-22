@@ -14,7 +14,8 @@ namespace Pickup.Data
         public DbSet<Donor> Donors { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<PickupOrDelivery> PickupsDeliveries { get; set; }
-        public DbSet<Furniture> Furnitures { get; set; }
+        public DbSet<Furniture> Furniture { get; set; }
+        public DbSet<FurnitureCategory> FurnitureCategories { get; set; }
         public DbSet<FurnitureDonationPickup> FurnitureDonationPickups { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
