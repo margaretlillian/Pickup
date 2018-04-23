@@ -19,6 +19,7 @@ namespace Pickup.Models
 
         public bool CallEnRoute { get; set; }
         public string SpecialInstructions { get; set; }
+
         public bool Delivery { get; set; }
 
         public int AddressID { get; set; }
