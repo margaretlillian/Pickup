@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models
 {
-    public class DonorViewModel
+    public class CustomerViewModel
 
 
     {

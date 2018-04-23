@@ -14,6 +14,9 @@ namespace Pickup.Models.DonationPickupViewModels
         [HiddenInput(DisplayValue = false)]
         public int AddressId { get; set; }
 
+        [Display(Name = "Check here if Delivery")]
+        public bool Delivery { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Pickup")]
