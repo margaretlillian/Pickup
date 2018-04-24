@@ -8,6 +8,7 @@ using Pickup.Models.DonationPickupViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 //using System.Security.Principal;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -106,7 +107,6 @@ namespace Pickup.Controllers
             ViewBag.Title = "Create New Pickup/Delivery";
 
             Address address = context.Addresses.Single(d => d.ID == addressId);
-            //PickupDeliveryViewModel donationViewModel = new PickupDeliveryViewModel();
             return View("Index", new PickupDeliveryViewModel());
         }
 
@@ -135,14 +135,18 @@ namespace Pickup.Controllers
 
                 context.Add(newPickup);
                 context.SaveChanges();
-
-                if (newPickup.Delivery)
-                    return Redirect("/");
-
                 return Redirect("/");
             }
             return View("Index", deliveryPickupViewModel);
 
+        }
+
+        public IActionResult AddFurniture(int pickupId)
+        {
+            PickupOrDelivery pickup = context.PickupsDeliveries.Single(d => d.ID == pickupId);
+
+            List<Furniture> furniture = context.Furniture.ToList();
+            return View(furniture);
         }
 
         public IActionResult Search()
@@ -170,27 +174,5 @@ namespace Pickup.Controllers
             }
             return View("Search", searchViewModel);
         }
-        /*
-        [Authorize]
-        [Route("/AddFurniture")]
-        public IActionResult AddFurniture()
-        {
-            AddFurnitureViewModel newFurniture = new AddFurnitureViewModel();
-            return View("Index", newFurniture);
-        }
-
-        [Authorize]
-        [HttpPost]
-        [Route("/AddFurniture")]
-        public IActionResult AddFurniture(AddFurnitureViewModel addFurniture)
-        {
-            Furniture newFurniture = new Furniture
-            {
-                Name = addFurniture.Name
-            };
-            context.Add(newFurniture);
-            context.SaveChanges();
-            return View("Index", addFurniture);
-        }*/
     }
 }
