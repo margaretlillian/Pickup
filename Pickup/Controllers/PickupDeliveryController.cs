@@ -145,6 +145,7 @@ namespace Pickup.Controllers
 
         public IActionResult FurniturePickup(int pickupId) {
             ViewBag.Title = "Furniture Donated";
+
             return View(new FurniturePickupViewModel(context.FurnitureCategories.ToList(), context.Furniture.ToList()));
             
         }

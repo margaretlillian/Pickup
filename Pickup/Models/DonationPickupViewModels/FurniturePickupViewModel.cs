@@ -10,42 +10,43 @@ namespace Pickup.Models.DonationPickupViewModels
 {
     public class FurniturePickupViewModel
     {
-        public List<QuantityListItem> FurnitureList { get; set; }
-        public List<FurnitureCategory> Categories { get; set; }
-
-        public int FurnitureID { get; set; }
-        public string FurnitureName { get; set; }
+        public List<Category> Categories { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public int PickupID { get; set; }
         
-        public int Quantity { get; set; }
-
         public FurniturePickupViewModel(IEnumerable<FurnitureCategory> categories, IEnumerable<Furniture> furniture)
         {
             Categories = categories.Select(category =>
-            new FurnitureCategory {
+            new Category {
             Name = category.Name,
-            ID = category.ID}).ToList();
+            ID = category.ID,
+            FurnitureLists = furniture.Select(item => 
+            new FurnitureList {
+                ID = item.ID,
+                Name = item.Name,
+                CategoryID = category.ID
+            }).ToList()}).ToList();
 
-                FurnitureList = furniture.Select(item =>
-                     new QuantityListItem
-                     {
-                         ID = item.ID,
-                         Name = item.Name
-                     }
-                 ).ToList();
-
+            
                   
         }
         public FurniturePickupViewModel() { }
 
     }
 
-
-    public class QuantityListItem
+    public class Category
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public List<FurnitureList> FurnitureLists { get; set; }
+    }
+
+    public class FurnitureList
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int CategoryID { get; set; }
+
     }
 }
