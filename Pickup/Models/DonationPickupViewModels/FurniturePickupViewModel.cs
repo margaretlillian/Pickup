@@ -9,11 +9,12 @@ using Pickup.Models;
 namespace Pickup.Models.DonationPickupViewModels
 {
     public class FurniturePickupViewModel
-    {
-        public List<Category> Categories { get; set; }
+    { 
+    [HiddenInput(DisplayValue = false)]
+    public int PickupID { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        public int PickupID { get; set; }
+    public List<Category> Categories { get; set; }
+
         
         public FurniturePickupViewModel(IEnumerable<FurnitureCategory> categories, IEnumerable<Furniture> furniture)
         {
@@ -25,8 +26,8 @@ namespace Pickup.Models.DonationPickupViewModels
             new FurnitureList {
                 ID = item.ID,
                 Name = item.Name,
-                CategoryID = category.ID
-            }).ToList()}).ToList();
+                CategoryID = item.FurnitureCategoryID
+            }).Where(fc => fc.CategoryID == category.ID).ToList()}).ToList();
 
             
                   

@@ -31,39 +31,37 @@ namespace Pickup.Controllers
 
         public IActionResult AddFurnitureCategory()
         {
-            Models.DonationPickupViewModels.AddFurnitureCategoryViewModel newFurnitureCategory = new AddFurnitureCategoryViewModel();
-            return View("Index", newFurnitureCategory);
+            return View("Index", new AddFurnitureCategoryViewModel());
         }
 
         [HttpPost]
-        public IActionResult AddFurnitureCategory(AddFurnitureCategoryViewModel addFurnitureCategory)
+        public IActionResult AddFurnitureCategory(AddFurnitureCategoryViewModel model)
         {
             FurnitureCategory newFurnitureCategory = new FurnitureCategory
             {
-                Name = addFurnitureCategory.Name
+                Name = model.Name
             };
             context.Add(newFurnitureCategory);
             context.SaveChanges();
-            return View(addFurnitureCategory);
+            return View("Index", model);
         }
 
 
         public IActionResult AddFurniture()
         {
-            AddFurnitureViewModel addFurnitureViewModel = new AddFurnitureViewModel(context.FurnitureCategories.ToList());
-            return View(addFurnitureViewModel);
+            return View(new AddFurnitureViewModel(context.FurnitureCategories.ToList()));
         }
 
         [HttpPost]
-        public IActionResult AddFurniture(AddFurnitureViewModel addFurnitureViewModel)
+        public IActionResult AddFurniture(AddFurnitureViewModel model)
         {
             if (ModelState.IsValid)
             {
                 // Add the new cheese to my existing cheeses
-                FurnitureCategory furnitureCategory = context.FurnitureCategories.Single(cheese => cheese.ID == addFurnitureViewModel.FurnitureCategoryID);
+                FurnitureCategory furnitureCategory = context.FurnitureCategories.Single(cheese => cheese.ID == model.FurnitureCategoryID);
                 Furniture newFurniture = new Furniture
                 {
-                    Name = addFurnitureViewModel.Name,
+                    Name = model.Name,
                     FurnitureCategory = furnitureCategory
                 };
 
@@ -73,7 +71,7 @@ namespace Pickup.Controllers
                 return Redirect("/");
             }
 
-            return View("Index", addFurnitureViewModel);
+            return View("Index", model);
         }
 
     }
