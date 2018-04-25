@@ -6,44 +6,18 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="sidebar">
-        <h2>Pickups/Deliveries</h2>
-    <ul>
-        <li><a asp-controller="Home" asp-action="Index">Schedule Matrix</a></li>
-        <li><a asp-controller="PickupDelivery" asp-action="PickupDonor">New Pickup</a></li>
-        <li><a href="#">New Delivery</a></li>
-    </ul>
+
+        <div class="sidebar">
+
+            <ul>
+                <li><a asp-controller="PickupDelivery" asp-action="Customer">Pickup / Delivery</a></li>
+                <li><a href="#">Schedule Matrix</a></li>
+                <li><a href="#">Blacklist</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a asp-controller="Manage" asp-action="Index">Account</a></li>
+
+            </ul>
         </div>
-
-   <div class="sidebar">
-       <h2>Blacklist</h2>
-       <ul>
-           <li><a href="#">Add to Blacklist</a></li>
-       </ul>
-   </div>
-
-    <div class="sidebar">
-        <h2>Search</h2>
-        <ul>
-            <li><a href="#">Search Donations</a></li>
-            <li><a href="#">Search Deliveries</a></li>
-        </ul>
-    </div>
-    <div class="sidebar">
-        <h2>Account</h2>
-    <ul>
-        <li>
-            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a>
-        </li>
-        <li>
-          <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-
-                <button type="submit">Log out</button>
-            </form>
-                </li>
-    </ul>
-        </div>
-
 }
 else
 {

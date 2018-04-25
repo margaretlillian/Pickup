@@ -92,7 +92,7 @@ namespace Pickup.Controllers
                     City = model.City,
                     ZIP = model.ZIP,
                     Neighborhood = model.Neighborhood,
-                    DonorID = model.DonorId
+                    DonorID = model.CustomerId
                 };
 
                 context.Add(newAddress);
@@ -145,12 +145,10 @@ namespace Pickup.Controllers
 
         }
 
-        public IActionResult FurniturePickup(int pickupId)
-        {
+        public IActionResult FurniturePickup(int pickupId) {
             ViewBag.Title = "Furniture Donated";
-
-            return View();
-
+            return View(new FurniturePickupViewModel(context.FurnitureCategories.ToList(), context.Furniture.ToList()));
+            
         }
 
     }

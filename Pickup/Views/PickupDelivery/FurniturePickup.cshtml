@@ -1,0 +1,18 @@
+﻿@using Pickup.Models.DonationPickupViewModels
+@model FurniturePickupViewModel
+
+<h2>@ViewBag.Title</h2>
+<form method="post">
+    <input asp-for="PickupID" />
+       @foreach (var category in Model.Categories)    {
+    <div class="furniture-group">
+    <h3>@category.Name</h3>
+    <ul>
+    @foreach (var piece in category.FurnitureLists)
+    {
+   <li> <input type="number" name="@piece.ID"/> @piece.Name</li> }
+    </ul>
+</div>
+    }
+    <button id="clear" type="submit">Add @ViewBag.Title</button>
+</form>

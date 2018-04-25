@@ -1,0 +1,37 @@
+/* USER STORIES */
+
+As a logged in scheduler, I can view a screen 
+
+As a logged in scheduler, I can add furniture and other donations to the pickup being scheduled. 
+
+As a logged in user, I can either update my information or enter it as I am signing up. Includes phone # and Full Name. 
+
+As a logged in scheduler, when I add an address to a pickup/delivery, I can select the city from a drop-down menu.
+
+As a logged in scheduler, I can add misbehaving donors to the Blacklist.
+
+As a logged in user, I can view entries in the Blacklist. 
+
+As a logged in scheduler, I can view a printout page of the pickup I just scheduled. 
+
+As a manager, I can log in with administrative privileges. 
+
+As a manager, I can approve scheduler user accounts.
+
+As a logged in scheduler, I can schedule deliveries. 
+
+As a logged in scheduler, I can add a description to the furniture being delivered to enable drivers to find the furniture more easily. 
+
+As a a logged in scheduler, I can view a printout page of the delivery I just scheduled. 
+
+
+
+As a logged in scheduler/manager/driver, I can view a calendar with the pickups currently scheduled.
+
+
+
+
+
+
+When coming up with stories, think of it from the perspective of the user. 
+50-100 interview questions for beginning programmers
