@@ -8,6 +8,7 @@ using Pickup.Models.DonationPickupViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 //using System.Security.Principal;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,52 +21,53 @@ namespace Pickup.Controllers
         private readonly ApplicationDbContext context;
 
         public PickupDeliveryController(ApplicationDbContext applicationDbContext)
-        { context = applicationDbContext;
+        {
+            context = applicationDbContext;
         }
 
 
 
-    // GET: /<controller>/
-    [Authorize]
+        // GET: /<controller>/
+        [Authorize]
 
-        public IActionResult PickupDonor()
+        public IActionResult Customer()
         {
             ViewBag.Title = "Customer Information";
-            CustomerViewModel donorViewModel = new CustomerViewModel();
-            return View(donorViewModel);
+            return View(new CustomerViewModel());
         }
 
         [HttpPost]
-        public IActionResult Customer(CustomerViewModel customerViewModel)
+        public IActionResult Customer(CustomerViewModel model)
         {
             ViewBag.Title = "Customer Information";
             if (ModelState.IsValid)
-            { Donor existingDonor = context.Donors
-                    .Where(d => d.FirstName == customerViewModel.FirstName)
-                    .Where(d => d.LastName == customerViewModel.LastName)
-                    .Where(d => d.PhoneNumber == customerViewModel.PhoneNumber)
-                    .FirstOrDefault();
+            {
+                Donor existingPerson = context.Donors
+                      .Where(d => d.FirstName == model.FirstName)
+                      .Where(d => d.LastName == model.LastName)
+                      .Where(d => d.PhoneNumber == model.PhoneNumber)
+                      .FirstOrDefault();
 
-                if (existingDonor != null)
+                if (existingPerson != null)
                 {
-                    return Redirect("/PickupDelivery/Address?customerId=" + existingDonor.ID);
+                    return Redirect("Address?customerId=" + existingPerson.ID);
                 }
 
-                Donor newDonor = new Donor
+                Donor newPerson = new Donor
                 {
-                    FirstName = customerViewModel.FirstName,
-                    LastName = customerViewModel.LastName,
-                    PhoneNumber = customerViewModel.PhoneNumber,
-                    PhoneNumberTwo = customerViewModel.PhoneNumberTwo
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    PhoneNumberTwo = model.PhoneNumberTwo
                 };
-                context.Add(newDonor);
+                context.Add(newPerson);
                 context.SaveChanges();
 
                 // I suspect there is a better way to do this thing here....
-                return Redirect("/PickupDelivery/Address?customerId=" + newDonor.ID);
+                return Redirect("Address?customerId=" + newPerson.ID);
             }
 
-            return View(customerViewModel);
+            return View(model);
         }
 
         public IActionResult Address(int customerId)
@@ -73,12 +75,11 @@ namespace Pickup.Controllers
             ViewBag.Title = "Address Information";
 
             Donor donor = context.Donors.Single(d => d.ID == customerId);
-            AddressViewModel addressViewModel = new AddressViewModel();
-            return View("Index", addressViewModel);
+            return View("Index", new AddressViewModel());
         }
 
         [HttpPost]
-        public IActionResult Address(AddressViewModel addressViewModel)
+        public IActionResult Address(AddressViewModel model)
         {
             ViewBag.Title = "Address Information";
 
@@ -86,50 +87,49 @@ namespace Pickup.Controllers
             {
                 Address newAddress = new Address
                 {
-                    Street = addressViewModel.Street,
-                    Apartment = addressViewModel.Apartment,
-                    City = addressViewModel.City,
-                    ZIP = addressViewModel.ZIP,
-                    Neighborhood = addressViewModel.Neighborhood,
-                    DonorID = addressViewModel.DonorId
+                    Street = model.Street,
+                    Apartment = model.Apartment,
+                    City = model.City,
+                    ZIP = model.ZIP,
+                    Neighborhood = model.Neighborhood,
+                    DonorID = model.DonorId
                 };
 
                 context.Add(newAddress);
                 context.SaveChanges();
-                return Redirect("/PickupDelivery/CreateNew?addressId=" + newAddress.ID);
+                return Redirect("CreateNew?addressId=" + newAddress.ID);
             }
-            return View("Index", addressViewModel);
+            return View("Index", model);
         }
 
         public IActionResult CreateNew(int addressId)
         {
-            ViewBag.Title = "Create New Pickup/Delivery";
+            ViewBag.Title = "New Pickup/Delivery";
 
             Address address = context.Addresses.Single(d => d.ID == addressId);
-            //PickupDeliveryViewModel donationViewModel = new PickupDeliveryViewModel();
             return View("Index", new PickupDeliveryViewModel());
         }
 
         [HttpPost]
-        public IActionResult CreateNewPickup(PickupDeliveryViewModel deliveryPickupViewModel)
+        public IActionResult CreateNew(PickupDeliveryViewModel model)
         {
-            ViewBag.Title = "Create New Pickup/Delivery";
+            ViewBag.Title = "New Pickup/Delivery";
 
             if (ModelState.IsValid)
             {
                 DateTime currentDate = DateTime.Now;
                 string scheduler = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                PickupOrDelivery newPickup = new PickupOrDelivery               
+                PickupOrDelivery newPickup = new PickupOrDelivery
 
                 {
-                    Delivery = deliveryPickupViewModel.Delivery,
+                    Delivery = model.Delivery,
                     ScheduleDateTime = currentDate,
-                    PickupDate = deliveryPickupViewModel.PickupDate,
-                    PickupTime = deliveryPickupViewModel.PickupTime,
-                    CallEnRoute = deliveryPickupViewModel.CallEnRoute,
-                    SpecialInstructions = deliveryPickupViewModel.SpecialInstructions,
-                    AddressID = deliveryPickupViewModel.AddressId,
+                    PickupDate = model.PickupDate,
+                    PickupTime = model.PickupTime,
+                    CallEnRoute = model.CallEnRoute,
+                    SpecialInstructions = model.SpecialInstructions,
+                    AddressID = model.AddressId,
                     UserId = scheduler
                 };
 
@@ -139,58 +139,19 @@ namespace Pickup.Controllers
                 if (newPickup.Delivery)
                     return Redirect("/");
 
-                return Redirect("/");
+                return Redirect("FurniturePickup?pickupId=" + newPickup.ID);
             }
-            return View("Index", deliveryPickupViewModel);
+            return View("Index", model);
 
         }
 
-        public IActionResult Search()
+        public IActionResult FurniturePickup(int pickupId)
         {
-            SearchViewModel searchViewModel = new SearchViewModel();
-            return View(searchViewModel);
+            ViewBag.Title = "Furniture Donated";
+
+            return View();
+
         }
 
-        public IActionResult SearchResults(SearchViewModel searchViewModel) {
-
-            searchViewModel.Donors = context.Donors
-                    .Where(d => d.FirstName == searchViewModel.FirstName)
-                    .Where(d => d.LastName == searchViewModel.LastName)
-                    .ToList();
-            searchViewModel.Addresses = new List<Address>();
-            foreach (Donor donor in searchViewModel.Donors) {
-                List<Address> donorAddresses = context.Addresses.Where(a => a.DonorID == donor.ID).ToList();
-
-                if (donorAddresses != null)
-                { foreach (Address donorAddress in donorAddresses)
-                    {
-                        searchViewModel.Addresses.Add(donorAddress);
-                    }
-                }
-            }
-            return View("Search", searchViewModel);
-        }
-        /*
-        [Authorize]
-        [Route("/AddFurniture")]
-        public IActionResult AddFurniture()
-        {
-            AddFurnitureViewModel newFurniture = new AddFurnitureViewModel();
-            return View("Index", newFurniture);
-        }
-
-        [Authorize]
-        [HttpPost]
-        [Route("/AddFurniture")]
-        public IActionResult AddFurniture(AddFurnitureViewModel addFurniture)
-        {
-            Furniture newFurniture = new Furniture
-            {
-                Name = addFurniture.Name
-            };
-            context.Add(newFurniture);
-            context.SaveChanges();
-            return View("Index", addFurniture);
-        }*/
     }
 }
