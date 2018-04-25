@@ -1,0 +1,17 @@
+﻿@using Pickup.Models.DonationPickupViewModels
+@model FurniturePickupViewModel
+
+<h2>@ViewBag.Title</h2>
+<form method="post">
+    @for (int i = 0; i < Model.Categories.Count; i++)
+    {<div>
+    <h3>@Html.DisplayFor(model => model.Categories[i].Name)</h3>
+    @for (int j = 0; j < Model.FurnitureList.Count; j++)
+    {
+       <input type="number" name="@Html.DisplayFor(model => model.FurnitureList[j].ID)" /> @Html.DisplayFor(model => model.FurnitureList[j].Name)
+
+    }
+    </div>
+    }
+    <button type="submit">Add @ViewBag.Title</button>
+</form>

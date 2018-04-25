@@ -5,7 +5,7 @@
 
 <h2>Search for Existing Donor</h2>
 
-<form asp-controller="PickupDelivery" asp-action="SearchResults">
+<form asp-controller="Search" asp-action="SearchResults">
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" />
@@ -35,7 +35,7 @@
         </ul>
         <p>
             <a href="JavaScript:void(0);"
-               onclick="openInParent('Address?DonorId=@donor.ID');">
+               onclick="openInParent('Address?customerId=@donor.ID');">
                 Use new address for this donor.
             </a>
         </p>
@@ -68,7 +68,7 @@
 
         <p>
             <a href="JavaScript:void(0);"
-               onclick="openInParent('CreateNewPickup?AddressId=@address.ID');">
+               onclick="openInParent('CreateNew?AddressId=@address.ID');">
                 Create new pickup using this address.
             </a>
         </p>

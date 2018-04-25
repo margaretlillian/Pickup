@@ -10,7 +10,7 @@ namespace Pickup.Models.DonationPickupViewModels
     public class AddressViewModel
     {
         [HiddenInput(DisplayValue = false)]
-        public int DonorId { get; set; }
+        public int CustomerId { get; set; }
 
         [Required]
         [Display(Name = "Address")]
