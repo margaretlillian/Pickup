@@ -5,25 +5,31 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
-{
+{<nav id="top">
 
-        <div class="sidebar">
+    </nav>
 
-            <ul>
-                <li><a asp-controller="PickupDelivery" asp-action="Customer">Pickup / Delivery</a></li>
-                <li><a href="#">Schedule Matrix</a></li>
-                <li><a href="#">Blacklist</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a asp-controller="Manage" asp-action="Index">Account</a></li>
 
-            </ul>
-        </div>
+    <nav id="side">
+
+        <ul>
+            <li><a asp-controller="PickupDelivery" asp-action="Customer">Pickup / Delivery</a></li>
+            <li><a asp-controller="Home">Schedule Matrix</a></li>
+            <li><a href="#">Blacklist</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a asp-controller="Manage" asp-action="Index">Account</a></li>
+
+        </ul>
+    </nav>
 }
 else
-{
+{<nav id="top">
+    You must be an approved user to view this page.</nav>
 
+    <nav id="side">
     <ul>
         <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
         <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
     </ul>
+        </nav>
 }

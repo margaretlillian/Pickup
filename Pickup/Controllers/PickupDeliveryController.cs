@@ -151,5 +151,11 @@ namespace Pickup.Controllers
             
         }
 
+        [HttpPost]
+        public IActionResult FurniturePickup(FurniturePickupViewModel model) {
+             return View();
+
+        }
+
     }
 }

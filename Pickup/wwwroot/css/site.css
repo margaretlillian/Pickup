@@ -174,10 +174,18 @@ footer {
         display: inline;
     }
 
-#searchme {
-    float: right;
+
+#top li {
+    padding: 6px 40px 10px 20px;
+    font-size: 1.3em;
+    font-variant: small-caps;
+    border-right: 6px solid #776456;
 }
 
+    #top li a {
+        border: 0;
+        text-shadow: 2px 2px 2px #5f554d;
+    }
 
 /* CONTENT*/
 
@@ -234,28 +242,89 @@ footer {
 #content #clear {
     clear: both;
 }
+/* SCHEDULE MATRIX */
 
-/* OTHER */
-
-#matrix {
+#schedulematrix {
     width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #000;
 }
 
-    #matrix td, #matrix th {
-        width: 15%;
-        padding: 8px;
-        border: 1px solid #000;
+    #schedulematrix ul {
+        list-style: none;
+        padding: 0;
+        display: table-row;
     }
 
-.sat {
-    background: #ccc;
+.day {
+    display: table-cell;
+    padding: 15px;
+    background: #fff;
+    border: 1px dotted #49545b;
+    box-shadow: 2px 2px 2px #b7c2c9;
+    font-size: 1em;
+    width: 13%;
 }
+
+    .day h3 {
+        color: #334c72;
+        margin: 0;
+        text-align: center;
+    }
+
+h4.the-date {
+    color: #8ba1af;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px #eee;
+    padding-left: 10px;
+}
+
+h4.the-date {
+    font-weight: lighter;
+    margin: 0;
+}
+
+.schedule, h4.the-date {
+    border-bottom: 1px solid #608696;
+    padding-bottom: 16px;
+}
+
+    .schedule li {
+        margin: 0;
+        font-size: 1em;
+        text-shadow: 1px 1px 1px #ddd;
+        color: #261f15;
+    }
+
+    .schedule ul {
+        height: 40px;
+    }
+
+.thetime {
+    margin-top: 25px;
+    font-size: 1em;
+    color: #333;
+    text-transform: uppercase;
+}
+
+#saturday {
+    background: #ddd;
+}
+
+.deliver {
+    text-transform: uppercase;
+    color: #cc5f0c;
+    padding-top: 6px;
+}
+
+
+/* OTHER */
 
 .form-group {
     margin: 1em;
     clear: both;
+}
+
+#verifyme {margin: 10px;
+           font-size: 1em;
 }
 
 #AddressId, #CustomerId {display: none;}
