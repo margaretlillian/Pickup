@@ -20,7 +20,7 @@ namespace Pickup.Models.DonationPickupViewModels
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Pickup")]
-        public DateTime PickupDate { get; set; }
+        public DateTime PickupDate { get; set; } = DateTime.Now;
 
         [Required]
         [DataType(DataType.Time)]

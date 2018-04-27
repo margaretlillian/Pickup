@@ -1,0 +1,13 @@
+﻿@model List<DateTime>
+<div id="schedulematrix">
+    @foreach (var x in Model)
+    {
+
+
+        <section class="day" id="@x.ToString("dddd").ToLower()">
+            <h3>@x.ToString("dddd")</h3>
+            <h4 class="the-date">@x.ToString("MMMM dd")</h4>
+        </section>
+            }
+
+</div>
