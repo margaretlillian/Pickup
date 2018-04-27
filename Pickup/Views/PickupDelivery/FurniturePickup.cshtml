@@ -4,15 +4,29 @@
 <h2>@ViewBag.Title</h2>
 <form method="post">
     <input asp-for="PickupID" />
-       @foreach (var category in Model.Categories)    {
-    <div class="furniture-group">
-    <h3>@category.Name</h3>
-    <ul>
-    @foreach (var piece in category.FurnitureLists)
+    @for (int i = 0; i < Model.Categories.Count; i++)
     {
-   <li> <input type="number" name="@piece.ID"/> @piece.Name</li> }
-    </ul>
-</div>
+        var cats = Model.Categories[i];
+
+        <div class="furniture-group">
+            <h3>@cats.Name</h3>
+            <ul>
+                @for (int j = 0; j < cats.FurnitureLists.Count; j++)
+                {
+                    var furniture = cats.FurnitureLists[j];
+                <li>
+                    <button type="button" id="" class="incdecbutton"> - </button>
+
+                    <input type="number" id="@furniture.ID" name="@furniture.ID" />
+                    <button type="button" id="" class="incdecbutton"> + </button>
+
+                    @furniture.Name
+
+                </li>
+
+                }
+            </ul>
+        </div>
     }
     <button id="clear" type="submit">Add @ViewBag.Title</button>
 </form>

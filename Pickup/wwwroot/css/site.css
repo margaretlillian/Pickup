@@ -201,14 +201,20 @@ footer {
         width: 56%;
     }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Removes leftover margin */
+}
     #content h2 {
         text-shadow: 3px 3px 3px #e5e1dc;
     }
 
-    #content input[type="number"] {
-        width: 45px;
-        box-shadow: 1px 1px 1px #444;
-    }
+#content input[type="number"] {
+    width: 45px;
+    box-shadow: 1px 1px 1px #444;
+    -moz-appearance: textfield;
+}
 
     #content input[type="checkbox"] {
         width: 45px;
@@ -329,6 +335,16 @@ h4.the-date {
 
 #AddressId, #CustomerId {display: none;}
 
+.incdecbutton {
+font-size: 1em;
+height: 1.4em;
+width: 1.4em;
+padding: 1px;
+border-radius: 15px;
+display:inline;
+margin: 1px;
+box-shadow: none;
+}
 
 /* SMALLER RESOLUTION SCREEN STYLE */
 
