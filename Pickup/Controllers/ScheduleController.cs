@@ -13,12 +13,12 @@ namespace Pickup.Controllers
     {
         // GET: /<controller>/
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult Index(int weekId)
         {
             List<DateTime> week = new List<DateTime>();
             for (int i = 1; i < 7; i++)
             {
-                week.Add(DateTime.Today.AddDays(-1 * (int)(DateTime.Today.DayOfWeek - i)));
+                week.Add(DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i)));
             }
             return View(week);
         }

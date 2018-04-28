@@ -24,6 +24,7 @@ namespace Pickup.Models.DonationPickupViewModels
 
         [Required]
         [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{hh:mm}")]
         [Display(Name = "Time")]
         public DateTime PickupTime { get; set; }
 
