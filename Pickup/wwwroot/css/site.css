@@ -44,8 +44,7 @@ button {
 margin-left: 1em;}
 
 h1 {
-    margin: 1px 0 0 150px;
-    font-size: 5em;
+    font-size: 1em;
     font-weight: bold;
     text-shadow: -2px 2px 5px #9e6a17;
     padding: 13px 0 0 0;
@@ -68,8 +67,7 @@ form {
     margin-top: 2em;
 }
 
-header {
-    background: #fff url('img/hep-logo.png') top left no-repeat;
+#header {
     height: 150px;
     padding: 0;
     margin: 0;
@@ -92,7 +90,7 @@ footer {
         color: #fff;
     }
 
-/* SIDEBAR STYLE */
+/* SIDEBAR STYLE *//*
 #side {
     float: left;
     width: 19%;
@@ -116,9 +114,9 @@ footer {
         padding: 25px 0.5em 25px 0.3em;
         margin-bottom: 14px;
         border: none;
-        background: #fff;
+        background: #fff; */
         /*color: #78adcc;*/
-        text-shadow: 2px 4px 2px #c9d6dd;
+     /*   text-shadow: 2px 4px 2px #c9d6dd;
         text-transform: uppercase;
         font-weight: bold;
         text-align: center;
@@ -151,7 +149,7 @@ footer {
 
 .sidebar {
     margin-bottom: 30px;
-}
+} */
 
 /* MULTIPLES */
 
@@ -190,8 +188,6 @@ footer {
 /* CONTENT*/
 
 #content {
-    float: right;
-    width: 75%;
     margin-right: 10px;
     padding: 15px;
     margin-top: 10px;

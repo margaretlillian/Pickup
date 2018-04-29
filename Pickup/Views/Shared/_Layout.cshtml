@@ -14,15 +14,15 @@
 </head>
 <body>
 
-    <header><h1>Pickups and Deliveries</h1></header>
+ <div id="header"><h1>Pickups and Deliveries</h1></div> 
 
         @await Html.PartialAsync("_LoginPartial")
-    <section id="content">
+    <div id="content">
         @RenderBody()
 
-    </section>
+    </div>
     <footer>
-        <p>&copy; 2018 Margaret Kiley</p>
+        <p>&copy; 2018 <a href="https://github.com/margaretlillian">Margaret Kiley</a></p>
     </footer>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
