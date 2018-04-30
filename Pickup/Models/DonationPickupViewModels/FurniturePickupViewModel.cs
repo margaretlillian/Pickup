@@ -46,6 +46,7 @@ namespace Pickup.Models.DonationPickupViewModels
     public class FurnitureList
     {
         public int ID { get; set; }
+        public int Quantity { get; set; }
         public string Name { get; set; }
         public int CategoryID { get; set; }
 

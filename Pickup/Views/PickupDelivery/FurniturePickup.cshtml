@@ -11,16 +11,12 @@
         <div class="furniture-group">
             <h3>@cats.Name</h3>
             <ul>
+                
                 @for (int j = 0; j < cats.FurnitureLists.Count; j++)
                 {
-                    var furniture = cats.FurnitureLists[j];
                 <li>
-                    <button type="button" id="" class="incdecbutton"> - </button>
-
-                    <input type="number" id="@furniture.ID" name="@furniture.ID" />
-                    <button type="button" id="" class="incdecbutton"> + </button>
-
-                    @furniture.Name
+                    @Html.DisplayFor(m => m.Categories[i].FurnitureLists[j].Name)
+                    @Html.EditorFor(m => m.Categories[i].FurnitureLists[j].ID)
 
                 </li>
 

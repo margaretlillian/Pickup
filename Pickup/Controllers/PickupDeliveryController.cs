@@ -153,6 +153,11 @@ namespace Pickup.Controllers
 
         [HttpPost]
         public IActionResult FurniturePickup(FurniturePickupViewModel model) {
+            foreach (var x in Request.Form)
+
+            {
+             
+            }
              return View();
 
         }
