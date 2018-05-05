@@ -147,18 +147,15 @@ namespace Pickup.Controllers
 
         public IActionResult FurniturePickup(int pickupId) {
             ViewBag.Title = "Furniture Donated";
-            return View(new FurniturePickupViewModel(context.FurnitureCategories.ToList(), context.Furniture.ToList()));
+            return View(new FurniturePickupViewModel(context.Furniture.ToList()));
             
         }
 
         [HttpPost]
         public IActionResult FurniturePickup(FurniturePickupViewModel model) {
-            foreach (var x in Request.Form)
-
-            {
-             
-            }
-             return View();
+            foreach (var x in model.Furniture)
+            { Console.WriteLine(x); }
+            return View();
 
         }
 

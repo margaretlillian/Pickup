@@ -28,13 +28,16 @@ label {
 
 input, textarea, select, button {
     font: 1em sans-serif;
-    height: 1.8em;
     background: #c67b13;
     border: none;
     color: #fff;
     box-shadow: 3px 3px 5px #3f2f0d;
 }
+input, textarea, button {
+    height: 1.8em;
+}
 
+select {height: 500px;}
     input:hover, button:hover {
         background: #b56a02;
     }

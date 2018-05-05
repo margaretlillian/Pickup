@@ -8,7 +8,7 @@ As a logged in user, I can either update my information or enter it as I am sign
 
 As a logged in scheduler, when I add an address to a pickup/delivery, I can select the city from a drop-down menu.
 
-As a logged in scheduler, I can add misbehaving donors to the Blacklist.
+As a logged in manager, I can add/approve misbehaving donors to the Blacklist.
 
 As a logged in user, I can view entries in the Blacklist. 
 
@@ -24,12 +24,11 @@ As a logged in scheduler, I can add a description to the furniture being deliver
 
 As a a logged in scheduler, I can view a printout page of the delivery I just scheduled. 
 
-
+As a logged in scheduler, I can change/update scheduled pickups. 
 
 As a logged in scheduler/manager/driver, I can view a calendar with the pickups currently scheduled.
 
-
-
+As a logged in user, I can search pickups. 
 
 
 
