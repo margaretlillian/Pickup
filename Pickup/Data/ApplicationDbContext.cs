@@ -16,7 +16,7 @@ namespace Pickup.Data
         public DbSet<PickupOrDelivery> PickupsDeliveries { get; set; }
         public DbSet<Furniture> Furniture { get; set; }
         public DbSet<FurnitureCategory> FurnitureCategories { get; set; }
-        public DbSet<FurnitureDonationPickup> FurnitureDonationPickups { get; set; }
+        public DbSet<FurniturePickupOrDelivery> FurnitureDonationPickups { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -30,7 +30,7 @@ namespace Pickup.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<FurnitureDonationPickup>()
+            builder.Entity<FurniturePickupOrDelivery>()
                 .HasKey(pickup => new { pickup.DonationPickupID, pickup.FurnitureID });
         }
 

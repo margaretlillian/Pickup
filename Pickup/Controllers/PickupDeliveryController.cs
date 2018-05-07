@@ -125,8 +125,7 @@ namespace Pickup.Controllers
                 {
                     Delivery = model.Delivery,
                     ScheduleDateTime = currentDate,
-                    PickupDate = model.PickupDate,
-                    PickupTime = model.PickupTime,
+                    PickupDateTime = model.PickupDateTime,
                     CallEnRoute = model.CallEnRoute,
                     SpecialInstructions = model.SpecialInstructions,
                     AddressID = model.AddressId,
@@ -167,7 +166,7 @@ namespace Pickup.Controllers
         public IActionResult FurniturePickup(FurniturePickupViewModel model) {
             var selectedFurniture = model.FurnitureList.Where(x => x.Quantity > 0).ToList();
             foreach (var furniturePiece in selectedFurniture) {
-                FurnitureDonationPickup furnitureDonationPickup = new FurnitureDonationPickup {
+                FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery {
                     DonationPickupID = model.PickupID,
                     FurnitureID = furniturePiece.ID,
                     Quantity = furniturePiece.Quantity
