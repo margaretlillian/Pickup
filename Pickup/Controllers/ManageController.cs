@@ -59,6 +59,7 @@ namespace Pickup.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
+                FullName = user.FullName,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -90,7 +91,7 @@ namespace Pickup.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
-            
+                       
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

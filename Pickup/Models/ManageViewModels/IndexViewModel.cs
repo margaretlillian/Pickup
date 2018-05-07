@@ -15,7 +15,9 @@ namespace Pickup.Models.ManageViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        
+
+        public string FullName { get; set; }
+
         public string StatusMessage { get; set; }
     }
 }

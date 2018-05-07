@@ -14,9 +14,13 @@
 </head>
 <body>
 
- <div id="header"><h1>Pickups and Deliveries</h1></div> 
-
-        @await Html.PartialAsync("_LoginPartial")
+    <div id="header"><h1>Pickups and Deliveries</h1></div>
+    @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Logout" class="btn btn-primary" />
+    }
+    @await Html.PartialAsync("_LoginPartial")
     <div id="content">
         @RenderBody()
 

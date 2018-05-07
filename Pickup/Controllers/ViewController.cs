@@ -25,6 +25,7 @@ namespace Pickup.Controllers
         public IActionResult Index(int id)
         {
             var results = (from p in context.PickupsDeliveries
+                           join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
                            join d in context.Donors on a.DonorID equals d.ID
                            where p.ID == id
@@ -44,7 +45,7 @@ namespace Pickup.Controllers
                                CallEnRoute = p.CallEnRoute,
                                SpecialInstructions = p.SpecialInstructions,
                                PickupDateTime = p.PickupDateTime,
-                               Scheduler = p.UserId
+                               Scheduler = s.FullName
                            }).FirstOrDefault();
             return View(results);
         }
