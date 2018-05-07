@@ -1,10 +1,25 @@
 ﻿@model Pickup.Models.ViewViewModel.ViewInformationViewModel
 
-
+    @if (Model.Delivery)
+    {
+        <h2>Delivery Information</h2>
+    }
+else  {<h2>Pickup Information</h2>}
 
 <ul>
-    <li>@Model.FirstName</li>
-    <li>@Model.PickupDateTime</li>
-    <li>@Model.Scheduler</li>
-    <li>@Model.StreetAddress</li>
+    <li class="scheduler-info"><span class="property-name">Scheduled By:</span> @Model.Scheduler</li>
+    <li class="scheduler-info"><span class="property-name">Date Scheduled:</span> @Model.ScheduleDateTime</li>
+
+    <li><span class="property-name">Pickup Date / Time:</span> @Model.PickupDateTime</li>
+
+    <li><span class="property-name">Name:</span> @Model.FirstName @Model.LastName</li>
+    <li><span class="property-name"> @Model.PhoneNumber </span></li>
+    <li><span class="property-name">Phone Number 2:</span> @Model.PhoneNumberTwo</li>
+
+    <li><span class="property-name">Address:</span> @Model.StreetAddress, @Model.Apt @Model.City, @Model.ZIP</li>
+    <li><span class="property-name">Neighborhood:</span> @Model.Neighborhood</li>
+
+
+    <li><span class="property-name">Call En Route:</span> @Model.CallEnRoute</li>
+    <li><span class="property-name">Special Instructions:</span> @Model.SpecialInstructions</li>
 </ul>

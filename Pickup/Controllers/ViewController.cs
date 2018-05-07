@@ -27,11 +27,22 @@ namespace Pickup.Controllers
             var results = (from p in context.PickupsDeliveries
                            join a in context.Addresses on p.AddressID equals a.ID
                            join d in context.Donors on a.DonorID equals d.ID
+                           where p.ID == id
                            select new ViewInformationViewModel()
                            {
-                               PickupID = id,
                                FirstName = d.FirstName,
+                               LastName = d.LastName,
+                               PhoneNumber = d.PhoneNumber,
+                               PhoneNumberTwo = d.PhoneNumberTwo,
                                StreetAddress = a.Street,
+                               Apt = a.Apartment,
+                               City = a.City,
+                               ZIP = a.ZIP,
+                               Neighborhood = a.Neighborhood,
+                               Delivery = p.Delivery,
+                               ScheduleDateTime = p.ScheduleDateTime,
+                               CallEnRoute = p.CallEnRoute,
+                               SpecialInstructions = p.SpecialInstructions,
                                PickupDateTime = p.PickupDateTime,
                                Scheduler = p.UserId
                            }).FirstOrDefault();
