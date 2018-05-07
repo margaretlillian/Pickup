@@ -11,11 +11,7 @@ namespace Pickup.Models
         public int ID { get; set; }
         public DateTime ScheduleDateTime { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime PickupDate { get; set; }
-
-        [Column(TypeName = "time")]
-        public DateTime PickupTime { get; set; }
+        public DateTime PickupDateTime { get; set; }
 
         public bool CallEnRoute { get; set; }
         public string SpecialInstructions { get; set; }
@@ -29,6 +25,6 @@ namespace Pickup.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public IList<FurnitureDonationPickup> FurnitureDonationPickups { get; set; }
+        public IList<FurniturePickupOrDelivery> FurnitureDonationPickups { get; set; }
     }
 }

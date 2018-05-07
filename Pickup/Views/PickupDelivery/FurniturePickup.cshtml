@@ -2,10 +2,9 @@
 @model FurniturePickupViewModel
 
 <h2>@ViewBag.Title</h2>
-<form method="post">
-    <input asp-for="PickupID" />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.PickupID)
+   <ul> @Html.EditorFor(m => m.FurnitureList)</ul>
 
-    
-    <select asp-for="Furniture" asp-items="Model.Furniture"></select>
-    <button id="clear" type="submit">Add @ViewBag.Title</button>
-</form>
+<button id="clear" type="submit">Add @ViewBag.Title</button> }

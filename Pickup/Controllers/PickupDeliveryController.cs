@@ -125,8 +125,7 @@ namespace Pickup.Controllers
                 {
                     Delivery = model.Delivery,
                     ScheduleDateTime = currentDate,
-                    PickupDate = model.PickupDate,
-                    PickupTime = model.PickupTime,
+                    PickupDateTime = model.PickupDateTime,
                     CallEnRoute = model.CallEnRoute,
                     SpecialInstructions = model.SpecialInstructions,
                     AddressID = model.AddressId,
@@ -146,15 +145,35 @@ namespace Pickup.Controllers
         }
 
         public IActionResult FurniturePickup(int pickupId) {
-            ViewBag.Title = "Furniture Donated";
-            return View(new FurniturePickupViewModel(context.Furniture.ToList()));
-            
+            FurniturePickupViewModel model = new FurniturePickupViewModel();
+            var furnitureItems = context.Furniture.ToList(); 
+            var checkBoxListItems = new List<CheckBoxItem>();
+            foreach (var item in furnitureItems)
+            {
+                checkBoxListItems.Add(new CheckBoxItem()
+                {
+                    ID = item.ID,
+                    Name = item.Name,
+                    Quantity = 0
+                });
+            }
+            model.FurnitureList = checkBoxListItems;
+            return View(model);
+
         }
 
         [HttpPost]
         public IActionResult FurniturePickup(FurniturePickupViewModel model) {
-            foreach (var x in model.Furniture)
-            { Console.WriteLine(x); }
+            var selectedFurniture = model.FurnitureList.Where(x => x.Quantity > 0).ToList();
+            foreach (var furniturePiece in selectedFurniture) {
+                FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery {
+                    DonationPickupID = model.PickupID,
+                    FurnitureID = furniturePiece.ID,
+                    Quantity = furniturePiece.Quantity
+                };
+                context.Add(furnitureDonationPickup);
+            }
+            context.SaveChanges();
             return View();
 
         }

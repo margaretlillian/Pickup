@@ -1,0 +1,7 @@
+﻿@model Pickup.Models.DonationPickupViewModels.CheckBoxItem
+<li>
+    @Html.TextBoxFor(x => x.Quantity)
+    @Html.LabelFor(x => x.Quantity, Model.Name)
+
+    @Html.HiddenFor(x => x.ID)
+</li>
