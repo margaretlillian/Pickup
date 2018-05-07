@@ -9,6 +9,6 @@ namespace Pickup.Models.DonationPickupViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public bool IsChecked { get; set; }
+        public int Quantity { get; set; }
     }
 }
