@@ -1,14 +1,10 @@
-﻿@model Pickup.Models.PickupOrDelivery
+﻿@model Pickup.Models.ViewViewModel.ViewInformationViewModel
 
 
 
 <ul>
-    <li>Name: @Model.Address.Donor.FirstName @Model.Address.Donor.LastName</li>
-    <li>Phone: @Model.Address.Donor.PhoneNumber</li>
-    <li> Phone #2: @Model.Address.Donor.PhoneNumberTwo</li>
-    <li>Address: @Model.Address.Street, @Model.Address.Apartment @Model.Address.City, @Model.Address.ZIP </li>
-    <li>Neighborhood: @Model.Address.Neighborhood</li>
-    <li>Pickup Date: @Model.PickupDate </li>
-    <li>Special Instructions: @Model.SpecialInstructions</li>
-    <li>Scheduler: @Model.UserId </li>
+    <li>@Model.FirstName</li>
+    <li>@Model.PickupDateTime</li>
+    <li>@Model.Scheduler</li>
+    <li>@Model.StreetAddress</li>
 </ul>

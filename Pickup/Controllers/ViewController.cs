@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pickup.Data;
 using Pickup.Models;
+using Pickup.Models.ViewViewModel;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,8 +24,18 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
-            PickupOrDelivery pickup = context.PickupsDeliveries.Where(p => p.ID == id).SingleOrDefault();
-            return View(pickup);
+            var results = (from p in context.PickupsDeliveries
+                           join a in context.Addresses on p.AddressID equals a.ID
+                           join d in context.Donors on a.DonorID equals d.ID
+                           select new ViewInformationViewModel()
+                           {
+                               PickupID = id,
+                               FirstName = d.FirstName,
+                               StreetAddress = a.Street,
+                               PickupDateTime = p.PickupDateTime,
+                               Scheduler = p.UserId
+                           }).FirstOrDefault();
+            return View(results);
         }
     }
 }
