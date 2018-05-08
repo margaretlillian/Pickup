@@ -24,6 +24,19 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
+            ViewInformationViewModel model = new ViewInformationViewModel();
+            var furnitureItems = context.FurnitureDonationPickups.ToList();
+            var listItems = new List<FurnitureListing>();
+            foreach (var item in furnitureItems)
+            {
+                listItems.Add(new FurnitureListing()
+                {
+                    ID = item.FurnitureID,
+                    Quantity = item.Quantity,
+                    Description = item.Description
+
+                });
+            }
             var results = (from p in context.PickupsDeliveries
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID

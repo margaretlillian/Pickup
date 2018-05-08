@@ -174,7 +174,7 @@ namespace Pickup.Controllers
                 context.Add(furnitureDonationPickup);
             }
             context.SaveChanges();
-            return View();
+            return Redirect("/View?id=" + model.PickupID);
 
         }
 
@@ -211,7 +211,7 @@ namespace Pickup.Controllers
                 context.Add(furnitureDonationPickup);
             }
             context.SaveChanges();
-            return View();
+            return Redirect("/View?id=" + model.DeliveryID);
 
         }
 

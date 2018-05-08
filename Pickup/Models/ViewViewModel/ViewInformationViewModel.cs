@@ -29,5 +29,12 @@ namespace Pickup.Models.ViewViewModel
         public string Scheduler { get; set; }
         public bool CallEnRoute { get; set; }
         public string SpecialInstructions { get; set; }
+
+        public List<FurnitureListing> Furniture { get; set; }
+
+        public ViewInformationViewModel()
+        {
+            List<FurnitureListing> Furniture = new List<FurnitureListing>();
+        }
     }
 }
