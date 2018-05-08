@@ -1,0 +1,10 @@
+﻿@using Pickup.Models.DonationPickupViewModels
+@model FurnitureDeliveryViewModel
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.DeliveryID)
+    <ul> @Html.EditorFor(m => m.FurnitureDelivered)</ul>
+
+    <button id="clear" type="submit">Add @ViewBag.Title</button>}

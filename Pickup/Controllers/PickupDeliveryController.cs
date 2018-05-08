@@ -136,7 +136,7 @@ namespace Pickup.Controllers
                 context.SaveChanges();
 
                 if (newPickup.Delivery)
-                    return Redirect("/");
+                    return Redirect("FurnitureDelivery?deliveryId=" + newPickup.ID);
 
                 return Redirect("FurniturePickup?pickupId=" + newPickup.ID);
             }
@@ -147,17 +147,17 @@ namespace Pickup.Controllers
         public IActionResult FurniturePickup(int pickupId) {
             FurniturePickupViewModel model = new FurniturePickupViewModel();
             var furnitureItems = context.Furniture.ToList(); 
-            var checkBoxListItems = new List<CheckBoxItem>();
+            var quantityListItems = new List<QuantityList>();
             foreach (var item in furnitureItems)
             {
-                checkBoxListItems.Add(new CheckBoxItem()
+                quantityListItems.Add(new QuantityList()
                 {
                     ID = item.ID,
                     Name = item.Name,
                     Quantity = 0
                 });
             }
-            model.FurnitureList = checkBoxListItems;
+            model.FurnitureList = quantityListItems;
             return View(model);
 
         }
@@ -170,6 +170,43 @@ namespace Pickup.Controllers
                     DonationPickupID = model.PickupID,
                     FurnitureID = furniturePiece.ID,
                     Quantity = furniturePiece.Quantity
+                };
+                context.Add(furnitureDonationPickup);
+            }
+            context.SaveChanges();
+            return View();
+
+        }
+
+        public IActionResult FurnitureDelivery(int deliveryId)
+        {
+            FurnitureDeliveryViewModel model = new FurnitureDeliveryViewModel();
+            var furnitureItems = context.Furniture.ToList();
+            var descriptionListItems = new List<DescriptionList>();
+            foreach (var item in furnitureItems)
+            {
+                descriptionListItems.Add(new DescriptionList()
+                {
+                    ID = item.ID,
+                    Name = item.Name,
+                Description = null});
+            }
+            model.FurnitureDelivered = descriptionListItems;
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public IActionResult FurnitureDelivery(FurnitureDeliveryViewModel model)
+        {
+            var selectedFurniture = model.FurnitureDelivered.Where(x => x.Description != null).ToList();
+            foreach (var furniturePiece in selectedFurniture)
+            {
+                FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
+                {
+                    DonationPickupID = model.DeliveryID,
+                    FurnitureID = furniturePiece.ID,
+                    Description = furniturePiece.Description
                 };
                 context.Add(furnitureDonationPickup);
             }

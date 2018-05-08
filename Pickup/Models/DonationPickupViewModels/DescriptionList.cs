@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models.DonationPickupViewModels
 {
-    public class CheckBoxItem
+    public class DescriptionList
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
+
+        public string Description { get; set; }
     }
 }

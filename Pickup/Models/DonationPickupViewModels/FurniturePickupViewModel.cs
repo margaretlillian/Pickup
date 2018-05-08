@@ -13,10 +13,10 @@ namespace Pickup.Models.DonationPickupViewModels
         [HiddenInput(DisplayValue = false)]
         public int PickupID { get; set; }
 
-        public List<CheckBoxItem> FurnitureList { get; set; }
+        public List<QuantityList> FurnitureList { get; set; }
 
         public FurniturePickupViewModel() {
-            FurnitureList = new List<CheckBoxItem>();
+            FurnitureList = new List<QuantityList>();
 }
 
     }
