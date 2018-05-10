@@ -1,8 +1,8 @@
 /* USER STORIES */
 
-As a logged in scheduler, I can view a screen 
+*As a logged in scheduler, I can view a screen 
 
-As a logged in scheduler, I can add furniture and other donations to the pickup being scheduled. 
+*As a logged in scheduler, I can add furniture and other donations to the pickup being scheduled. 
 
 As a logged in user, I can either update my information or enter it as I am signing up. Includes phone # and Full Name. 
 
@@ -12,17 +12,17 @@ As a logged in manager, I can add/approve misbehaving donors to the Blacklist.
 
 As a logged in user, I can view entries in the Blacklist. 
 
-As a logged in scheduler, I can view a printout page of the pickup I just scheduled. 
+++As a logged in scheduler, I can view a printout page of the pickup I just scheduled. 
 
 As a manager, I can log in with administrative privileges. 
 
 As a manager, I can approve scheduler user accounts.
 
-As a logged in scheduler, I can schedule deliveries. 
+*As a logged in scheduler, I can schedule deliveries. 
 
-As a logged in scheduler, I can add a description to the furniture being delivered to enable drivers to find the furniture more easily. 
+*As a logged in scheduler, I can add a description to the furniture being delivered to enable drivers to find the furniture more easily. 
 
-As a a logged in scheduler, I can view a printout page of the delivery I just scheduled. 
+++As a a logged in scheduler, I can view a printout page of the delivery I just scheduled. 
 
 As a logged in scheduler, I can change/update scheduled pickups. 
 

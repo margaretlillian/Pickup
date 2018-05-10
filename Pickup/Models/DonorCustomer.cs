@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models
 {
-    public class Donor
+    public class DonorCustomer
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
@@ -13,6 +13,6 @@ namespace Pickup.Models
         public string PhoneNumber { get; set; }
         public string PhoneNumberTwo { get; set; }
 
-        public IList<Donor> Donors { get; set; }
+        public IList<DonorCustomer> DonorsCustomers { get; set; }
     }
 }

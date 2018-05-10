@@ -11,9 +11,10 @@ using System;
 namespace Pickup.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180510180145_Blacklist_Renaming")]
+    partial class Blacklist_Renaming
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,7 +142,7 @@ namespace Pickup.Data.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<int>("DonorCustomerID");
+                    b.Property<int>("DonorID");
 
                     b.Property<string>("Neighborhood");
 
@@ -153,7 +154,7 @@ namespace Pickup.Data.Migrations
 
                     b.HasIndex("AddressID");
 
-                    b.HasIndex("DonorCustomerID");
+                    b.HasIndex("DonorID");
 
                     b.ToTable("Addresses");
                 });
@@ -373,9 +374,9 @@ namespace Pickup.Data.Migrations
                         .WithMany("Addresses")
                         .HasForeignKey("AddressID");
 
-                    b.HasOne("Pickup.Models.DonorCustomer", "DonorCustomer")
+                    b.HasOne("Pickup.Models.DonorCustomer", "Donor")
                         .WithMany()
-                        .HasForeignKey("DonorCustomerID")
+                        .HasForeignKey("DonorID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -40,7 +40,7 @@ namespace Pickup.Controllers
             var results = (from p in context.PickupsDeliveries
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
-                           join d in context.Donors on a.DonorID equals d.ID
+                           join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
                            where p.ID == id
                            select new ViewInformationViewModel()
                            {
@@ -62,5 +62,6 @@ namespace Pickup.Controllers
                            }).FirstOrDefault();
             return View(results);
         }
+        
     }
 }

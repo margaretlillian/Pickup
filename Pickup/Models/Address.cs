@@ -15,8 +15,8 @@ namespace Pickup.Models
         public string Neighborhood { get; set; }
         public string BottomFloor { get; set; }
 
-        public int DonorID { get; set; }
-        public Donor Donor { get; set; }
+        public int DonorCustomerID { get; set; }
+        public DonorCustomer DonorCustomer { get; set; }
 
         public IList<Address> Addresses { get; set; }
     }

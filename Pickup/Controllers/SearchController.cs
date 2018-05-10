@@ -28,14 +28,14 @@ namespace Pickup.Controllers
         public IActionResult SearchResults(SearchViewModel model)
         {
 
-            model.Donors = context.Donors
+            model.Donors = context.DonorsCustomers
                     .Where(d => d.FirstName == model.FirstName)
                     .Where(d => d.LastName == model.LastName)
                     .ToList();
             model.Addresses = new List<Address>();
-            foreach (Donor donor in model.Donors)
+            foreach (DonorCustomer donor in model.Donors)
             {
-                List<Address> donorAddresses = context.Addresses.Where(a => a.DonorID == donor.ID).ToList();
+                List<Address> donorAddresses = context.Addresses.Where(a => a.DonorCustomerID == donor.ID).ToList();
 
                 if (donorAddresses != null)
                 {

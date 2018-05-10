@@ -11,7 +11,7 @@ namespace Pickup.Models.DonationPickupViewModels
         public string LastName { get; set; }
 
 
-        public IList<Donor> Donors { get; set; }
+        public IList<DonorCustomer> Donors { get; set; }
         public IList<Address> Addresses { get; set; }
 
     }

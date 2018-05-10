@@ -74,7 +74,7 @@ form {
     height: 150px;
     padding: 0;
     margin: 0;
-    box-shadow: -3px -3px 5px #5e534c;
+    background: url('/images/blurredtruck.jpg') no-repeat;
 }
 
 footer {
@@ -336,12 +336,8 @@ h4.the-date {
 
 .incdecbutton {
 font-size: 1em;
-height: 1.4em;
-width: 1.4em;
-padding: 1px;
 border-radius: 15px;
 display:inline;
-margin: 1px;
 box-shadow: none;
 }
 

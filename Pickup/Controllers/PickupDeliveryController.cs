@@ -42,7 +42,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Customer Information";
             if (ModelState.IsValid)
             {
-                Donor existingPerson = context.Donors
+                DonorCustomer existingPerson = context.DonorsCustomers
                       .Where(d => d.FirstName == model.FirstName)
                       .Where(d => d.LastName == model.LastName)
                       .Where(d => d.PhoneNumber == model.PhoneNumber)
@@ -53,7 +53,7 @@ namespace Pickup.Controllers
                     return Redirect("Address?customerId=" + existingPerson.ID);
                 }
 
-                Donor newPerson = new Donor
+                DonorCustomer newPerson = new DonorCustomer
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -74,7 +74,7 @@ namespace Pickup.Controllers
         {
             ViewBag.Title = "Address Information";
 
-            Donor donor = context.Donors.Single(d => d.ID == customerId);
+            DonorCustomer donor = context.DonorsCustomers.Single(d => d.ID == customerId);
             return View("Index", new AddressViewModel());
         }
 
@@ -92,7 +92,7 @@ namespace Pickup.Controllers
                     City = model.City,
                     ZIP = model.ZIP,
                     Neighborhood = model.Neighborhood,
-                    DonorID = model.CustomerId
+                    DonorCustomerID = model.CustomerId
                 };
 
                 context.Add(newAddress);
