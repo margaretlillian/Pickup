@@ -5,26 +5,50 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
-{<div id="top">
+{<nav id="top">
+    @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Logout" class="btn btn-primary" />
+    }
+</nav>
 
 
-        <ul>
-            <li><a asp-controller="PickupDelivery" asp-action="Customer">Pickup / Delivery</a></li>
-            <li><a asp-controller="Home">Schedule Matrix</a></li>
-            <li><a href="#">Blacklist</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a asp-controller="Manage" asp-action="Index">Account</a></li>
+    <nav id="side">
 
-        </ul>
-    </div>
+
+        <div class="sidebar">
+
+            <ul>
+                <li><a href="/PickupDelivery/Customer">Pickup / Delivery</a></li>
+                <li><a href="#">Schedule Matrix</a></li>
+                <li><a href="#">Blacklist</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="/Manage/Index">Account</a></li>
+
+            </ul>
+        </div>
+
+    </nav>
+
 }
 else
-{<div id="top">
-    You must be an approved user to view this page.
+{ <nav id="top">
+        <div id="searchme">Search <input type="text"> <input type="submit" value="Search"></div>
+    </nav>
 
-    <ul>
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-    </ul>
-    </div>
+
+    <nav id="side">
+
+
+        <div class="sidebar">
+
+            <ul>
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
 }
