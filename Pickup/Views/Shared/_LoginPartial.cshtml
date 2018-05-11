@@ -6,6 +6,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {<nav id="top">
+    Logged in as <a>Somene </a>
     @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -20,11 +21,11 @@
         <div class="sidebar">
 
             <ul>
-                <li><a href="/PickupDelivery/Customer">Pickup / Delivery</a></li>
-                <li><a href="#">Schedule Matrix</a></li>
+                <li class="special-attention"><a class="special-attention" asp-controller="PickupDelivery" asp-action="Customer">New Pickup or Delivery</a></li>
+                <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
                 <li><a href="#">Blacklist</a></li>
                 <li><a href="#">Search</a></li>
-                <li><a href="/Manage/Index">Account</a></li>
+                <li id="manage"><a asp-controller="Manage" asp-action="Index">Account</a></li>
 
             </ul>
         </div>
@@ -34,7 +35,6 @@
 }
 else
 { <nav id="top">
-        <div id="searchme">Search <input type="text"> <input type="submit" value="Search"></div>
     </nav>
 
 

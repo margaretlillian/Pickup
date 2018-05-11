@@ -138,7 +138,7 @@ footer {
         text-transform: uppercase;
         font-weight: bold;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.2em;
         letter-spacing: 1px;
     }
 
@@ -148,6 +148,11 @@ footer {
             color: #cca36a;
         }
 
+        #side a.special-attention {
+            background: #ca7e1c;
+            text-shadow: 2px 4px 2px #513e2c;
+            color: #fff;
+        }
     #side h2 {
         font: 1em arial;
         padding-left: 7px;
@@ -155,6 +160,9 @@ footer {
         text-shadow: 1px 1px #e5e1dc;
     }
 
+    #side li.special-attention {
+        border-top-color: #333;
+    }
 
     #side button {
         background: #fff;
@@ -349,11 +357,16 @@ li.deliver {
 }
 
 
+@media only screen and (min-width: 1400px) {
+    h1 {
+        letter-spacing: 3px;
+    }
+}
 /* SMALLER RESOLUTION SCREEN STYLE */
 
-@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+@media only screen and (min-width: 1000px) and (max-width: 1400px) {
     h1 {
-        font-size: 2em;
+        font-size: 80px;
     }
 
     #side {
