@@ -75,7 +75,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Address Information";
 
             DonorCustomer donor = context.DonorsCustomers.Single(d => d.ID == customerId);
-            return View("Index", new AddressViewModel());
+            return View(new AddressViewModel());
         }
 
         [HttpPost]

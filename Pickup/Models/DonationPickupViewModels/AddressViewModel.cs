@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,8 +28,14 @@ namespace Pickup.Models.DonationPickupViewModels
 
         public string Neighborhood {get; set; }
 
-        public AddressViewModel() { }
+        public List<string> BottomFloor { get; set; }
+        public AddressViewModel()
+        {
 
-        public AddressViewModel(int donorId) { }
+            BottomFloor = new List<string>
+            {
+"Yes", "No - No elevator", "No - There is an elevator"            };
+
+        }
     }
 }
