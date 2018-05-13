@@ -22,7 +22,7 @@
 @if (Model.Donors != null)
 {@if (@Model.Donors.Count == 0)
     {<h3>No Results</h3>}
-@foreach (Donor donor in Model.Donors)
+@foreach (DonorCustomer donor in Model.Donors)
 {
 
     <div class="donor-new-address">
@@ -47,17 +47,17 @@
 {
     @foreach (Address address in Model.Addresses)
     {
-        <h4>Address for: @address.Donor.FirstName @address.Donor.LastName</h4>
+        <h4>Address for: @address.DonorCustomer.FirstName @address.DonorCustomer.LastName</h4>
         <ul>
             <li>
                 <span class="name">Phone Number: </span>
-                @address.Donor.PhoneNumber
+                @address.DonorCustomer.PhoneNumber
             </li>
-            @if (address.Donor.PhoneNumberTwo != null)
+            @if (address.DonorCustomer.PhoneNumberTwo != null)
             {
                 <li>
                     <span class="name">Phone #2: </span>
-                    @address.Donor.PhoneNumberTwo
+                    @address.DonorCustomer.PhoneNumberTwo
                 </li>}
 
             <li>
