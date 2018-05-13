@@ -28,14 +28,24 @@ namespace Pickup.Models.DonationPickupViewModels
 
         public string Neighborhood {get; set; }
 
-        public List<string> BottomFloor { get; set; }
+        public List<SelectListItem> BottomFloor { get; set; }
         public AddressViewModel()
         {
 
-            BottomFloor = new List<string>
+            BottomFloor = new List<SelectListItem>();
+            BottomFloor.Add(new SelectListItem
             {
-"Yes", "No - No elevator", "No - There is an elevator"            };
-
+                Value = "Yes",
+                Text = "Yes"
+            });
+            BottomFloor.Add(
+            new SelectListItem {
+                Value = "No - There is an elevator",
+                Text = "No - There is an elevator" });
+            BottomFloor.Add(
+            new SelectListItem {
+            Value = "No - No elevator",
+            Text = "No - No elevator"});
         }
     }
 }
