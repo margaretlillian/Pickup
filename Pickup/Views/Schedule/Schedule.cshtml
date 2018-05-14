@@ -1,11 +1,12 @@
-﻿@model  Dictionary<DateTime, List<PickupOrDelivery>>
-@foreach (KeyValuePair<DateTime, List<PickupOrDelivery>> x in Model)
+﻿@using Pickup.Models.ScheduleViewModels
+@model  Dictionary<DateTime, IList<WeeklyCalendarViewModel>>
+@foreach (KeyValuePair<DateTime, IList<WeeklyCalendarViewModel>> x in Model)
 {
    <h2>@x.Key.ToString("MMM dd")</h2>
 
 @foreach (var y in x.Value)
 {
-    <p>@y.ID <br /></p>
+    <p>@y.City <br /></p>
 
 }
 }

@@ -26,17 +26,7 @@ namespace Pickup.Controllers
         [Authorize]
         public IActionResult Index(int weekId)
         {
-            List<DateTime> week = new List<DateTime>();
-            for (int i = 1; i < 7; i++)
-            {
-                week.Add(DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i)));
-            }
-            return View(week);
-        }
-
-        public IActionResult Schedule(int weekId)
-        {
-            Dictionary<DateTime, List<PickupOrDelivery>> something = new Dictionary<DateTime, List<PickupOrDelivery>>();
+            Dictionary<DateTime, IList<WeeklyCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<WeeklyCalendarViewModel>>();
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
@@ -44,13 +34,19 @@ namespace Pickup.Controllers
                                where p.PickupDateTime.ToShortDateString() == theDate.ToShortDateString()
                                join a in context.Addresses on p.AddressID equals a.ID
                                join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
-                               select p).ToList();
+                               select new WeeklyCalendarViewModel {
+                               City = a.City,
+                               FirstName = dc.FirstName,
+                               LastName = dc.LastName,
+                               PickupID = p.ID,
+                               Phone = dc.PhoneNumber,
+                               PickupTime = p.PickupDateTime}).ToList();
                 
-                    something.Add(theDate, results);
+                    pickupsDates.Add(theDate, results);
                 
             }
             
-            return View(something);
+            return View(pickupsDates);
         }
     }
 }
