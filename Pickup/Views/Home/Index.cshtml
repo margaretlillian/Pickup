@@ -1,24 +1,16 @@
-﻿
-<h2>Schedule Matrix</h2>
+﻿@using Microsoft.AspNetCore.Identity
+@using Pickup.Models
 
-<p>Coming soon!</p>
-<a asp-controller="AddDelete" asp-action="AddFurnitureCategory">Add Furniture Category</a> 
-<a asp-controller="AddDelete" asp-action="AddFurniture">Add Furniture</a>
-<!--<table id="matrix">
-    <tr>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th class="sat">Saturday</th>
-    </tr>
-    <tr>
-        <td>dgfjsgdfdgs</td>
-        <td>fhgdfjgdsjfgjh</td>
-        <td>dhsgfjgdshf</td>
-        <td>fsdfsdfs</td>
-        <td>fdsjfdsk</td>
-        <td class="sat">fdskfsdjfh</td>
-    </tr>
-</table>-->
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h2>Welcome!</h2>
+@if (SignInManager.IsSignedIn(User))
+{
+
+}
+else
+{ 
+<p>This application is designed to make scheduling of pickups and deliveries easier. 
+    </p>
+}

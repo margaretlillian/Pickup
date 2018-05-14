@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pickup.Data;
@@ -12,6 +13,7 @@ using Pickup.Models.ViewViewModel;
 
 namespace Pickup.Controllers
 {
+    [Authorize]
     public class ViewController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -61,6 +63,14 @@ namespace Pickup.Controllers
                                Scheduler = s.FullName
                            }).FirstOrDefault();
             return View(results);
+        }
+
+        public IActionResult Week(string date)
+        {
+            var results = (from p in context.PickupsDeliveries
+                           where p.PickupDateTime.ToString("dd-MM-yy") == date
+                           select p);
+            return View(results.ToList());
         }
         
     }

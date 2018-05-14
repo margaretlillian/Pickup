@@ -1,0 +1,7 @@
+﻿@model  List<PickupOrDelivery>
+
+@foreach (var x in Model)
+{
+   <h2>Date</h2> @x.PickupDateTime
+@x.ScheduleDateTime
+}

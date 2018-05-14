@@ -10,8 +10,7 @@ using Pickup.Models;
 namespace Pickup.Controllers
 {
     public class HomeController : Controller
-    {   [Authorize]
-        public IActionResult Index()
+    {           public IActionResult Index()
         {
             return View();
         }

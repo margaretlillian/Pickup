@@ -68,7 +68,7 @@ namespace Pickup.Controllers
                 context.Furniture.Add(newFurniture);
                 context.SaveChanges();
 
-                return Redirect("/");
+                return View("Index", model);
             }
 
             return View("Index", model);

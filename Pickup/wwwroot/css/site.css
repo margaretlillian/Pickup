@@ -1,4 +1,7 @@
-﻿* {    box-sizing: border-box;}
+﻿* {
+    box-sizing: border-box;
+}
+
 body {
     font: 1.25em arial, sans-serif;
     color: #000;
@@ -149,11 +152,6 @@ footer {
             color: #cca36a;
         }
 
-        #side a.special-attention {
-            background: #ca7e1c;
-            text-shadow: 2px 4px 2px #513e2c;
-            color: #fff;
-        }
     #side h2 {
         font: 1em arial;
         padding-left: 7px;
@@ -242,7 +240,47 @@ footer {
 #content #clear {
     clear: both;
 }
-    /* Autocomplete City */.autocomplete {    /*the container must be positioned relative:*/    position: relative;    display: inline-block;}.autocomplete-items {    position: absolute;    border: 1px solid #4c4132;    border-bottom: none;    border-top: none;    z-index: 99;    /*position the autocomplete items to be the same width as the container:*/    top: 100%;    left: 0;    right: 0;    box-shadow: 3px 3px 5px #3f2f0d;}    .autocomplete-items div {        padding: 5px;        cursor: pointer;        background: #c67b13;        color: #fff;        border-bottom: 1px solid #915f1b;    }        .autocomplete-items div:hover {            background-color: #915f1b;            color: #fff;        }.autocomplete-active {    background-color: #4f3108 !important;    color: #ffffff;}
+    /* Autocomplete City */
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #4c4132;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    box-shadow: 3px 3px 5px #3f2f0d;
+}
+
+    .autocomplete-items div {
+        padding: 5px;
+        cursor: pointer;
+        background: #c67b13;
+        color: #fff;
+        border-bottom: 1px solid #915f1b;
+    }
+
+        .autocomplete-items div:hover {
+            background-color: #915f1b;
+            color: #fff;
+        }
+
+.autocomplete-active {
+    background-color: #4f3108 !important;
+    color: #ffffff;
+}
+
 
 /* OTHER */
 
