@@ -1,10 +1,10 @@
 ﻿@using Pickup.Models.DonationPickupViewModels
 @model FurniturePickupViewModel
 
-<h2>Furniture to Be Picked Up</h2>
+<h2>Furniture Picked Up</h2>
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(m => m.PickupID)
    <ul> @Html.EditorFor(m => m.FurnitureList)</ul>
 
-<button id="clear" type="submit">Add @ViewBag.Title</button> }
+<button id="clear" type="submit">Add Furniture Picked Up</button> }

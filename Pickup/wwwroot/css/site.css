@@ -219,6 +219,15 @@ footer {
 
 
     /* Furniture List */
+    #content .quantity {width: 45px;
+                        float: none;
+    }
+label.furn-item {
+float: none;}
+.piece {
+margin: 6px;
+}
+
     #content .furniture-group ul {
         
         padding: 0 0 10px 0;
