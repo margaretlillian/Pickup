@@ -29,8 +29,7 @@ namespace Pickup.Controllers
         {
 
             model.Donors = context.DonorsCustomers
-                    .Where(d => d.FirstName == model.FirstName)
-                    .Where(d => d.LastName == model.LastName)
+                    .Where(d => d.FirstName == model.FirstName || d.LastName == model.LastName)
                     .ToList();
             model.Addresses = new List<Address>();
             foreach (DonorCustomer donor in model.Donors)
