@@ -25,8 +25,8 @@
 @foreach (DonorCustomer donor in Model.Donors)
 {
 
-    <div class="donor-new-address">
-        <h4>@donor.FirstName @donor.LastName</h4>
+    <section class="result">
+        <h3>@donor.FirstName @donor.LastName</h3>
         <ul>
             <li><span class="name">Phone Number: </span>@donor.PhoneNumber</li>
             @if (donor.PhoneNumberTwo != null)
@@ -40,14 +40,15 @@
             </a>
         </p>
 
-    </div>
+    </section>
 }
 }
 @if (Model.Addresses != null)
 {
     @foreach (Address address in Model.Addresses)
     {
-        <h4>Address for: @address.DonorCustomer.FirstName @address.DonorCustomer.LastName</h4>
+        <section class="result">
+        <h3>Address for: @address.DonorCustomer.FirstName @address.DonorCustomer.LastName</h3>
         <ul>
             <li>
                 <span class="name">Phone Number: </span>
@@ -71,7 +72,7 @@
                onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@address.ID');">
                 Create new pickup using this address.
             </a>
-        </p>
+        </p></section>
 
 
     }
