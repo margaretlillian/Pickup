@@ -7,13 +7,11 @@ namespace Pickup.Models.ScheduleViewModels
 {
     public class WeeklyCalendarViewModel
     {
-        public List<DateTime> Week { get; set; }
-
-        public WeeklyCalendarViewModel()
-        {
-           
-        }
+     
+           public string FirstName { get; set; }
+        public string City { get; set; }
+        public DateTime PickupTime { get; set; }
+    }
 
     }
 
-}

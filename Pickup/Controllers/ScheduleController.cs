@@ -36,20 +36,21 @@ namespace Pickup.Controllers
 
         public IActionResult Schedule(int weekId)
         {
-            List<PickupOrDelivery> pickups = new List<PickupOrDelivery>();
+            Dictionary<DateTime, List<PickupOrDelivery>> something = new Dictionary<DateTime, List<PickupOrDelivery>>();
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
                 var results = (from p in context.PickupsDeliveries
-                               where p.PickupDateTime.ToString("dd-MM-yy") == theDate.ToString("dd-MM-yy")
+                               where p.PickupDateTime.ToShortDateString() == theDate.ToShortDateString()
+                               join a in context.Addresses on p.AddressID equals a.ID
+                               join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
                                select p).ToList();
-                foreach (var item in results)
-                {
-                    pickups.Add(item);
-                }
+                
+                    something.Add(theDate, results);
+                
             }
             
-            return View(pickups);
+            return View(something);
         }
     }
 }
