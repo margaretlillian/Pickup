@@ -14,38 +14,21 @@ namespace Pickup.Models.DonationPickupViewModels
         public int CustomerId { get; set; }
 
         [Required]
-        [Display(Name = "Address")]
+        [Display(Name = "Address *")]
         public string Street { get; set; }
 
         [Display(Name = "Apt.")]
         public string Apartment { get; set; }
 
         [Required]
+        [Display(Name = "City *")]
         public string City { get; set; }
 
         [Required]
+        [Display(Name = "ZIP Code *")]
         public string ZIP { get; set; }
 
         public string Neighborhood {get; set; }
 
-        public List<SelectListItem> BottomFloor { get; set; }
-        public AddressViewModel()
-        {
-
-            BottomFloor = new List<SelectListItem>();
-            BottomFloor.Add(new SelectListItem
-            {
-                Value = "Yes",
-                Text = "Yes"
-            });
-            BottomFloor.Add(
-            new SelectListItem {
-                Value = "No - There is an elevator",
-                Text = "No - There is an elevator" });
-            BottomFloor.Add(
-            new SelectListItem {
-            Value = "No - No elevator",
-            Text = "No - No elevator"});
-        }
     }
 }

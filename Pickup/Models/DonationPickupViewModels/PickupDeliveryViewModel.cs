@@ -18,7 +18,7 @@ namespace Pickup.Models.DonationPickupViewModels
         public bool Delivery { get; set; }
 
         [Required]
-        [Display(Name = "Date/Time of Pickup")]
+        [Display(Name = "Date/Time of Pickup *")]
         public DateTime PickupDateTime { get; set; } = DateTime.Now;
 
         [Display(Name = "Call en route")]

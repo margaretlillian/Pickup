@@ -16,18 +16,18 @@ namespace Pickup.Models
         //public int DonorId { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "First Name *")]
         public string FirstName { get; set; }
         
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last Name *")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Phone #")]
+        [Display(Name = "Phone Number *")]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "2nd Phone #")]
+        [Display(Name = "Second Phone Number")]
         public string PhoneNumberTwo { get; set; }
     }
 }
