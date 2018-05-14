@@ -1,5 +1,6 @@
 ﻿@using Pickup.Models.ScheduleViewModels
 @model Dictionary<DateTime, IList<WeeklyCalendarViewModel>>
+
 <h2>Schedule Matrix</h2>
 @{var week = Context.Request.Query["weekId"];
     if (String.IsNullOrEmpty(week)) {

@@ -1,14 +1,15 @@
 ﻿@model Pickup.Models.ViewViewModel.ViewInformationViewModel
 
-    @if (Model.Delivery)
-    {
-        <h2>Delivery Information</h2>
-    }
-else  {<h2>Pickup Information</h2>}
+@if (Model.Delivery)
+{
+    <h2>Delivery Information</h2>
+}
+else
+{<h2>Pickup Information</h2>}
 
 
 <ul>
-    <li class="scheduler-info"><span class="property-name">Scheduled By:</span> @Model.Scheduler</li>
+    <li class="scheduler-info"><span class="property-name">Scheduled By:</span> @Html.DisplayFor(m => m.Scheduler)</li>
     <li class="scheduler-info"><span class="property-name">Date Scheduled:</span> @Model.ScheduleDateTime</li>
 
     <li><span class="property-name">Pickup Date / Time:</span> @Model.PickupDateTime</li>
@@ -23,4 +24,9 @@ else  {<h2>Pickup Information</h2>}
 
     <li><span class="property-name">Call En Route:</span> @Model.CallEnRoute</li>
     <li><span class="property-name">Special Instructions:</span> @Model.SpecialInstructions</li>
+    @foreach (var x in Model.Furniture) { 
+        <li>@x.Name - @if (Model.Delivery)
+        { @x.Description}
+        else { @x.Quantity}</li>
+    }
 </ul>

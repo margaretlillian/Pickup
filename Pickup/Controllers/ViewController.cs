@@ -26,14 +26,22 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index(int id)
         {
-            ViewInformationViewModel model = new ViewInformationViewModel();
-            var furnitureItems = context.FurnitureDonationPickups.ToList();
+            var furnitureItems = (from fpd in context.FurnitureDonationPickups
+                                  join f in context.Furniture on fpd.FurnitureID equals f.ID
+                                  where fpd.DonationPickupID == id
+                                  select new FurnitureListing {
+                                  Name = f.Name,
+                                  ID = f.ID,
+                                  Quantity = fpd.Quantity,
+                                  Description = fpd.Description
+                                  }).ToList();
             var listItems = new List<FurnitureListing>();
             foreach (var item in furnitureItems)
             {
                 listItems.Add(new FurnitureListing()
                 {
-                    ID = item.FurnitureID,
+                    ID = item.ID,
+                    Name = item.Name,
                     Quantity = item.Quantity,
                     Description = item.Description
 
@@ -43,6 +51,7 @@ namespace Pickup.Controllers
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
                            join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
+                           join fpd in context.FurnitureDonationPickups on p.ID equals fpd.DonationPickupID
                            where p.ID == id
                            select new ViewInformationViewModel()
                            {
@@ -60,8 +69,8 @@ namespace Pickup.Controllers
                                CallEnRoute = p.CallEnRoute,
                                SpecialInstructions = p.SpecialInstructions,
                                PickupDateTime = p.PickupDateTime,
-                               Scheduler = s.FullName
-                           }).FirstOrDefault();
+                               Scheduler = s.FullName,
+                               Furniture = listItems}).FirstOrDefault();
             return View(results);
         }
 
