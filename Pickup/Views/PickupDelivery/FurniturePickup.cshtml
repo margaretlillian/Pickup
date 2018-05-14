@@ -2,6 +2,8 @@
 @model FurniturePickupViewModel
 
 <h2>Furniture Picked Up</h2>
+<p>Enter the quantity next to the items being donated. Boxes must either be left blank or 
+    be a valid number.</p>
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(m => m.PickupID)

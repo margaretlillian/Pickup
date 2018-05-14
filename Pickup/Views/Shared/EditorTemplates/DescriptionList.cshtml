@@ -1,7 +1,8 @@
 ﻿@model Pickup.Models.DonationPickupViewModels.DescriptionList
-<li>
+<li><div class="piece">
     @Html.TextBoxFor(x => x.Description)
     @Html.LabelFor(x => x.Description, Model.Name)
 
     @Html.HiddenFor(x => x.ID)
+    </div>
 </li>
