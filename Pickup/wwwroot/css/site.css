@@ -68,14 +68,11 @@ h2 {
     margin: 5px;
 }
 
-h3 {
+h3{
     color: #555;
     text-shadow: 1px 1px 1px #c9baa5;
 }
 
-form {
-  /*margin-top: 2em; */
-}
 /* HEADER */
 header {
     background: #fff url('/images/hep-logo.png') top left no-repeat;
@@ -190,8 +187,9 @@ footer {
     #content .quantity {width: 45px;
                         float: none;
     }
-label.furn-item {
+.furn-item {
 float: none;}
+
 .piece {
 margin: 6px;
 }
@@ -299,14 +297,11 @@ padding: 15px;
 
     #schedulematrix ul {
         
-        margin: 0;
-        padding: 0;
         display: table-row;
     }
 
 .day {
     display: table-cell;
-    margin: 2px;
     padding: 15px;
     background: #fff;
     border: 1px dotted #49545b;
@@ -349,7 +344,7 @@ h4.the-date {
         height: 40px;
     }
 
-h3.thetime {
+.thetime {
     margin-top: 25px;
     font-size: 1em;
     color: #333;
@@ -360,7 +355,7 @@ h3.thetime {
     background: #ddd;
 }
 
-li.deliver {
+.deliver {
     text-transform: uppercase;
     color: #cc5f0c;
     padding-top: 6px;
@@ -390,10 +385,40 @@ font-size: 1.2em;
 
 /* VIEW PICKUP/DELIVERY */
 
-.property-name {width: 200px;
-                display: inline-block;
+table {margin-top: 16px;
+       margin-left: 35px;
+       border-collapse: collapse;
+       line-height: 1.2em;
 }
-.property-info {display: inline-block;}
+
+td {padding: 16px;
+    vertical-align: top;
+}
+
+    tr:nth-child(odd) {
+        background: #f2ede3;
+    }
+
+th {font-size: 1.5em;
+    padding: 10px;
+}
+
+.property-name {padding-right: 45px;
+                font-weight: bold;
+}
+
+table.furniture-list-view, .furniture-list-view td{
+    padding: 0;
+    margin: 0;
+}
+
+.furniture-list-view tr {height: 1.6em;
+                         border-bottom: 1px dotted #eee;
+}
+.furniture-list-view :nth-child(odd) {
+    background: #fff;
+}
+#furniture-count-descr {padding-right: 15px;}
 
 /* MULTIPLES */
 

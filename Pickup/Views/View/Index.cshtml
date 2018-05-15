@@ -16,59 +16,42 @@ else
              @Model.FirstName @Model.LastName
          </th>
      </tr>
+
      <tr>
          <td>
-             <span class="property-name">Scheduled By:</span>
+             <span class="property-name">Pickup Date </span>
          </td>
          <td>
-             @Model.Scheduler
+             @Model.PickupDateTime.ToString("MMMM dd yyyy")
          </td>
      </tr>
 
 
      <tr>
          <td>
-             <span class="property-name">Date Scheduled:</span>
+             <span class="property-name">Phone Number</span>
          </td>
          <td>
-             @Model.ScheduleDateTime
+             @Model.PhoneNumber
          </td>
-     </tr>
-
-     <tr>
-         <td>
-             <span class="property-name">Pickup Date / Time:</span>
-         </td>
-         <td>
-             @Model.PickupDateTime
-         </td>
-     </tr>
-
-
-     <tr>
-         <td>
-         <span class="property-name">Phone Number:</span>
-             </td>
-         <td>
-         @Model.PhoneNumber
-             </td>
      </tr>
 
 
      @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
     {
      <tr>
-     <td>
-         <span class="property-name">Phone Number 2:</span></td>
-     <td>
-         @Model.PhoneNumberTwo
-     </td>
+         <td>
+             <span class="property-name">Phone Number 2</span>
+         </td>
+         <td>
+             @Model.PhoneNumberTwo
+         </td>
      </tr>}
 
      <tr>
          <td>
-         <span class="property-name">Address:</span>
-             </td>
+             <span class="property-name">Address</span>
+         </td>
          <td>
              @Model.StreetAddress
              @if (!String.IsNullOrEmpty(Model.Apt))
@@ -81,49 +64,68 @@ else
      @if (!String.IsNullOrEmpty(Model.Neighborhood))
     {
      <tr>
-     <td>
-         <span class="property-name">Neighborhood:</span>
+         <td>
+             <span class="property-name">Neighborhood</span>
          </td>
-     <td>
-         @Model.Neighborhood
+         <td>
+             @Model.Neighborhood
          </td>
      </tr>}
 
 
      <tr>
          <td>
-         <span class="property-name">Call En Route:</span>
-             </td>
+             <span class="property-name">Call En Route</span>
+         </td>
          <td>
-         @Model.CallEnRoute
-             </td>
+             @Model.CallEnRoute
+         </td>
      </tr>
 
 
      @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
     {
      <tr>
-     <td>
-         <span class="property-name">Special Instructions:</span>
+         <td>
+             <span class="property-name">Special Instructions</span>
          </td>
-     <td>
-         @Model.SpecialInstructions
+         <td>
+             @Model.SpecialInstructions
          </td>
      </tr>}
 
      <tr>
-         <td>Furniture Donated</td>
-     @foreach (var x in Model.Furniture)
-    {<td>
-         <ul>
-     <li>
-         @x.Name - @if (Model.Delivery)
+         <td><span class="property-name">Furniture Donated</span> </td>
+         <td>
+             <table class="furniture-list-view">
+                 @foreach (var x in Model.Furniture)
+                {
+                 <tr>
+                     <td id="furniture-count-descr">
+                         @if (Model.Delivery)
         {@x.Description}
 else
 { @x.Quantity}
-     </li>
-             </ul>
-             </td>
-}
-         </tr>
+                     </td>
+                     <td>@x.Name </td>
+
+                 </tr>
+
+            }
+
+             </table>
+         </td>
+     </tr>
+
+
+     <tr>
+         <td>
+             <span class="property-name">Scheduled By</span>
+         </td>
+         <td>
+             @Model.Scheduler <br />
+             @Model.ScheduleDateTime
+
+         </td>
+     </tr>
  </table>
