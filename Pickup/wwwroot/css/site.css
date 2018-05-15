@@ -388,6 +388,13 @@ text-align:right;
 font-size: 1.2em;
 }
 
+/* VIEW PICKUP/DELIVERY */
+
+.property-name {width: 200px;
+                display: inline-block;
+}
+.property-info {display: inline-block;}
+
 /* MULTIPLES */
 
 #content, .sidebar, #content-search {

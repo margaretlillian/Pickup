@@ -8,39 +8,122 @@ else
 {<h2>Pickup Information</h2>}
 
 
- <ul id="pickupinfo">
-     <li class="scheduler-info"><span class="property-name">Scheduled By:</span> @Model.Scheduler</li>
-     <li class="scheduler-info"><span class="property-name">Date Scheduled:</span> @Model.ScheduleDateTime</li>
+ <table id="pickupinfo">
 
-     <li><span class="property-name">Pickup Date / Time:</span> @Model.PickupDateTime</li>
 
-     <li><span class="property-name">Name:</span> @Model.FirstName @Model.LastName</li>
-     <li><span class="property-name">Phone Number:</span> @Model.PhoneNumber</li>
+     <tr>
+         <th colspan="2">
+             @Model.FirstName @Model.LastName
+         </th>
+     </tr>
+     <tr>
+         <td>
+             <span class="property-name">Scheduled By:</span>
+         </td>
+         <td>
+             @Model.Scheduler
+         </td>
+     </tr>
+
+
+     <tr>
+         <td>
+             <span class="property-name">Date Scheduled:</span>
+         </td>
+         <td>
+             @Model.ScheduleDateTime
+         </td>
+     </tr>
+
+     <tr>
+         <td>
+             <span class="property-name">Pickup Date / Time:</span>
+         </td>
+         <td>
+             @Model.PickupDateTime
+         </td>
+     </tr>
+
+
+     <tr>
+         <td>
+         <span class="property-name">Phone Number:</span>
+             </td>
+         <td>
+         @Model.PhoneNumber
+             </td>
+     </tr>
+
+
      @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
     {
-     <li><span class="property-name">Phone Number 2:</span> @Model.PhoneNumberTwo</li>}
+     <tr>
+     <td>
+         <span class="property-name">Phone Number 2:</span></td>
+     <td>
+         @Model.PhoneNumberTwo
+     </td>
+     </tr>}
 
-     <li>
-         <span class="property-name">Address:</span> @Model.StreetAddress@if (!String.IsNullOrEmpty(Model.Apt))
-        {<span>#</span> @Model.Apt
-     }<br />
-        @Model.City, @Model.ZIP</li>
+     <tr>
+         <td>
+         <span class="property-name">Address:</span>
+             </td>
+         <td>
+             @Model.StreetAddress
+             @if (!String.IsNullOrEmpty(Model.Apt))
+            {<span>#</span> @Model.Apt
+    }<br />
+             @Model.City, @Model.ZIP
+         </td>
+     </tr>
+
      @if (!String.IsNullOrEmpty(Model.Neighborhood))
-     {
-     <li><span class="property-name">Neighborhood:</span> @Model.Neighborhood</li>}
-
-
-     <li><span class="property-name">Call En Route:</span> @Model.CallEnRoute</li>
-     @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
-     {
-     <li><span class="property-name">Special Instructions:</span> @Model.SpecialInstructions</li> }
-     @foreach (var x in Model.Furniture)
     {
+     <tr>
+     <td>
+         <span class="property-name">Neighborhood:</span>
+         </td>
+     <td>
+         @Model.Neighborhood
+         </td>
+     </tr>}
+
+
+     <tr>
+         <td>
+         <span class="property-name">Call En Route:</span>
+             </td>
+         <td>
+         @Model.CallEnRoute
+             </td>
+     </tr>
+
+
+     @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
+    {
+     <tr>
+     <td>
+         <span class="property-name">Special Instructions:</span>
+         </td>
+     <td>
+         @Model.SpecialInstructions
+         </td>
+     </tr>}
+
+     <tr>
+         <td>Furniture Donated</td>
+     @foreach (var x in Model.Furniture)
+    {<td>
+         <ul>
      <li>
          @x.Name - @if (Model.Delivery)
-    {@x.Description}
+        {@x.Description}
 else
 { @x.Quantity}
      </li>
+             </ul>
+             </td>
 }
- </ul>
+         </tr>
+ </table>
