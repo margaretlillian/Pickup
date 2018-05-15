@@ -6,29 +6,31 @@
 
 @if (SignInManager.IsSignedIn(User))
 {<nav id="top">
-    Logged in as <a>Somene </a>
-    @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <input type="submit" value="Logout" class="btn btn-primary" />
-    }
+<ul id="navigation-bar">
+    <li><a asp-controller="PickupDelivery" asp-action="Customer">New Pickup/Delivery</a></li>
+    <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
+</ul>
+
+    
 </nav>
 
 
     <nav id="side">
 
+        <div class="sidebar">
+            <h2>Calendar</h2>
+            <p>Coming soon!</p>
+        </div>
 
         <div class="sidebar">
+            <h2>Account</h2>
+            <p>Logged in as <a asp-controller="Manage" asp-action="Index">@User.Identity.Name </a></p>
 
-            <ul>
-                <li class="special-attention"><a class="special-attention" asp-controller="PickupDelivery" asp-action="Customer">New Pickup or Delivery</a></li>
-                <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
-                <li><a href="#">Blacklist</a></li>
-                <li><a href="#">Search</a></li>
-                <li id="manage"><a asp-controller="Manage" asp-action="Index">Account</a></li>
-                <li><a asp-controller="AddDelete">Add Furniture</a></li>
-
-            </ul>
+            @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Logout" class="btn btn-primary" />
+}
         </div>
 
     </nav>

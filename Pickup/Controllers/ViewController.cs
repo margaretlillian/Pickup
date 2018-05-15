@@ -73,14 +73,7 @@ namespace Pickup.Controllers
                                Furniture = listItems}).FirstOrDefault();
             return View(results);
         }
-
-        public IActionResult Week(string date)
-        {
-            var results = (from p in context.PickupsDeliveries
-                           where p.PickupDateTime.ToString("dd-MM-yy") == date
-                           select p);
-            return View(results.ToList());
-        }
+        
         
     }
 }

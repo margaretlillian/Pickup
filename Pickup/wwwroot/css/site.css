@@ -98,6 +98,19 @@ header {
         display: inline;
     }
 
+    #top li {
+        padding: 6px 40px 10px 20px;
+        font-size: 1.3em;
+        font-variant: small-caps;
+        border-right: 6px solid #776456;
+    }
+
+        #top li a {
+            border: 0;
+            text-shadow: 2px 2px 2px #5f554d;
+        }
+
+
 /* FOOTER */
 
 footer {
@@ -119,75 +132,30 @@ footer {
 /* SIDEBAR STYLE */
 #side {
     float: left;
-    width: 19%;
+    width: 23%;
     margin-left: 10px;
+    margin-top: 10px;
 }
+
+#side p, #side form {padding: 0 10px 10px 10px;
+}
+
+#side button {display: inline;}
 
     #side ul {
         margin-left: 0;
     }
 
-    #side li {
-        
-        margin-bottom: 10px;
-        background: #443f33;
-        border-top: 6px solid #c18441;
-    }
-
-    #side a {
-        text-decoration: none;
-        display: block;
-        padding: 25px 0.5em 25px 0.3em;
-        margin-bottom: 14px;
-        border: none;
-        background: #fff;
-        /*color: #78adcc;*/
-        text-shadow: 2px 4px 2px #c9d6dd;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-align: center;
-        font-size: 1.2em;
-        letter-spacing: 1px;
-    }
-
-        #side a:hover {
-            text-shadow: 2px 4px 2px #513e2c;
-            background: #38322c;
-            color: #cca36a;
-        }
-
     #side h2 {
-        font: 1em arial;
+        font: 1.5em arial;
         padding-left: 7px;
         font-weight: bold;
         text-shadow: 1px 1px #e5e1dc;
     }
 
-    #side li.special-attention {
-        border-top-color: #333;
-    }
-
-    #side button {
-        background: #fff;
-        font: 1em sans-serif;
-        padding: 0;
-        cursor: pointer;
-        height: 1.2em;
-        box-shadow: none;
-    }
-
 .sidebar {
     margin-bottom: 30px;
 }
-
-/* MULTIPLES */
-
-#content, #side li, #content-search {
-    background: #fff;
-    border-top: 6px solid #c18441;
-    box-shadow: 3px 3px 5px #7a736e;
-}
-
 
 /* CONTENT*/
 
@@ -195,7 +163,7 @@ footer {
     float: right;
     width: 75%;
     margin-right: 10px;
-    padding: 15px;
+    padding: 10px;
     margin-top: 10px;
 }
 
@@ -321,24 +289,12 @@ padding: 15px;
 .name {
     font-weight: bolder;
 }
-/* OTHER */
 
-#top li {
-    padding: 6px 40px 10px 20px;
-    font-size: 1.3em;
-    font-variant: small-caps;
-    border-right: 6px solid #776456;
-}
-
-    #top li a {
-        border: 0;
-        text-shadow: 2px 2px 2px #5f554d;
-    }
-
-
+/*SCHEDULE MATRIX*/
 
 #schedulematrix {
     width: 100%;
+    margin-top: 25px;
 }
 
     #schedulematrix ul {
@@ -426,6 +382,20 @@ li.deliver {
 .sat {
     background: #ccc;
 }
+
+#weeklylinks {
+text-align:right;
+font-size: 1.2em;
+}
+
+/* MULTIPLES */
+
+#content, .sidebar, #content-search {
+    background: #fff;
+    border-top: 6px solid #c18441;
+    box-shadow: 3px 3px 5px #7a736e;
+}
+
 
 .form-group, .autocomplete {
     margin: 1em;

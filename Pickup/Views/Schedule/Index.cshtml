@@ -8,10 +8,16 @@
      }
     int lastWeek = int.Parse(week) - 7;
     int nextWeek = int.Parse(week) + 7;}
+
+
+
 <div id="weeklylinks">
-    <a href="/Schedule?weekId=@lastWeek">Previous Week</a>
-    <a href="/Schedule?weekId=@nextWeek">Next Week</a>
+    <a href="/Schedule?weekId=@lastWeek">&laquo; Previous Week</a> ||
+    <a href="/Schedule?weekId=@nextWeek">Next Week &raquo;</a>
     </div>
+
+
+
 <div id="schedulematrix">
     @foreach (KeyValuePair<DateTime, IList<WeeklyCalendarViewModel>> date in Model)
 
