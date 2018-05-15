@@ -25,7 +25,9 @@ else
         {<span>#</span> @Model.Apt
      }<br />
         @Model.City, @Model.ZIP</li>
-     <li><span class="property-name">Neighborhood:</span> @Model.Neighborhood</li>
+     @if (!String.IsNullOrEmpty(Model.Neighborhood))
+     {
+     <li><span class="property-name">Neighborhood:</span> @Model.Neighborhood</li>}
 
 
      <li><span class="property-name">Call En Route:</span> @Model.CallEnRoute</li>
