@@ -335,7 +335,7 @@ h4.the-date {
 
     .schedule li {
         margin: 0;
-        font-size: 1em;
+        font-size: 0.9em;
         text-shadow: 1px 1px 1px #ddd;
         color: #261f15;
     }
@@ -344,12 +344,16 @@ h4.the-date {
         height: 40px;
     }
 
-.thetime {
+h3.thetime {
     margin-top: 25px;
     font-size: 1em;
     color: #333;
     text-transform: uppercase;
 }
+
+    .schedule a {
+        border-bottom: none;
+    }
 
 #saturday {
     background: #ddd;
