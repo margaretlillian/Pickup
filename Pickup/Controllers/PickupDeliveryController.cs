@@ -57,7 +57,8 @@ namespace Pickup.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
-                    PhoneNumberTwo = model.PhoneNumberTwo
+                    PhoneNumberTwo = model.PhoneNumberTwo,
+                    FOT = model.FOT
                 };
                 context.Add(newPerson);
                 context.SaveChanges();

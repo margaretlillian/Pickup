@@ -29,5 +29,8 @@ namespace Pickup.Models
 
         [Display(Name = "Second Phone Number")]
         public string PhoneNumberTwo { get; set; }
+
+        [Display(Name = "FOT?")]
+        public bool FOT { get; set; }
     }
 }
