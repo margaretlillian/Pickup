@@ -418,10 +418,9 @@ table.furniture-list-view, .furniture-list-view td{
 }
 
 .furniture-list-view tr {height: 1.6em;
-                         border-bottom: 1px dotted #eee;
 }
 .furniture-list-view :nth-child(odd) {
-    background: #fff;
+    background: transparent;
 }
 #furniture-count-descr {padding-right: 15px;}
 
