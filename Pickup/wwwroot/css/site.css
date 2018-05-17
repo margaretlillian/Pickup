@@ -30,7 +30,7 @@ label {
     float: left;
 }
 
-input, textarea, select, button {
+input, textarea, select, button, span.furn-item {
     font: 1em sans-serif;
     height: 1.8em;
     background: #c67b13;
@@ -188,8 +188,13 @@ footer {
     #content .quantity {width: 45px;
                         float: none;
     }
-.furn-item {
+label.furn-item {
 float: none;}
+
+span.furn-item {border-radius: 10px;
+   margin: 3px;
+   padding: 6px;
+   cursor:default;}
 
 .piece {
 margin: 6px;

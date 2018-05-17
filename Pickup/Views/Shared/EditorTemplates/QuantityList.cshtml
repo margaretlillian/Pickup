@@ -1,8 +1,10 @@
 ﻿@model Pickup.Models.DonationPickupViewModels.QuantityList
-<li><div class="piece">
-    @Html.TextBoxFor(x => x.Quantity, new { @class = "quantity"})
-    @Html.LabelFor(x => x.Quantity, Model.Name, new { @class = "furn-item" })
-
+<li><div class="numbers-row">
+    @Html.TextBoxFor(x => x.Quantity, new { @class = "quantity" })
+        @Html.LabelFor(x => x.Quantity, Model.Name, new { @class = "furn-item" })
+    <span class="furn-item">+ </span>
+    <span class="furn-item">-</span>
     @Html.HiddenFor(x => x.ID)
-    </div>
+</div>
 </li>
+
