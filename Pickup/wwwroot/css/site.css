@@ -140,7 +140,8 @@ footer {
 #side button {display: inline;}
 
     #side ul {
-        margin-left: 0;
+        margin-left: 5px;
+        padding-bottom: 10px;
     }
 
     #side h2 {
