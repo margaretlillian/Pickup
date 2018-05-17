@@ -12,6 +12,7 @@ namespace Pickup.Models
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string PhoneNumberTwo { get; set; }
+        public bool FOT { get; set; }
 
         public IList<DonorCustomer> DonorsCustomers { get; set; }
     }
