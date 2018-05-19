@@ -21,6 +21,8 @@ namespace Pickup.Models
         public int AddressID { get; set; }
         public Address Address { get; set; }
 
+        public bool Cancelled { get; set; }
+
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
