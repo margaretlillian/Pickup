@@ -12,11 +12,11 @@ using Pickup.Models.DonationPickupViewModels;
 
 namespace Pickup.Controllers
 {
-    public class AddDeleteController : Controller
+    public class AddEditDeleteController : Controller
     {
         private readonly ApplicationDbContext context;
 
-        public AddDeleteController(ApplicationDbContext applicationDbContext)
+        public AddEditDeleteController(ApplicationDbContext applicationDbContext)
         {
             context = applicationDbContext;
         }
@@ -72,6 +72,13 @@ namespace Pickup.Controllers
             }
 
             return View("Index", model);
+        }
+
+        [Route("/EditPickup")]
+        public IActionResult EditPickup(int pickupId)
+        {
+            PickupOrDelivery pickup = context.PickupsDeliveries.Where(p => p.ID == pickupId).FirstOrDefault();
+            return View(pickup);
         }
 
     }
