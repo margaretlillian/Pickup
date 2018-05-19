@@ -1,8 +1,4 @@
-﻿* {
-    box-sizing: border-box;
-}
-
-body {
+﻿body {
     font: 1.25em arial, sans-serif;
     color: #000;
     background: #b2a89e;
@@ -264,7 +260,7 @@ margin: 6px;
         }
 
 .autocomplete-active {
-    background-color: #4f3108 !important;
+    background-color: #4f3108;
     color: #ffffff;
 }
 
