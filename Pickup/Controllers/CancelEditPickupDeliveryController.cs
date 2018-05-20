@@ -25,5 +25,11 @@ namespace Pickup.Controllers
             PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == id).FirstOrDefault();
             return View(model);
         }
+
+        public IActionResult Cancel(int id)
+        {
+            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == id).FirstOrDefault();
+            return View(model);
+        }
     }
 }

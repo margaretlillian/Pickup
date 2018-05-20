@@ -1,0 +1,17 @@
+﻿@model PickupOrDelivery
+
+@{ 
+    string pd = "Pickup";
+    if (Model.Delivery)
+    {
+        pd = "Delivery";
+
+    }
+}
+
+<h2>Cancel @pd</h2>
+<p>Are you sure you want to cancel this @pd? </p>
+<form>
+    <button>Yes, cancel this @pd</button>
+    </form>
+<p><a>Go back to @pd</a></p>
