@@ -9,7 +9,8 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(m => m.PickupID)
-    <ul> @Html.EditorFor(m => m.FurnitureList)</ul>
+    <ul> @Html.EditorFor(m => m.FurnitureList)
+    </ul>
 
     <button id="clear" type="submit">Add Furniture Picked Up</button>}
 

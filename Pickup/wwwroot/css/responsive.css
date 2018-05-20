@@ -1,0 +1,88 @@
+﻿
+@media only screen and (min-width: 1400px) {
+    h1, h1 a {
+        letter-spacing: 4px;
+    }
+}
+
+
+@media only screen and (max-width: 1380px) {
+
+    h1, h1 a, h1 a:hover {
+        font-size: 1.7em;
+        padding-top: 30px;
+    }
+
+    #content {
+        width: 66%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+
+    #schedulematrix section {
+        margin: 25px;
+    }
+
+    .day {
+        display: inline;
+        border: none;
+        box-shadow: none;
+        font-size: 1.7em;
+        background: none;
+    }
+
+        .day h3 {
+            margin-top: 40px;
+        }
+
+    .schedule {
+        border: none;
+        display: inline-flex;
+    }
+
+        .schedule a {
+            padding-left: 30px;
+        }
+
+    #saturday {
+        background: transparent;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #side h2 {
+        font-size: 0.9em;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #side, #content {
+        float: none;
+        width: 90%;
+    }
+
+    header {
+        background: #fff url('hep-logo.png') top center no-repeat;
+        height: 170px;
+        width: 99%;
+    }
+
+    #top li {
+        font-size: 1em;
+        padding: 2px;
+        display: block;
+        border: none;
+    }
+
+    h1, h1 a, h1 a:hover {
+        font-size: 1.2em;
+        margin-left: 0;
+        padding-top: 130px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+}
