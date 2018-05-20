@@ -40,7 +40,8 @@ namespace Pickup.Controllers
                                LastName = dc.LastName,
                                PickupID = p.ID,
                                Phone = dc.PhoneNumber,
-                               PickupTime = p.PickupDateTime}).ToList();
+                               PickupTime = p.PickupDateTime,
+                               Cancelled = p.Cancelled}).ToList();
                 
                     pickupsDates.Add(theDate, results);
                 

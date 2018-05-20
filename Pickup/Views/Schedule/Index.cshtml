@@ -26,7 +26,8 @@
             <h4 class="the-date">@date.Key.ToString("MMM dd")</h4>
             <ul>
                 @foreach (var pickup in date.Value)
-                {
+                {@if (!pickup.Cancelled)
+{
                     <li class="schedule">
                         <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupID">
                             <ul>
@@ -37,7 +38,8 @@
                             </ul>
                         </a>
                     </li>
-                }
+    }
+}
             </ul>
         </section>
     }
