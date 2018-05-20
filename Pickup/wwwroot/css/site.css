@@ -391,8 +391,7 @@ font-size: 1.2em;
 
 /* VIEW PICKUP/DELIVERY */
 
-table {margin-top: 16px;
-       margin-left: 35px;
+table {margin: 16px 0 20px 35px;
        border-collapse: collapse;
        line-height: 1.2em;
 }
@@ -424,6 +423,9 @@ table.furniture-list-view, .furniture-list-view td{
     background: transparent;
 }
 #furniture-count-descr {padding-right: 15px;}
+
+#view-options {
+display: none;}
 
 /* MULTIPLES */
 

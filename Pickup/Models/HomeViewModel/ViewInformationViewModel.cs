@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pickup.Models.ViewViewModel
+namespace Pickup.Models.HomeViewModel
 {
     public class ViewInformationViewModel
     {

@@ -1,4 +1,4 @@
-﻿@model Pickup.Models.ViewViewModel.ViewInformationViewModel
+﻿@model Pickup.Models.HomeViewModel.ViewInformationViewModel
 
 @if (Model.Delivery)
 {
@@ -130,24 +130,11 @@ else
      </tr>
  </table>
    @if (Model.Delivery)
-     {<button id="edit-cancel" onclick="editCancelView()">Edit/Cancel Delivery</button>
+     {<button id="edit-cancel">Edit/Cancel Delivery</button>
      }
      else
-     {<button id="edit-cancel" onclick="editCancelView()">Edit/Cancel Pickup</button>}
+     {<button id="edit-cancel">Edit/Cancel Pickup</button>}
 
-<span id="view-options">Something</span>
 
-<script>
-    function editCancelView() {
-        var elem = document.getElementById('view-options');
-        var button = document.getElementById('edit-cancel')
-        if (elem.style.display == 'inline') {
-            elem.style.display = 'none';
-        }
-        else {
-            elem.style.display = 'inline';
-        }
-    }
-</script>
 
  
