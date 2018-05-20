@@ -155,7 +155,7 @@ footer {
 
 #content {
     float: right;
-    width: 75%;
+    width: 73%;
     margin-right: 10px;
     padding: 10px;
     margin-top: 10px;
@@ -444,56 +444,6 @@ table.furniture-list-view, .furniture-list-view td{
 }
 
 
-@media only screen and (min-width: 1400px) {
-    h1 {
-        letter-spacing: 3px;
-    }
-}
-/* SMALLER RESOLUTION SCREEN STYLE */
-
-@media only screen and (min-width: 1000px) and (max-width: 1400px) {
-    h1 {
-        font-size: 80px;
-    }
-
-    #side {
-        width: 28%;
-    }
-
-    #content {
-        width: 66%;
-    }
-}
-
-/* MOBILE SCREEN STYLE */
-
-@media only screen and (max-width: 1000px) {
-
-    header {
-        border-bottom: 5px solid #443e33;
-    }
-
-    h1 {
-        font-size: 1.3em;
-        margin: 0 0 0 140px;
-        padding: 36px 0 0 0;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    #top {
-        display: none;
-    }
-
-    #content, #side {
-        width: 98%;
-        margin: 0;
-        float: none;
-        padding: 3px;
-    }
-
     label {
         float: none;
     }
@@ -501,4 +451,4 @@ table.furniture-list-view, .furniture-list-view td{
     input, textarea, select {
         display: block;
     }
-}
+
