@@ -1,0 +1,32 @@
+﻿@model Pickup.Models.DonationPickupViewModels.PickupDeliveryViewModel
+
+<h2>Create New Pickup</h2>
+<form method="post">
+
+    <input asp-for="AddressId" />
+
+    <div class="form-group">
+        <label asp-for="PickupDateTime"></label>
+        <input asp-for="PickupDateTime" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PickupTime"></label>
+        <input asp-for="PickupTime" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CallEnRoute"></label>
+        <input asp-for="CallEnRoute" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SpecialInstructions"></label>
+        <input asp-for="SpecialInstructions" />
+    </div>
+
+    <div class="form-group">
+        @Html.EditorFor(m => m.Items)
+    </div>
+
+</form>

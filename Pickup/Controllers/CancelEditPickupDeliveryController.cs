@@ -25,7 +25,7 @@ namespace Pickup.Controllers
             PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
             return View(model);
         }
-
+        [Route("/Cancel")]
         public IActionResult Cancel(int pid)
         {
             PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
@@ -41,6 +41,12 @@ namespace Pickup.Controllers
 
             context.SaveChanges();
             return Redirect("/");
+        }
+
+        [Route("/ec")]
+        public IActionResult EditCustomer(int id)
+        {
+            return View("Index");
         }
     }
 }

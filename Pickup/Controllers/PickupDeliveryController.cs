@@ -99,7 +99,7 @@ namespace Pickup.Controllers
                 context.SaveChanges();
                 return Redirect("CreateNew?addressId=" + newAddress.ID);
             }
-            return View("Index", model);
+            return View("PickupDelivery/FormDefault", model);
         }
 
         public IActionResult CreateNew(int addressId)
@@ -107,7 +107,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "New Pickup/Delivery";
 
             Address address = context.Addresses.Single(d => d.ID == addressId);
-            return View("Index", new PickupDeliveryViewModel());
+            return View("PickupDelivery/FormDefault", new PickupDeliveryViewModel());
         }
 
         [HttpPost]
@@ -140,7 +140,7 @@ namespace Pickup.Controllers
 
                 return Redirect("FurniturePickup?pickupId=" + newPickup.ID);
             }
-            return View("Index", model);
+            return View("/PickupDelivery/FormDefault", model);
 
         }
 

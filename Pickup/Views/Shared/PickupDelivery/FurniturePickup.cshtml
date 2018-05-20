@@ -1,0 +1,48 @@
+﻿@using Pickup.Models.DonationPickupViewModels
+@model FurniturePickupViewModel
+
+<h2>Furniture Picked Up</h2>
+<p>
+    Enter the quantity next to the items being donated. Boxes must either be left blank or
+    be a valid number.
+</p>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.PickupID)
+    <ul> @Html.EditorFor(m => m.FurnitureList)
+    </ul>
+
+    <button id="clear" type="submit">Add Furniture Picked Up</button>}
+
+
+
+<script>
+    $(function () {
+        $(".furn-item").on("click", function () {
+
+            var $clicker = $(this);
+            var oldValue = $clicker.parent().find("input").val();
+            if (oldValue.length === 0) {
+                oldValue = 0;
+            }
+
+            if ($clicker.text() == "-") {
+                if (oldValue > 0) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 0;
+                }
+
+            } else {
+                // Don't allow decrementing below zero
+
+
+                var newVal = parseFloat(oldValue) + 1;
+            }
+
+            $clicker.parent().find("input").val(newVal);
+
+        });
+
+    });
+</script>
