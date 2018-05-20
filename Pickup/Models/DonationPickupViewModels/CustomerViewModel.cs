@@ -12,8 +12,8 @@ namespace Pickup.Models
 
 
     {
-       // [HiddenInput(DisplayValue = false)]
-        //public int DonorId { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int CustomerId { get; set; }
 
         [Required]
         [Display(Name = "First Name *")]

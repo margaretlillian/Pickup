@@ -32,7 +32,7 @@ namespace Pickup.Controllers
         public IActionResult Customer()
         {
             ViewBag.Title = "Customer Information";
-            return View(new CustomerViewModel());
+            return View("PickupDelivery/FormDefault", new CustomerViewModel());
         }
 
         [HttpPost]
@@ -67,7 +67,7 @@ namespace Pickup.Controllers
                 return Redirect("Address?customerId=" + newPerson.ID);
             }
 
-            return View(model);
+            return View("PickupDelivery/FormDefault", model);
         }
 
         public IActionResult Address(int customerId)
@@ -75,7 +75,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Address Information";
 
             DonorCustomer donor = context.DonorsCustomers.Single(d => d.ID == customerId);
-            return View(new AddressViewModel());
+            return View("PickupDelivery/Address", new AddressViewModel());
         }
 
         [HttpPost]
@@ -99,7 +99,7 @@ namespace Pickup.Controllers
                 context.SaveChanges();
                 return Redirect("CreateNew?addressId=" + newAddress.ID);
             }
-            return View("PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/Address", model);
         }
 
         public IActionResult CreateNew(int addressId)
@@ -140,7 +140,7 @@ namespace Pickup.Controllers
 
                 return Redirect("FurniturePickup?pickupId=" + newPickup.ID);
             }
-            return View("/PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/FormDefault", model);
 
         }
 
@@ -158,7 +158,7 @@ namespace Pickup.Controllers
                 });
             }
             model.FurnitureList = quantityListItems;
-            return View(model);
+            return View("PickupDelivery/FurniturePickup", model);
 
         }
 
@@ -192,7 +192,7 @@ namespace Pickup.Controllers
                 Description = null});
             }
             model.FurnitureDelivered = descriptionListItems;
-            return View(model);
+            return View("PickupDelivery/FurnitureDelivery", model);
 
         }
 

@@ -33,6 +33,7 @@ namespace Pickup.Controllers
         }
 
         [HttpPost]
+        [Route("/Cancel")]
         public IActionResult Cancel(PickupOrDelivery model)
         {
             PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(pickup => pickup.ID == model.ID).FirstOrDefault();
@@ -46,7 +47,7 @@ namespace Pickup.Controllers
         [Route("/ec")]
         public IActionResult EditCustomer(int id)
         {
-            return View("Index");
+            return View("PickupDelivery/FormDefault", new CustomerViewModel());
         }
     }
 }
