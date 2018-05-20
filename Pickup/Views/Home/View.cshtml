@@ -38,7 +38,7 @@ else
 
 
      @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
-    {
+     {
      <tr>
          <td>
              <span class="property-name">Phone Number 2</span>
@@ -55,14 +55,14 @@ else
          <td>
              @Model.StreetAddress
              @if (!String.IsNullOrEmpty(Model.Apt))
-            {<span>#</span> @Model.Apt
-    }<br />
+             {<span>#</span> @Model.Apt
+             }<br />
              @Model.City, @Model.ZIP
          </td>
      </tr>
 
      @if (!String.IsNullOrEmpty(Model.Neighborhood))
-    {
+     {
      <tr>
          <td>
              <span class="property-name">Neighborhood</span>
@@ -84,7 +84,7 @@ else
 
 
      @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
-    {
+     {
      <tr>
          <td>
              <span class="property-name">Special Instructions</span>
@@ -99,19 +99,19 @@ else
          <td>
              <table class="furniture-list-view">
                  @foreach (var x in Model.Furniture)
-                {
+                 {
                  <tr>
                      <td id="furniture-count-descr">
                          @if (Model.Delivery)
-        {@x.Description}
-else
-{ @x.Quantity}
+                         {@x.Description}
+                         else
+                         { @x.Quantity}
                      </td>
                      <td>@x.Name </td>
 
                  </tr>
 
-            }
+                 }
 
              </table>
          </td>
@@ -129,11 +129,13 @@ else
          </td>
      </tr>
  </table>
-   @if (Model.Delivery)
-     {<button id="edit-cancel">Edit/Cancel Delivery</button>
-     }
-     else
-     {<button id="edit-cancel">Edit/Cancel Pickup</button>}
+@{ 
+    string pd = "Pickup";
+    if (Model.Delivery){
+        pd = "Delivery"; }
+}
+
+ <a class="button" asp-controller="CancelEditPickupDelivery" asp-action="Index" asp-route-id="@Model.PickupID">Edit / Cancel @pd</a> 
 
 
 

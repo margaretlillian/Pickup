@@ -1,0 +1,22 @@
+﻿@model Pickup.Models.PickupOrDelivery
+@{ 
+    string pd = "Pickup";
+    string verb = "Picked Up";
+    if (Model.Delivery)
+    {
+        pd = "Delivery";
+        verb = "Delivered";
+    }
+}
+
+<h2>Cancel / Edit @pd</h2>
+
+What would you like to do? 
+<h3><a href="#">Cancel this @pd</a></h3>
+<h3>Edit @pd</h3>
+<ul>
+    <li><a href="#">Edit Customer Information</a></li>
+    <li>Edit Address Information</li>
+    <li>Edit @pd Information</li>
+    <li>Edit Items @verb </li>
+</ul>

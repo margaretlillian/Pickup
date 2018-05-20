@@ -73,6 +73,7 @@ namespace Pickup.Controllers
                                SpecialInstructions = p.SpecialInstructions,
                                PickupDateTime = p.PickupDateTime,
                                Scheduler = s.FullName,
+                               PickupID = p.ID,
                                Furniture = listItems
                            }).FirstOrDefault();
             return View(results);

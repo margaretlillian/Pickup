@@ -28,7 +28,7 @@
                 @foreach (var pickup in date.Value)
                 {
                     <li class="schedule">
-                        <a href="/View?id=@pickup.PickupID">
+                        <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupID">
                             <ul>
                                 <li><h3 class="thetime">@pickup.PickupTime.ToString("hh:mm tt")</h3></li>
                                 <li>@pickup.FirstName @pickup.LastName</li>

@@ -26,7 +26,7 @@ label {
     float: left;
 }
 
-input, textarea, select, button, span.furn-item {
+input, textarea, select, button, span.furn-item, .button {
     font: 1em sans-serif;
     height: 1.8em;
     background: #c67b13;
@@ -35,7 +35,7 @@ input, textarea, select, button, span.furn-item {
     box-shadow: 3px 3px 5px #3f2f0d;
 }
 
-    input:hover, button:hover {
+    input:hover, button:hover, .button:hover {
         background: #b56a02;
     }
 
@@ -427,6 +427,8 @@ table.furniture-list-view, .furniture-list-view td{
 #view-options {
 display: none;}
 
+
+
 /* MULTIPLES */
 
 #content, .sidebar, #content-search {
@@ -445,12 +447,7 @@ display: none;}
     display: none;
 }
 
-
-    label {
-        float: none;
-    }
-
-    input, textarea, select {
-        display: block;
-    }
-
+.button, .button:hover {padding: 10px;
+                        color: #fff;
+                        cursor: default;
+}
