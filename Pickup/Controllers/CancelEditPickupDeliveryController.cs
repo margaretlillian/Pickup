@@ -20,16 +20,27 @@ namespace Pickup.Controllers
         }
         // GET: /<controller>/
         [Route("/EditChoice")]
-        public IActionResult Index(int id)
+        public IActionResult Index(int pid)
         {
-            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == id).FirstOrDefault();
+            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
             return View(model);
         }
 
-        public IActionResult Cancel(int id)
+        public IActionResult Cancel(int pid)
         {
-            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == id).FirstOrDefault();
+            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Cancel(PickupOrDelivery model)
+        {
+            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(pickup => pickup.ID == model.ID).FirstOrDefault();
+            if (pickupOrDelivery != null)
+            pickupOrDelivery.Cancelled = true;
+
+            context.SaveChanges();
+            return Redirect("/");
         }
     }
 }
