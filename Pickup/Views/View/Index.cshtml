@@ -6,7 +6,7 @@
 }
 else
 {<h2>Pickup Information</h2>}
-
+<h2></h2>
 
  <table id="pickupinfo">
 
@@ -129,3 +129,25 @@ else
          </td>
      </tr>
  </table>
+   @if (Model.Delivery)
+     {<button id="edit-cancel" onclick="editCancelView()">Edit/Cancel Delivery</button>
+     }
+     else
+     {<button id="edit-cancel" onclick="editCancelView()">Edit/Cancel Pickup</button>}
+
+<span id="view-options">Something</span>
+
+<script>
+    function editCancelView() {
+        var elem = document.getElementById('view-options');
+        var button = document.getElementById('edit-cancel')
+        if (elem.style.display == 'inline') {
+            elem.style.display = 'none';
+        }
+        else {
+            elem.style.display = 'inline';
+        }
+    }
+</script>
+
+ 
