@@ -384,6 +384,11 @@ h3.thetime {
     background: #ccc;
 }
 
+.schedule a .delivery {
+    color: #d17b36;
+    font-weight: bold;
+}
+
 #weeklylinks {
 text-align:right;
 font-size: 1.2em;

@@ -35,6 +35,11 @@
                                 <li>@pickup.FirstName @pickup.LastName</li>
                                 <li>@pickup.City</li>
                                 <li>@pickup.Phone</li>
+                                @if (pickup.Delivery)
+                                {
+                                    <li class="delivery">Delivery</li>
+
+                                }
                             </ul>
                         </a>
                     </li>

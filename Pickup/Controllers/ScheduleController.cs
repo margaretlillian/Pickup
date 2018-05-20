@@ -41,7 +41,8 @@ namespace Pickup.Controllers
                                PickupID = p.ID,
                                Phone = dc.PhoneNumber,
                                PickupTime = p.PickupDateTime,
-                               Cancelled = p.Cancelled}).ToList();
+                               Cancelled = p.Cancelled,
+                               Delivery = p.Delivery}).ToList();
                 
                     pickupsDates.Add(theDate, results);
                 

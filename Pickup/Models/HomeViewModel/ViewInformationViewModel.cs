@@ -31,6 +31,7 @@ namespace Pickup.Models.HomeViewModel
         public string SpecialInstructions { get; set; }
         public bool Cancelled { get; set; }
 
+
         public List<FurnitureListing> Furniture { get; set; }
 
         public ViewInformationViewModel()

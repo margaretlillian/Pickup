@@ -14,6 +14,8 @@ namespace Pickup.Models.ScheduleViewModels
         public string City { get; set; }
         public string Phone { get; set; }
         public DateTime PickupTime { get; set; }
+
+        public bool Delivery { get; set; }
         public bool Cancelled { get; set; }
     }
 
