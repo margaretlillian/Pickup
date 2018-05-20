@@ -5,7 +5,6 @@
     }
 }
 
-
 @media only screen and (max-width: 1380px) {
 
     h1, h1 a, h1 a:hover {
@@ -13,12 +12,12 @@
         padding-top: 30px;
     }
 
-    #content {
-        width: 66%;
-    }
+   
 }
-
 @media only screen and (max-width: 1200px) {
+    #content {
+        width: 68%;
+    }
 
     #schedulematrix section {
         margin: 25px;

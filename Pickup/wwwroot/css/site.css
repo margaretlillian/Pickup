@@ -155,7 +155,7 @@ footer {
 
 #content {
     float: right;
-    width: 75%;
+    width: 73%;
     margin-right: 10px;
     padding: 10px;
     margin-top: 10px;
@@ -442,3 +442,13 @@ table.furniture-list-view, .furniture-list-view td{
 #AddressId, #CustomerId {
     display: none;
 }
+
+
+    label {
+        float: none;
+    }
+
+    input, textarea, select {
+        display: block;
+    }
+
