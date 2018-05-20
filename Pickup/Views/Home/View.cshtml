@@ -8,135 +8,141 @@ else
 {<h2>Pickup Information</h2>}
 <h2></h2>
 
- <table id="pickupinfo">
+<table id="pickupinfo">
+
+    @if (Model.Cancelled)
+    {
+        <tr>
+            <td colspan="2" id="cancelled">Cancelled</td>
+        </tr>
+    }
+
+    <tr>
+        <th colspan="2">
+            @Model.FirstName @Model.LastName
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            <span class="property-name">Pickup Date </span>
+        </td>
+        <td>
+            @Model.PickupDateTime.ToString("MMMM dd yyyy")
+        </td>
+    </tr>
 
 
-     <tr>
-         <th colspan="2">
-             @Model.FirstName @Model.LastName
-         </th>
-     </tr>
-
-     <tr>
-         <td>
-             <span class="property-name">Pickup Date </span>
-         </td>
-         <td>
-             @Model.PickupDateTime.ToString("MMMM dd yyyy")
-         </td>
-     </tr>
+    <tr>
+        <td>
+            <span class="property-name">Phone Number</span>
+        </td>
+        <td>
+            @Model.PhoneNumber
+        </td>
+    </tr>
 
 
-     <tr>
-         <td>
-             <span class="property-name">Phone Number</span>
-         </td>
-         <td>
-             @Model.PhoneNumber
-         </td>
-     </tr>
+    @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
+    {
+        <tr>
+            <td>
+                <span class="property-name">Phone Number 2</span>
+            </td>
+            <td>
+                @Model.PhoneNumberTwo
+            </td>
+        </tr>}
+
+    <tr>
+        <td>
+            <span class="property-name">Address</span>
+        </td>
+        <td>
+            @Model.StreetAddress
+            @if (!String.IsNullOrEmpty(Model.Apt))
+            {<span>#</span> @Model.Apt
+            }<br />
+            @Model.City, @Model.ZIP
+        </td>
+    </tr>
+
+    @if (!String.IsNullOrEmpty(Model.Neighborhood))
+    {
+        <tr>
+            <td>
+                <span class="property-name">Neighborhood</span>
+            </td>
+            <td>
+                @Model.Neighborhood
+            </td>
+        </tr>}
 
 
-     @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
-     {
-     <tr>
-         <td>
-             <span class="property-name">Phone Number 2</span>
-         </td>
-         <td>
-             @Model.PhoneNumberTwo
-         </td>
-     </tr>}
-
-     <tr>
-         <td>
-             <span class="property-name">Address</span>
-         </td>
-         <td>
-             @Model.StreetAddress
-             @if (!String.IsNullOrEmpty(Model.Apt))
-             {<span>#</span> @Model.Apt
-             }<br />
-             @Model.City, @Model.ZIP
-         </td>
-     </tr>
-
-     @if (!String.IsNullOrEmpty(Model.Neighborhood))
-     {
-     <tr>
-         <td>
-             <span class="property-name">Neighborhood</span>
-         </td>
-         <td>
-             @Model.Neighborhood
-         </td>
-     </tr>}
+    <tr>
+        <td>
+            <span class="property-name">Call En Route</span>
+        </td>
+        <td>
+            @Model.CallEnRoute
+        </td>
+    </tr>
 
 
-     <tr>
-         <td>
-             <span class="property-name">Call En Route</span>
-         </td>
-         <td>
-             @Model.CallEnRoute
-         </td>
-     </tr>
+    @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
+    {
+        <tr>
+            <td>
+                <span class="property-name">Special Instructions</span>
+            </td>
+            <td>
+                @Model.SpecialInstructions
+            </td>
+        </tr>}
+
+    <tr>
+        <td><span class="property-name">Furniture Donated</span> </td>
+        <td>
+            <table class="furniture-list-view">
+                @foreach (var x in Model.Furniture)
+                {
+                    <tr>
+                        <td id="furniture-count-descr">
+                            @if (Model.Delivery)
+                            {@x.Description}
+                            else
+                            { @x.Quantity}
+                        </td>
+                        <td>@x.Name </td>
+
+                    </tr>
+
+                }
+
+            </table>
+        </td>
+    </tr>
 
 
-     @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
-     {
-     <tr>
-         <td>
-             <span class="property-name">Special Instructions</span>
-         </td>
-         <td>
-             @Model.SpecialInstructions
-         </td>
-     </tr>}
+    <tr>
+        <td>
+            <span class="property-name">Scheduled By</span>
+        </td>
+        <td>
+            @Model.Scheduler <br />
+            @Model.ScheduleDateTime
 
-     <tr>
-         <td><span class="property-name">Furniture Donated</span> </td>
-         <td>
-             <table class="furniture-list-view">
-                 @foreach (var x in Model.Furniture)
-                 {
-                 <tr>
-                     <td id="furniture-count-descr">
-                         @if (Model.Delivery)
-                         {@x.Description}
-                         else
-                         { @x.Quantity}
-                     </td>
-                     <td>@x.Name </td>
-
-                 </tr>
-
-                 }
-
-             </table>
-         </td>
-     </tr>
-
-
-     <tr>
-         <td>
-             <span class="property-name">Scheduled By</span>
-         </td>
-         <td>
-             @Model.Scheduler <br />
-             @Model.ScheduleDateTime
-
-         </td>
-     </tr>
- </table>
+        </td>
+    </tr>
+</table>
 @{ 
     string pd = "Pickup";
-    if (Model.Delivery){
+    if (Model.Delivery) {
         pd = "Delivery"; }
 }
+@if (!Model.Cancelled) {
+    <a class="button" asp-controller="CancelEditPickupDelivery" asp-action="Index" asp-route-pid="@Model.PickupID">Edit / Cancel @pd</a> 
 
- <a class="button" asp-controller="CancelEditPickupDelivery" asp-action="Index" asp-route-pid="@Model.PickupID">Edit / Cancel @pd</a> 
-
-
+}
 
  

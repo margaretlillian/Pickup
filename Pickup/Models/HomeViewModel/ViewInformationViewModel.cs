@@ -29,6 +29,7 @@ namespace Pickup.Models.HomeViewModel
         public string Scheduler { get; set; }
         public bool CallEnRoute { get; set; }
         public string SpecialInstructions { get; set; }
+        public bool Cancelled { get; set; }
 
         public List<FurnitureListing> Furniture { get; set; }
 

@@ -427,7 +427,11 @@ table.furniture-list-view, .furniture-list-view td{
 #view-options {
 display: none;}
 
-
+#cancelled {
+    color: #99410f;
+    font-size: 1.7em;
+    text-shadow: 1px 1px 1px #ddd;
+}
 
 /* MULTIPLES */
 

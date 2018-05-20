@@ -74,6 +74,7 @@ namespace Pickup.Controllers
                                PickupDateTime = p.PickupDateTime,
                                Scheduler = s.FullName,
                                PickupID = p.ID,
+                               Cancelled = p.Cancelled,
                                Furniture = listItems
                            }).FirstOrDefault();
             return View(results);
