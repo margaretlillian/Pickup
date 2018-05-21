@@ -6,7 +6,6 @@
 }
 else
 {<h2>Pickup Information</h2>}
-<h2></h2>
 
 <table id="pickupinfo">
 
@@ -62,7 +61,7 @@ else
             @Model.StreetAddress
             @if (!String.IsNullOrEmpty(Model.Apt))
             {<span>#</span> @Model.Apt
-            }<br />
+        }<br />
             @Model.City, @Model.ZIP
         </td>
     </tr>
@@ -104,19 +103,22 @@ else
         <td><span class="property-name">Furniture Donated</span> </td>
         <td>
             <table class="furniture-list-view">
-                @foreach (var x in Model.Furniture)
+                @if (!Model.Furniture.Any())
                 {
-                    <tr>
-                        <td id="furniture-count-descr">
-                            @if (Model.Delivery)
-                            {@x.Description}
+                    @foreach (var x in Model.Furniture)
+                    {
+                        <tr>
+                            <td id="furniture-count-descr">
+                                @if (Model.Delivery)
+                                {@x.Description}
                             else
                             { @x.Quantity}
-                        </td>
-                        <td>@x.Name </td>
+                            </td>
+                            <td>@x.Name </td>
 
-                    </tr>
+                        </tr>
 
+                    }
                 }
 
             </table>

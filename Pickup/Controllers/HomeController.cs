@@ -39,17 +39,21 @@ namespace Pickup.Controllers
                                       Description = fpd.Description
                                   }).ToList();
             var listItems = new List<FurnitureListing>();
-            foreach (var item in furnitureItems)
+            if (furnitureItems != null)
             {
-                listItems.Add(new FurnitureListing()
+                foreach (var item in furnitureItems)
                 {
-                    ID = item.ID,
-                    Name = item.Name,
-                    Quantity = item.Quantity,
-                    Description = item.Description
+                    listItems.Add(new FurnitureListing()
+                    {
+                        ID = item.ID,
+                        Name = item.Name,
+                        Quantity = item.Quantity,
+                        Description = item.Description
 
-                });
+                    });
+                }
             }
+            
             var results = (from p in context.PickupsDeliveries
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
