@@ -1,13 +1,12 @@
-﻿@using Pickup.Models.DonationPickupViewModels
-@model  CustomerViewModel
+﻿<h2>@ViewBag.Title</h2>
+<p>
+    Fields marked with a * are required. <a href="Search"
+                                            target="popup"
+                                            onclick="window.open('/Search','popup','width=600,height=600'); return false;" title="LOOKUP DONOR">
+        Search for existing donor.
+    </a>
+</p>
 
-<h2>@ViewBag.Title</h2>
-<p>Fields marked with a * are required. <a href="/Search"
-   target="popup" 
-   onclick="window.open('/Search','popup','width=600,height=600'); return false;" title="LOOKUP DONOR">
-Search for existing donor.</a></p>
-<form method="post">
-<input asp-for="CustomerId" />
-<input asp-for="FirstName" />
-    </form>
+@await Html.PartialAsync("_FormPartial")
+
 

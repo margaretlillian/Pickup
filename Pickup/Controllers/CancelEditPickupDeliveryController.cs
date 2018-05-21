@@ -44,10 +44,11 @@ namespace Pickup.Controllers
             return Redirect("/");
         }
 
-        [Route("/ec")]
-        public IActionResult EditCustomer(int id)
+        [Route("/EditCustomer")]
+        public IActionResult EditCustomer(int customerId)
         {
-            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == id);
+            ViewBag.Title = "Edit Customer Information";
+            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == customerId);
             CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
             FirstName = donorCustomer.FirstName,
             LastName = donorCustomer.LastName,
@@ -55,6 +56,28 @@ namespace Pickup.Controllers
             PhoneNumberTwo = donorCustomer.PhoneNumberTwo,
             FOT = donorCustomer.FOT};
             return View("PickupDelivery/FormDefault", model);
+        }
+
+        [Route("/EditCustomer")]
+        [HttpPost]
+        public IActionResult EditCustomer(CustomerViewModel model)
+        {
+            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == model.CustomerId);
+            if (donorCustomer == null && !ModelState.IsValid)
+                return View("PickupDelivery/FormDefault", model);
+            else
+            {
+                donorCustomer.FirstName = model.FirstName;
+                donorCustomer.LastName = model.LastName;
+                donorCustomer.PhoneNumber = model.PhoneNumber;
+                donorCustomer.PhoneNumberTwo = model.PhoneNumberTwo;
+                donorCustomer.FOT = model.FOT;
+
+                context.SaveChanges();
+
+            }
+
+            return Redirect("/");
         }
     }
 }
