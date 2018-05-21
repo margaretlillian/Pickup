@@ -3,29 +3,24 @@
 @model IList<WeeklyCalendarViewModel>
 
 <h2>Welcome!</h2>
-
-<h3>Today's Pickups and Deliveries</h3>
-@foreach (var item in Model)
-{@if (!item.Cancelled)
-{
-    <div class="pdschedule">
-    <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupID"><ul>
-    <li>  @item.FirstName @item.LastName</li>
-    <li>@item.PickupTime.ToString("hh:mm tt")</li>
-
-    <li> @item.City</li>
-    <li>@item.Phone</li>
-        @if (item.Delivery)
+   <h3>Today's Pickups and Deliveries</h3>
+    @foreach (var item in Model)
+    {@if (!item.Cancelled)
         {
-        <li>@item.Delivery</li> }
-</ul>
-    </a>
-</div>}
+            <div class="pdschedule">
+                <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupID">
+                    <ul>
+                        <li>  @item.FirstName @item.LastName</li>
+                        <li>@item.PickupTime.ToString("hh:mm tt")</li>
+
+                        <li> @item.City</li>
+                        <li>@item.Phone</li>
+                        @if (item.Delivery)
+                        {
+                            <li>@item.Delivery</li>}
+                    </ul>
+                </a>
+            </div>}
 }
 
-
-
-    <a asp-controller="AddDelete" asp-action="Index">Add Furniture/Furniture Categories</a><br />
-<a asp-controller="PickupDelivery" asp-action="Customer">Start scheduling!</a><br />
-    <a asp-controller="Manage" asp-action="Index">View Account Details</a><br />
-    <a asp-controller="Schedule" asp-action="Index">View current pickup schedule</a>
+ 

@@ -12,6 +12,7 @@ using Pickup.Models.ScheduleViewModels;
 
 namespace Pickup.Controllers
     {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
