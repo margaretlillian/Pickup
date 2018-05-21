@@ -12,6 +12,9 @@ namespace Pickup.Models.DonationPickupViewModels
     public class PickupDeliveryViewModel
     {
         [HiddenInput(DisplayValue = false)]
+        public int PickupId { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public int AddressId { get; set; }
 
         [Display(Name = "Check here if Delivery")]

@@ -112,5 +112,38 @@ namespace Pickup.Controllers
 
             return Redirect("/");
         }
+
+
+        [Route("/EditPD")]
+        public IActionResult EditPickupDelivery(int pid)
+        {
+            ViewBag.Title = "Edit Address Information";
+            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(dc => dc.ID == pid);
+            PickupDeliveryViewModel model = new PickupDeliveryViewModel()
+            {PickupId = pickupOrDelivery.ID,
+            PickupDateTime = pickupOrDelivery.PickupDateTime,
+            CallEnRoute = pickupOrDelivery.CallEnRoute,
+            SpecialInstructions = pickupOrDelivery.SpecialInstructions
+            };
+            return View("PickupDelivery/FormDefault", model);
+        }
+
+        [Route("/EditPD")]
+        [HttpPost]
+        public IActionResult EditPickupDelivery(PickupDeliveryViewModel model)
+        {
+            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(a => a.ID == model.PickupId);
+            if (pickupOrDelivery == null && !ModelState.IsValid)
+                return View("PickupDelivery/FormDefault", model);
+
+            pickupOrDelivery.PickupDateTime = model.PickupDateTime;
+            pickupOrDelivery.CallEnRoute = model.CallEnRoute;
+            pickupOrDelivery.SpecialInstructions = model.SpecialInstructions;
+
+            context.SaveChanges();
+
+            return Redirect("/");
+        }
+
     }
 }
