@@ -11,12 +11,14 @@
 
 <h2>Cancel / Edit @pd</h2>
 
-What would you like to do? 
+<p>What would you like to do? </p>
+
 <h3><a asp-controller="CancelEditPickupDelivery" asp-action="Cancel" asp-route-pid="@Model.ID">Cancel this @pd</a></h3>
+
 <h3>Edit @pd</h3>
 <ul>
-    <li><a href="#">Edit Customer Information</a></li>
-    <li>Edit Address Information</li>
-    <li>Edit @pd Information</li>
+    <li>Edit Customer Information</li>
+    <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditAddress" asp-route-addressId="@Model.AddressID">Edit Address Information</a></li>
+    <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditPickupDelivery" asp-route-pid="@Model.ID">Edit @pd Information</a></li>
     <li>Edit Items @verb </li>
 </ul>
