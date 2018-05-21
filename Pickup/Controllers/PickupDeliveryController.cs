@@ -32,7 +32,7 @@ namespace Pickup.Controllers
         public IActionResult Customer()
         {
             ViewBag.Title = "Customer Information";
-            return View("PickupDelivery/FormDefault", new CustomerViewModel());
+            return View("PickupDelivery/Customer", new CustomerViewModel());
         }
 
         [HttpPost]
@@ -67,7 +67,7 @@ namespace Pickup.Controllers
                 return Redirect("Address?customerId=" + newPerson.ID);
             }
 
-            return View("PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/Customer", model);
         }
 
         public IActionResult Address(int customerId)

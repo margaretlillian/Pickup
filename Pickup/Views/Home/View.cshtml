@@ -103,8 +103,7 @@ else
         <td><span class="property-name">Furniture Donated</span> </td>
         <td>
             <table class="furniture-list-view">
-                @if (!Model.Furniture.Any())
-                {
+              
                     @foreach (var x in Model.Furniture)
                     {
                         <tr>
@@ -119,7 +118,7 @@ else
                         </tr>
 
                     }
-                }
+                
 
             </table>
         </td>

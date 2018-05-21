@@ -47,7 +47,14 @@ namespace Pickup.Controllers
         [Route("/ec")]
         public IActionResult EditCustomer(int id)
         {
-            return View("PickupDelivery/FormDefault", new CustomerViewModel());
+            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == id);
+            CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
+            FirstName = donorCustomer.FirstName,
+            LastName = donorCustomer.LastName,
+            PhoneNumber = donorCustomer.PhoneNumber,
+            PhoneNumberTwo = donorCustomer.PhoneNumberTwo,
+            FOT = donorCustomer.FOT};
+            return View("PickupDelivery/FormDefault", model);
         }
     }
 }
