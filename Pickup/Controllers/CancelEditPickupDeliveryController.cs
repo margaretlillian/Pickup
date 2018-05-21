@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
+using Pickup.Models.DonationPickupViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -65,8 +66,7 @@ namespace Pickup.Controllers
             DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == model.CustomerId);
             if (donorCustomer == null && !ModelState.IsValid)
                 return View("PickupDelivery/FormDefault", model);
-            else
-            {
+
                 donorCustomer.FirstName = model.FirstName;
                 donorCustomer.LastName = model.LastName;
                 donorCustomer.PhoneNumber = model.PhoneNumber;
@@ -75,7 +75,40 @@ namespace Pickup.Controllers
 
                 context.SaveChanges();
 
-            }
+            return Redirect("/");
+        }
+
+        [Route("/EditAddress")]
+        public IActionResult EditAddress(int addressId)
+        {  ViewBag.Title = "Edit Address Information";
+            Address address = context.Addresses.Single(dc => dc.ID == addressId);
+            AddressViewModel model = new AddressViewModel()
+            {
+            AddressId = address.ID,
+            Street = address.Street,
+            Apartment = address.Apartment,
+            City = address.City,
+            ZIP = address.ZIP,
+            Neighborhood = address.Neighborhood
+            };
+            return View("PickupDelivery/FormDefault", model);
+        }
+
+        [Route("/EditAddress")]
+        [HttpPost]
+        public IActionResult EditAddress(AddressViewModel model)
+        {
+            Address address = context.Addresses.Single(a => a.ID == model.AddressId);
+            if (address == null && !ModelState.IsValid)
+                return View("PickupDelivery/FormDefault", model);
+
+            address.Street = model.Street;
+            address.Apartment = model.Apartment;
+            address.City = model.City;
+            address.ZIP = model.ZIP;
+            address.Neighborhood = model.Neighborhood;
+
+            context.SaveChanges();
 
             return Redirect("/");
         }

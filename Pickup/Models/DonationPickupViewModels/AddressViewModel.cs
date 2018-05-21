@@ -11,6 +11,9 @@ namespace Pickup.Models.DonationPickupViewModels
     public class AddressViewModel
     {
         [HiddenInput(DisplayValue = false)]
+        public int AddressId { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public int CustomerId { get; set; }
 
         [Required]
