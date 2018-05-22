@@ -1,0 +1,52 @@
+﻿@using Pickup.Models.ScheduleViewModels
+@model Dictionary<DateTime, IList<WeeklyCalendarViewModel>>
+
+<h2>Schedule Matrix</h2>
+@{var week = Context.Request.Query["weekId"];
+    if (String.IsNullOrEmpty(week)) {
+        week = "0";
+     }
+    int lastWeek = int.Parse(week) - 7;
+    int nextWeek = int.Parse(week) + 7;}
+
+
+
+<div id="weeklylinks">
+    <a href="/Schedule?weekId=@lastWeek">&laquo; Previous Week</a> ||
+    <a href="/Schedule?weekId=@nextWeek">Next Week &raquo;</a>
+    </div>
+
+
+
+<div id="schedulematrix">
+    @foreach (KeyValuePair<DateTime, IList<WeeklyCalendarViewModel>> date in Model)
+
+    {<section class="day" id="@date.Key.ToString("dddd").ToLower()">
+            <h3>@date.Key.ToString("dddd")</h3>
+            <h4 class="the-date">@date.Key.ToString("MMM dd")</h4>
+            <ul>
+                @foreach (var pickup in date.Value)
+                {@if (!pickup.Cancelled)
+{
+                    <li class="schedule">
+                        <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupID">
+                            <ul>
+                                <li><h3 class="thetime">@pickup.PickupTime.ToString("hh:mm tt")</h3></li>
+                                <li>@pickup.FirstName @pickup.LastName</li>
+                                <li>@pickup.City</li>
+                                <li>@pickup.Phone</li>
+                                @if (pickup.Delivery)
+                                {
+                                    <li class="delivery">Delivery</li>
+
+                                }
+                            </ul>
+                        </a>
+                    </li>
+    }
+}
+            </ul>
+        </section>
+    }
+</div>
+
