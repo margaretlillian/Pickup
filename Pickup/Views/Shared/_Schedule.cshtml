@@ -12,8 +12,9 @@
 
 
 <div id="weeklylinks">
-    <a href="/Schedule?weekId=@lastWeek">&laquo; Previous Week</a> ||
-    <a href="/Schedule?weekId=@nextWeek">Next Week &raquo;</a>
+    
+    <a href="@Context.Request.Path?weekId=@lastWeek">&laquo; Previous Week</a> ||
+    <a href="@Context.Request.Path?weekId=@nextWeek">Next Week &raquo;</a>
     </div>
 
 
