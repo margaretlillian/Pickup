@@ -107,7 +107,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "New Pickup/Delivery";
 
             Address address = context.Addresses.Single(d => d.ID == addressId);
-            return View("PickupDelivery/FormDefault", new PickupDeliveryViewModel());
+            return View("PickupDelivery/CreateNewPickup", new PickupDeliveryViewModel());
         }
 
         [HttpPost]
