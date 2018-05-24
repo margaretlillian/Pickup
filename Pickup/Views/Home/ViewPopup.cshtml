@@ -113,11 +113,11 @@
         }
 
         #donor-city {
-            width: 140px;
+            width: 170px;
         }
 
         #donor-phone {
-            width: 120px;
+            width: 140px;
         }
 
         #donor-zip {
@@ -146,22 +146,12 @@
             width: 130px;
         }
 
-        button {
-            /*font-size: 20px;
-                border: 2px solid #900;
-                color: #900;
-                width: 200px;
-                margin: auto;
-                display: block;*/
-            display: none;
-        }
-
         #rules {
             background: #ddd;
         }
     </style>
 </head>
-<body>
+<body onload="print()">
 
     <main>
         <!-- <form method="POST"> -->
@@ -170,7 +160,7 @@
 
                 Taken By: <span class="info" name="scheduler" id="scheduler">@Model.Scheduler</span>
 
-                Date: <span class="info" id="schedule-date">@Model.ScheduleDateTime.ToString("MM/DD/YY")</span>
+                Date: <span class="info" id="schedule-date">@Model.ScheduleDateTime.ToString("MM/dd/yy")</span>
 
             </p>
         </header>
@@ -179,7 +169,7 @@
 
         <section id="pickup-body">
             <p id="pickup-datetime">
-                Date of pickup: <span class="info" id="pickup-date">@Model.PickupDateTime.ToString("MM/DD/YY")</span>
+                Date of pickup: <span class="info" id="pickup-date">@Model.PickupDateTime.ToString("MM/dd/yy")</span>
 
                 Day: <span class="info" id="pickup-day">@Model.PickupDateTime.ToString("dddd")</span>
 
