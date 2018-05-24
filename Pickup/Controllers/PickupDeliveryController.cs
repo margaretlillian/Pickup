@@ -28,13 +28,13 @@ namespace Pickup.Controllers
 
 
         // GET: /<controller>/
-
         public IActionResult Customer()
         {
             ViewBag.Title = "Customer Information";
             return View("PickupDelivery/Customer", new CustomerViewModel());
         }
 
+       
         [HttpPost]
         public IActionResult Customer(CustomerViewModel model)
         {
@@ -74,16 +74,24 @@ namespace Pickup.Controllers
         {
             ViewBag.Title = "Address Information";
 
-            DonorCustomer donor = context.DonorsCustomers.Single(d => d.ID == customerId);
-            return View("PickupDelivery/Address", new AddressViewModel());
-        }
+            DonorCustomer donor = context.DonorsCustomers.Where(d => d.ID == customerId).SingleOrDefault();
+            if (donor != null)
+            {
+                return View("PickupDelivery/Address", new AddressViewModel());
+            }
+
+            else
+                return Redirect("/");
+
+
+                 }
 
         [HttpPost]
         public IActionResult Address(AddressViewModel model)
         {
             ViewBag.Title = "Address Information";
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.Street !=null && model.City != null && model.ZIP != null)
             {
                 Address newAddress = new Address
                 {
@@ -106,8 +114,12 @@ namespace Pickup.Controllers
         {
             ViewBag.Title = "New Pickup/Delivery";
 
-            Address address = context.Addresses.Single(d => d.ID == addressId);
-            return View("PickupDelivery/CreateNewPickup", new PickupDeliveryViewModel());
+            Address address = context.Addresses.Where(d => d.ID == addressId).SingleOrDefault();
+            if (address != null)
+                return View("PickupDelivery/CreateNewPickup", new PickupDeliveryViewModel());
+
+            else
+                return Redirect("/");
         }
 
         [HttpPost]
@@ -151,6 +163,11 @@ namespace Pickup.Controllers
         }
 
         public IActionResult FurniturePickup(int pickupId) {
+            PickupOrDelivery pd = context.PickupsDeliveries.Where(p => p.ID == pickupId).SingleOrDefault();
+            IList<FurniturePickupOrDelivery> existingItem = context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == pickupId).ToList();
+            if (pd == null || existingItem.Count > 0)
+                return Redirect("/");
+
             FurniturePickupViewModel model = new FurniturePickupViewModel();
             var furnitureItems = context.Furniture.ToList(); 
             var quantityListItems = new List<QuantityList>();
