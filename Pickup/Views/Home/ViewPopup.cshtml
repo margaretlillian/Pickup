@@ -1,0 +1,301 @@
+﻿@{Layout = null; }
+@model Pickup.Models.HomeViewModel.ViewInformationViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Pickup Form</title>
+    <style>
+        body {
+            color: #000;
+            font-family: verdana;
+            text-transform: uppercase;
+        }
+
+        .info {
+            border-width: 0 0 1px 0;
+            border-color: #ccc;
+            border-style: solid;
+            font-size: 16px;
+            display: inline-flex;
+        }
+
+        #donor-instructions {
+            width: 7in;
+            height: 0.5in;
+            border: 1px solid #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: lighter;
+            padding-top: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: lighter;
+        }
+
+        main {
+            width: 8in;
+            height: 10.5in;
+            margin: auto;
+            border: 1px solid #999;
+            background: #fff url('heplogo.png') no-repeat 10px 20px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        li {
+            padding: 6px;
+        }
+
+        p {
+            padding: 0;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #rules {
+            list-style: square;
+        }
+
+        #schedulerdate {
+            padding-left: 110px;
+            padding-top: 5px;
+        }
+
+        #pickup-body {
+            width: 7.5in;
+            margin: auto;
+            font-size: 16px;
+        }
+
+        #donor-info {
+            padding-top: 2px;
+        }
+
+        #scheduler {
+            width: 320px;
+        }
+
+        #schedule-date {
+            width: 140px;
+        }
+
+        #pickup-datetime {
+            font-size: 12px;
+        }
+
+            #pickup-datetime span {
+                width: 170px;
+            }
+
+        #bottom-floor-check {
+            text-align: center;
+            padding-top: 7px;
+        }
+
+        #donor-firstname, #donor-lastname {
+            width: 2.55in;
+        }
+
+        #donor-address {
+            width: 6.5in;
+        }
+
+        #donor-city {
+            width: 140px;
+        }
+
+        #donor-phone {
+            width: 120px;
+        }
+
+        #donor-zip {
+            width: 100px;
+        }
+
+        #donor-neighborhood {
+            width: 550px;
+        }
+
+        #donor-signature {
+            width: 280px;
+        }
+
+        #furniture-list {
+            height: 320px;
+        }
+
+        #bottomfloor {
+            border: 1px dotted #000;
+            padding: 3px;
+            margin: 25px 0 10px 0;
+        }
+
+        .new-furn {
+            width: 130px;
+        }
+
+        button {
+            /*font-size: 20px;
+                border: 2px solid #900;
+                color: #900;
+                width: 200px;
+                margin: auto;
+                display: block;*/
+            display: none;
+        }
+
+        #rules {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <!-- <form method="POST"> -->
+        <header id="schedulerdate">
+            <p>
+
+                Taken By: <span class="info" name="scheduler" id="scheduler">@Model.Scheduler</span>
+
+                Date: <span class="info" id="schedule-date">@Model.ScheduleDateTime.ToString("MM/DD/YY")</span>
+
+            </p>
+        </header>
+
+        <header id="main-header"><h1>Furniture Pickup Form</h1></header>
+
+        <section id="pickup-body">
+            <p id="pickup-datetime">
+                Date of pickup: <span class="info" id="pickup-date">@Model.PickupDateTime.ToString("MM/DD/YY")</span>
+
+                Day: <span class="info" id="pickup-day">@Model.PickupDateTime.ToString("dddd")</span>
+
+                Time: <span class="info" id="pickup-time">@Model.PickupDateTime.ToString("hh:mm tt")</span>
+            </p>
+
+            <ul id="rules">
+                <li>We cannot take anything over 75lbs or 6ft long down stairs.</li>
+                <li>We do not take anything with tears, stains, or animal hair.</li>
+                <li>Drivers have final say on what we can take.</li>
+            </ul>
+
+            <section id="donor-info">
+
+                <p class="donor-info">
+                    First Name: <span class="info" id="donor-firstname">
+                    @Model.FirstName
+                    </span>
+
+                    Last Name: <span class="info" id="donor-lastname">
+                    @Model.LastName
+                    </span>
+                </p>
+
+                <p class="donor-info">
+
+                    Address: <span class="info" id="donor-address">
+                    @Model.StreetAddress @if (Model.Apt != null) {
+                        <span># @Model.Apt</span>
+                    }
+                    </span>
+                </p>
+
+                <p class="donor-info">
+
+                    City: <span class="info" id="donor-city">
+                    @Model.City
+                    </span>
+
+                    ZIP: <span class="info" id="donor-zip">
+                    @Model.ZIP
+                    </span>
+
+
+                    Phone: <span class="info" name="donor-phone" id="donor-phone">
+                    @Model.PhoneNumber
+                    </span>
+                    @if (Model.CallEnRoute) {
+                            <span>Call en route: </span><input type="checkbox" checked="checked" id = "call-donor" > }
+                     </p>
+
+
+
+                    <p class="donor-info">
+                    Neighborhood: <span class="info" id="donor-neighborhood">
+                        @Model.Neighborhood</span>
+                </p>
+
+            <!--    <p class="donor-info" id="bottomfloor">
+                    <span class="bold">Bottom if;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Yes <input type="radio" class="radio" value="yes" name="bottomfloor"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    There is an elevator <input type="radio" value="elevator" class="radio" name="bottomfloor"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;										No elevator<input type="radio" value="no"
+                                                                                                                                                                                                    class="radio" name="bottomfloor"></span>
+
+                </p> -->
+
+
+
+                    <div id="furniture-list">
+
+                        <h3>Furniture Donated</h3>
+
+
+                        <table class="furniture-list-view">
+                            <tr>
+                            <th>Quantity</th>
+                                <th>Item Donated</th>
+                                </tr>
+                            @foreach (var x in Model.Furniture)
+        {
+                    <tr>
+                        <td id="furniture-count-descr">
+                            @if (Model.Delivery)
+        {@x.Description}
+else
+{ @x.Quantity}
+                        </td>
+                        <td>@x.Name </td>
+
+                    </tr>
+
+}
+
+
+                        </table>
+                    </div>
+
+                <p class="donor-info">
+                    Additional Instructions:
+                    <div id="donor-instructions">@Model.SpecialInstructions</div>
+                </p>
+
+                <p class="donor-info">
+                    Client Signature: ______________________________
+                    Date: ________________
+                </p>
+
+                <p class="donor-info">
+                    Print Name: ______________________________________________________
+                </p>
+
+            </section>
+        </section>
+
+    </main>
+
+
+</body>
+</html>
