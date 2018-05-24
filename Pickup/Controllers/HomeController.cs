@@ -75,7 +75,7 @@ namespace Pickup.Controllers
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
                            join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
-                           join fpd in context.FurnitureDonationPickups on p.ID equals fpd.DonationPickupID
+                           //join fpd in context.FurnitureDonationPickups on p.ID equals fpd.DonationPickupID
                            where p.ID == id
                            select new ViewInformationViewModel()
                            {
@@ -96,7 +96,7 @@ namespace Pickup.Controllers
                                Scheduler = s.FullName,
                                PickupID = p.ID,
                                Cancelled = p.Cancelled,
-                               Furniture = listItems
+                              // Furniture = listItems
                            }).FirstOrDefault();
             return View(results);
         }
