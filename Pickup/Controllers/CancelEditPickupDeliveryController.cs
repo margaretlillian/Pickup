@@ -121,7 +121,6 @@ namespace Pickup.Controllers
             PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(dc => dc.ID == pid);
             PickupDeliveryViewModel model = new PickupDeliveryViewModel()
             {PickupId = pickupOrDelivery.ID,
-            PickupDateTime = pickupOrDelivery.PickupDateTime,
             CallEnRoute = pickupOrDelivery.CallEnRoute,
             SpecialInstructions = pickupOrDelivery.SpecialInstructions
             };
@@ -136,7 +135,6 @@ namespace Pickup.Controllers
             if (pickupOrDelivery == null && !ModelState.IsValid)
                 return View("PickupDelivery/FormDefault", model);
 
-            pickupOrDelivery.PickupDateTime = model.PickupDateTime;
             pickupOrDelivery.CallEnRoute = model.CallEnRoute;
             pickupOrDelivery.SpecialInstructions = model.SpecialInstructions;
 

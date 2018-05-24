@@ -13,36 +13,3 @@
     </ul>
 
     <button id="clear" type="submit">Add Furniture Picked Up</button>}
-
-
-
-<script>
-    $(function () {
-        $(".furn-item").on("click", function () {
-
-            var $clicker = $(this);
-            var oldValue = $clicker.parent().find("input").val();
-            if (oldValue.length === 0) {
-                oldValue = 0;
-            }
-
-            if ($clicker.text() == "-") {
-                if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 0;
-                }
-
-            } else {
-                // Don't allow decrementing below zero
-
-
-                var newVal = parseFloat(oldValue) + 1;
-            }
-
-            $clicker.parent().find("input").val(newVal);
-
-        });
-
-    });
-</script>

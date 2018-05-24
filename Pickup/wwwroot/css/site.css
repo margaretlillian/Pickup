@@ -224,7 +224,6 @@ margin: 6px;
     /* Autocomplete City */
 
 .autocomplete {
-    /*the container must be positioned relative:*/
     position: relative;
     padding: 0;
     margin: 0;
@@ -239,7 +238,6 @@ margin: 6px;
     border-bottom: none;
     border-top: none;
     z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
     top: 100%;
     left: 20%;
     right: 0;
@@ -250,7 +248,6 @@ margin: 6px;
         padding: 5px;
         cursor: pointer;
         background: #c67b13;
-        color: #fff;
         border-bottom: 1px solid #915f1b;
     }
 
@@ -260,7 +257,7 @@ margin: 6px;
         }
 
 .autocomplete-active {
-    background-color: #4f3108;
+    background-color: #4f3108 !important;
     color: #ffffff;
 }
 

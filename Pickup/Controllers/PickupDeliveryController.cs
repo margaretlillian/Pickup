@@ -119,13 +119,19 @@ namespace Pickup.Controllers
             {
                 DateTime currentDate = DateTime.Now;
                 string scheduler = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                DateTime pickupDateTime = new DateTime(model.PickupDate.Year,
+                    model.PickupDate.Month,
+                    model.PickupDate.Day,
+                    model.PickupTime.Hour,
+                    model.PickupTime.Minute,
+                    0);
 
                 PickupOrDelivery newPickup = new PickupOrDelivery
 
                 {
                     Delivery = model.Delivery,
                     ScheduleDateTime = currentDate,
-                    PickupDateTime = model.PickupDateTime,
+                    PickupDateTime = pickupDateTime,
                     CallEnRoute = model.CallEnRoute,
                     SpecialInstructions = model.SpecialInstructions,
                     AddressID = model.AddressId,
