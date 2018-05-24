@@ -7,20 +7,21 @@
     @foreach (var item in Model)
     {@if (!item.Cancelled)
         {
-            <div class="pdschedule">
-                <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupID">
-                    <ul>
-                        <li>  @item.FirstName @item.LastName</li>
-                        <li>@item.PickupTime.ToString("hh:mm tt")</li>
+   <div class="pdschedule">
+       <ul>
+           <li><h4>
+    <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupID">
+        @item.FirstName @item.LastName
+</a></h4></li>
+           <li>@item.PickupTime.ToString("hh:mm tt")</li>
 
-                        <li> @item.City</li>
-                        <li>@item.Phone</li>
-                        @if (item.Delivery)
-                        {
-                            <li>@item.Delivery</li>}
-                    </ul>
-                </a>
-            </div>}
+           <li> @item.City</li>
+           <li>@item.Phone</li>
+           @if (item.Delivery)
+        {
+           <li>@item.Delivery</li>}
+       </ul>
+   </div>}
 }
 
  

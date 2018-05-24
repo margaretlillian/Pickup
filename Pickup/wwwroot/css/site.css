@@ -69,6 +69,10 @@ h3{
     text-shadow: 1px 1px 1px #c9baa5;
 }
 
+h4{
+    margin: 0 0 8px 0;
+}
+
 /* HEADER */
 header {
     background: #fff url('/images/hep-logo.png') top left no-repeat;
@@ -456,4 +460,15 @@ display: none;}
 .button, .button:hover {padding: 10px;
                         color: #fff;
                         cursor: default;
+}
+
+.pdschedule {display: inline-grid;
+             height: 170px;
+border-left: 1px solid #b2a89e;
+padding: 10px;
+}
+
+.pdschedule ul {
+    margin: 0 20px;
+    padding: 0;
 }
