@@ -101,10 +101,29 @@ else
 
     <tr>
         <td><span class="property-name">Furniture Donated</span> </td>
-        <td></td>
+        <td>
+            <table class="furniture-list-view">
+               
+                @foreach (var x in Model.Furniture)
+        {
+            <tr>
+                <td id="furniture-count-descr">
+                    @if (Model.Delivery)
+            {@x.Description}
+else
+{ @x.Quantity}
+                </td>
+                <td>@x.Name </td>
+
+            </tr>
+
+}
+
+
+            </table>
+        </td>
     </tr>
-
-
+    
     <tr>
         <td>
             <span class="property-name">Scheduled By</span>

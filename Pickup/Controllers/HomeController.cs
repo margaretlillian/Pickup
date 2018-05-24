@@ -45,6 +45,10 @@ namespace Pickup.Controllers
         [Route("/View")]
         public IActionResult View(int id)
         {
+            PickupOrDelivery individual = context.PickupsDeliveries.Where(p => p.ID == id).FirstOrDefault();
+            if (individual == null)
+                return Redirect("/");
+
             var furnitureItems = (from fpd in context.FurnitureDonationPickups
                                   join f in context.Furniture on fpd.FurnitureID equals f.ID
                                   where fpd.DonationPickupID == id
@@ -56,8 +60,6 @@ namespace Pickup.Controllers
                                       Description = fpd.Description
                                   }).ToList();
             var listItems = new List<FurnitureListing>();
-            if (furnitureItems != null)
-            {
                 foreach (var item in furnitureItems)
                 {
                     listItems.Add(new FurnitureListing()
@@ -68,14 +70,13 @@ namespace Pickup.Controllers
                         Description = item.Description
 
                     });
-                }
+               
             }
             
-            var results = (from p in context.PickupsDeliveries
+            ViewInformationViewModel results = (from p in context.PickupsDeliveries
                            join s in context.Users on p.UserId equals s.Id
                            join a in context.Addresses on p.AddressID equals a.ID
                            join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
-                           //join fpd in context.FurnitureDonationPickups on p.ID equals fpd.DonationPickupID
                            where p.ID == id
                            select new ViewInformationViewModel()
                            {
@@ -96,8 +97,9 @@ namespace Pickup.Controllers
                                Scheduler = s.FullName,
                                PickupID = p.ID,
                                Cancelled = p.Cancelled,
-                              // Furniture = listItems
                            }).FirstOrDefault();
+
+            results.Furniture = listItems;
             return View(results);
         }
 
