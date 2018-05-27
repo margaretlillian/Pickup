@@ -24,13 +24,19 @@ namespace Pickup.Controllers
         public IActionResult Index(int pid)
         {
             PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
+            if (model != null)
             return View(model);
+
+            return Redirect("/");
         }
         [Route("/Cancel")]
         public IActionResult Cancel(int pid)
         {
             PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
+            if (model != null)
             return View(model);
+
+            return Redirect("/");
         }
 
         [HttpPost]
@@ -49,7 +55,10 @@ namespace Pickup.Controllers
         public IActionResult EditCustomer(int customerId)
         {
             ViewBag.Title = "Edit Customer Information";
-            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == customerId);
+            DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == customerId).FirstOrDefault();
+            if (donorCustomer == null)
+                return Redirect("/");
+
             CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
             FirstName = donorCustomer.FirstName,
             LastName = donorCustomer.LastName,
@@ -63,7 +72,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult EditCustomer(CustomerViewModel model)
         {
-            DonorCustomer donorCustomer = context.DonorsCustomers.Single(dc => dc.ID == model.CustomerId);
+            DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == model.CustomerId).FirstOrDefault();
             if (donorCustomer == null && !ModelState.IsValid)
                 return View("PickupDelivery/FormDefault", model);
 
@@ -81,7 +90,10 @@ namespace Pickup.Controllers
         [Route("/EditAddress")]
         public IActionResult EditAddress(int addressId)
         {  ViewBag.Title = "Edit Address Information";
-            Address address = context.Addresses.Single(dc => dc.ID == addressId);
+            Address address = context.Addresses.Where(dc => dc.ID == addressId).FirstOrDefault();
+            if (address == null)
+                return Redirect("/");
+
             AddressViewModel model = new AddressViewModel()
             {
             AddressId = address.ID,
@@ -118,7 +130,10 @@ namespace Pickup.Controllers
         public IActionResult EditPickupDelivery(int pid)
         {
             ViewBag.Title = "Edit Address Information";
-            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(dc => dc.ID == pid);
+            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(dc => dc.ID == pid).FirstOrDefault();
+            if (pickupOrDelivery == null)
+                return Redirect("/");
+
             PickupDeliveryViewModel model = new PickupDeliveryViewModel()
             {PickupId = pickupOrDelivery.ID,
             CallEnRoute = pickupOrDelivery.CallEnRoute,

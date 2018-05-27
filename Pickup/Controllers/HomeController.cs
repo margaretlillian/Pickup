@@ -12,6 +12,8 @@ using Pickup.Models.ScheduleViewModels;
 
 namespace Pickup.Controllers
     {
+
+
     [Authorize]
     public class HomeController : Controller
     {
@@ -20,12 +22,14 @@ namespace Pickup.Controllers
         public HomeController(ApplicationDbContext applicationDbContext)
         {
             context = applicationDbContext;
+
         }
 
-        public IActionResult Index()
+        public List<WeeklyCalendarViewModel> CreateQuery(string date)
         {
+
             var results = (from p in context.PickupsDeliveries
-                           where p.PickupDateTime.ToShortDateString() == DateTime.Today.ToShortDateString()
+                           where p.PickupDateTime.ToShortDateString() == date
                            join a in context.Addresses on p.AddressID equals a.ID
                            join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
                            select new WeeklyCalendarViewModel
@@ -39,6 +43,26 @@ namespace Pickup.Controllers
                                Cancelled = p.Cancelled,
                                Delivery = p.Delivery
                            }).ToList();
+            return results;
+        }
+        public IActionResult Index()
+        {
+            //    var results = (from p in context.PickupsDeliveries
+            //                   where p.PickupDateTime.ToShortDateString() == DateTime.Today.ToShortDateString()
+            //                   join a in context.Addresses on p.AddressID equals a.ID
+            //                   join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
+            //                   select new WeeklyCalendarViewModel
+            //                   {
+            //                       City = a.City,
+            //                       FirstName = dc.FirstName,
+            //                       LastName = dc.LastName,
+            //                       PickupID = p.ID,
+            //                       Phone = dc.PhoneNumber,
+            //                       PickupTime = p.PickupDateTime,
+            //                       Cancelled = p.Cancelled,
+            //                       Delivery = p.Delivery
+            //                   }).ToList();
+            List<WeeklyCalendarViewModel> results = CreateQuery(DateTime.Today.ToShortDateString());
             return View(results);
         }
 
