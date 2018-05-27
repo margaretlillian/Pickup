@@ -5,15 +5,22 @@
 @{var week = Context.Request.Query["weekId"];
     if (String.IsNullOrEmpty(week)) {
         week = "0";
-     }
+    }
     int lastWeek = int.Parse(week) - 7;
-    int nextWeek = int.Parse(week) + 7;}
+    int nextWeek = int.Parse(week) + 7;
+    var popup = Context.Request.Query["popup"];
+    if (popup == "true") {
+        popup = "&popup=true";
+     }
+
+}
 
 
 
 <div id="weeklylinks">
-    <a href="@Context.Request.Path?weekId=@lastWeek">&laquo; Previous Week</a> ||
-    <a href="@Context.Request.Path?weekId=@nextWeek">Next Week &raquo;</a>
+    <a href="?weekId=@lastWeek@popup"> 
+    &laquo; Previous Week</a> ||
+    <a href="?weekId=@nextWeek@popup">Next Week &raquo;</a>
     </div>
 
 

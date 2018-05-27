@@ -28,23 +28,8 @@ namespace Pickup.Controllers
 
         public IActionResult Index()
         {
-            //    var results = (from p in context.PickupsDeliveries
-            //                   where p.PickupDateTime.ToShortDateString() == DateTime.Today.ToShortDateString()
-            //                   join a in context.Addresses on p.AddressID equals a.ID
-            //                   join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
-            //                   select new WeeklyCalendarViewModel
-            //                   {
-            //                       City = a.City,
-            //                       FirstName = dc.FirstName,
-            //                       LastName = dc.LastName,
-            //                       PickupID = p.ID,
-            //                       Phone = dc.PhoneNumber,
-            //                       PickupTime = p.PickupDateTime,
-            //                       Cancelled = p.Cancelled,
-            //                       Delivery = p.Delivery
-            //                   }).ToList();
-            var instance = new WeeklyCalendarViewModelQuery();
-            IList<WeeklyCalendarViewModel> results = instance.CreateQuery(context, DateTime.Today.ToShortDateString());
+            CalendarViewQuery query = new CalendarViewQuery();
+            IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }
 

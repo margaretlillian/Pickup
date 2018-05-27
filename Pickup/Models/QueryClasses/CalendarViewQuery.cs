@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.QueryClasses
 {
-    public class WeeklyCalendarViewModelQuery
+    public class CalendarViewQuery
     {
         
         public IList<WeeklyCalendarViewModel> CreateQuery(ApplicationDbContext context, string date)
