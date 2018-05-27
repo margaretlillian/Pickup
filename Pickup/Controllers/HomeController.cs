@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.HomeViewModel;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.ScheduleViewModels;
-using Pickup.QueryClasses;
-
 namespace Pickup.Controllers
     {
 
@@ -19,6 +18,7 @@ namespace Pickup.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
+        AllPickupDeliveryInformationQuery query = new AllPickupDeliveryInformationQuery();
 
         public HomeController(ApplicationDbContext applicationDbContext)
         {
@@ -26,6 +26,11 @@ namespace Pickup.Controllers
 
         }
         
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [Route("/View")]
         public IActionResult View(int id)
         {
@@ -33,57 +38,8 @@ namespace Pickup.Controllers
             if (individual == null)
                 return Redirect("/");
 
-            var furnitureItems = (from fpd in context.FurnitureDonationPickups
-                                  join f in context.Furniture on fpd.FurnitureID equals f.ID
-                                  where fpd.DonationPickupID == id
-                                  select new FurnitureListing
-                                  {
-                                      Name = f.Name,
-                                      ID = f.ID,
-                                      Quantity = fpd.Quantity,
-                                      Description = fpd.Description
-                                  }).ToList();
-            var listItems = new List<FurnitureListing>();
-                foreach (var item in furnitureItems)
-                {
-                    listItems.Add(new FurnitureListing()
-                    {
-                        ID = item.ID,
-                        Name = item.Name,
-                        Quantity = item.Quantity,
-                        Description = item.Description
-
-                    });
-               
-            }
-            
-            ViewInformationViewModel results = (from p in context.PickupsDeliveries
-                           join s in context.Users on p.UserId equals s.Id
-                           join a in context.Addresses on p.AddressID equals a.ID
-                           join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
-                           where p.ID == id
-                           select new ViewInformationViewModel()
-                           {
-                               FirstName = d.FirstName,
-                               LastName = d.LastName,
-                               PhoneNumber = d.PhoneNumber,
-                               PhoneNumberTwo = d.PhoneNumberTwo,
-                               StreetAddress = a.Street,
-                               Apt = a.Apartment,
-                               City = a.City,
-                               ZIP = a.ZIP,
-                               Neighborhood = a.Neighborhood,
-                               Delivery = p.Delivery,
-                               ScheduleDateTime = p.ScheduleDateTime,
-                               CallEnRoute = p.CallEnRoute,
-                               SpecialInstructions = p.SpecialInstructions,
-                               PickupDateTime = p.PickupDateTime,
-                               Scheduler = s.FullName,
-                               PickupID = p.ID,
-                               Cancelled = p.Cancelled,
-                           }).FirstOrDefault();
-
-            results.Furniture = listItems;
+            ViewInformationViewModel results = query.CreateQuery(context, id);
+            results.Furniture = query.CreateFurnitureListQuery(context, id);
             return View(results);
         }
 

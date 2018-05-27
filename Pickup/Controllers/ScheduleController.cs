@@ -25,9 +25,9 @@ namespace Pickup.Controllers
         }
 
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult HomePage()
         {
-            IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, DateTime.Today.ToShortDateString());
+            IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, DateTime.Today.ToString());
             return View(results);
         }
 
