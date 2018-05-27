@@ -25,14 +25,7 @@ namespace Pickup.Controllers
             context = applicationDbContext;
 
         }
-
-        public IActionResult Index()
-        {
-            CalendarViewQuery query = new CalendarViewQuery();
-            IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, DateTime.Today.ToShortDateString());
-            return View(results);
-        }
-
+        
         [Route("/View")]
         public IActionResult View(int id)
         {
