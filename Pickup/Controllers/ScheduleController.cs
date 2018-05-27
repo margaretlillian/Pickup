@@ -23,7 +23,12 @@ namespace Pickup.Controllers
         {
             context = applicationDbContext;
         }
-
+        public static List<DateTime> GetDates(int year, int month)
+        {
+            return Enumerable.Range(1, DateTime.DaysInMonth(year, month)) 
+                             .Select(day => new DateTime(year, month, day))
+                             .ToList();
+        }
         [Route("/")]
         public IActionResult HomePage()
         {
@@ -33,7 +38,6 @@ namespace Pickup.Controllers
 
 
         // GET: /<controller>/
-        [Authorize]
         public IActionResult Index(int weekId, bool popup)
         {
 
@@ -53,5 +57,16 @@ namespace Pickup.Controllers
             return View(pickupsDates);
         }
         
+        public IActionResult MonthlyCalendarSmall(int year, int month)
+        {
+            Dictionary<DateTime, IList<WeeklyCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<WeeklyCalendarViewModel>>();
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, date.ToShortDateString());
+                pickupsDates.Add(date, results);
+
+            }
+            return View("MonthlyCalendar", pickupsDates);
+        }
     }
 }

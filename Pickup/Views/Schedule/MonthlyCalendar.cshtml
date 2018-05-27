@@ -1,0 +1,39 @@
+﻿@using Pickup.Models.ScheduleViewModels
+@model Dictionary<DateTime, IList<WeeklyCalendarViewModel>>
+
+<h2>Schedule Matrix</h2>
+
+<table>
+    <tr>
+        <td>Su</td>
+        <td>Mo</td>
+        <td>Tu</td>
+        <td>We</td>
+        <td>Th</td>
+        <td>Fr</td>
+        <td>Sa</td>
+    </tr>
+    <tr>
+        @foreach (KeyValuePair<DateTime, IList<WeeklyCalendarViewModel>> date in Model)
+
+        {
+            int day = (int)date.Key.DayOfWeek;
+            @if (date.Key.Day == 1)
+            {
+                @for (int i = 0; i < day; i++)
+                {
+                <td></td>
+                }}
+            <td>
+                <span class="@date.Value.Count" title="@date.Value.Count">@date.Key.Day</span>
+            </td>
+
+            @if (date.Key.ToString("dddd") == "Saturday")
+            {
+                @:</tr>
+            @:<tr>
+            }
+        }
+    </tr>
+</table>
+

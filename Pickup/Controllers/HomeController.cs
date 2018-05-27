@@ -43,6 +43,7 @@ namespace Pickup.Controllers
 
             if (popup)
                 return View("ViewPopup", results);
+
             return View(results);
         }
         
