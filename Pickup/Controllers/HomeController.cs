@@ -9,6 +9,7 @@ using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.HomeViewModel;
 using Pickup.Models.ScheduleViewModels;
+using Pickup.QueryClasses;
 
 namespace Pickup.Controllers
     {
@@ -25,26 +26,6 @@ namespace Pickup.Controllers
 
         }
 
-        public List<WeeklyCalendarViewModel> CreateQuery(string date)
-        {
-
-            var results = (from p in context.PickupsDeliveries
-                           where p.PickupDateTime.ToShortDateString() == date
-                           join a in context.Addresses on p.AddressID equals a.ID
-                           join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
-                           select new WeeklyCalendarViewModel
-                           {
-                               City = a.City,
-                               FirstName = dc.FirstName,
-                               LastName = dc.LastName,
-                               PickupID = p.ID,
-                               Phone = dc.PhoneNumber,
-                               PickupTime = p.PickupDateTime,
-                               Cancelled = p.Cancelled,
-                               Delivery = p.Delivery
-                           }).ToList();
-            return results;
-        }
         public IActionResult Index()
         {
             //    var results = (from p in context.PickupsDeliveries
@@ -62,7 +43,8 @@ namespace Pickup.Controllers
             //                       Cancelled = p.Cancelled,
             //                       Delivery = p.Delivery
             //                   }).ToList();
-            List<WeeklyCalendarViewModel> results = CreateQuery(DateTime.Today.ToShortDateString());
+            var instance = new WeeklyCalendarViewModelQuery();
+            IList<WeeklyCalendarViewModel> results = instance.CreateQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }
 
