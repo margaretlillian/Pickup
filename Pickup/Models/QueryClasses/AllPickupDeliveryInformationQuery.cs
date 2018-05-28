@@ -45,24 +45,10 @@ namespace Pickup.Models.QueryClasses
              join a in context.Addresses on p.AddressID equals a.ID
              join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
              select new ViewInformationViewModel()
-             {
-                 FirstName = d.FirstName,
-                 LastName = d.LastName,
-                 PhoneNumber = d.PhoneNumber,
-                 PhoneNumberTwo = d.PhoneNumberTwo,
-                 StreetAddress = a.Street,
-                 Apt = a.Apartment,
-                 City = a.City,
-                 ZIP = a.ZIP,
-                 Neighborhood = a.Neighborhood,
-                 Delivery = p.Delivery,
-                 ScheduleDateTime = p.ScheduleDateTime,
-                 CallEnRoute = p.CallEnRoute,
-                 SpecialInstructions = p.SpecialInstructions,
-                 PickupDateTime = p.PickupDateTime,
-                 Scheduler = s.FullName,
-                 PickupID = p.ID,
-                 Cancelled = p.Cancelled,
+             {DonorCustomer = d,
+             Address = a,
+             PickupOrDelivery = p,
+             Scheduler = s.FullName
              });
             return results;
         }

@@ -1,6 +1,6 @@
 ﻿@model Pickup.Models.HomeViewModel.ViewInformationViewModel
 
-@if (Model.Delivery)
+@if (Model.PickupOrDelivery.Delivery)
 {
     <h2>Delivery Information</h2>
 }
@@ -11,7 +11,7 @@ else
 View printable version. </a></p>
 <table id="pickupinfo">
 
-    @if (Model.Cancelled)
+    @if (Model.PickupOrDelivery.Cancelled)
     {
         <tr>
             <td colspan="2" id="cancelled">Cancelled</td>
@@ -20,7 +20,7 @@ View printable version. </a></p>
 
     <tr>
         <th colspan="2">
-            @Model.FirstName @Model.LastName
+            @Model.DonorCustomer.FirstName @Model.DonorCustomer.LastName
         </th>
     </tr>
 
@@ -29,7 +29,7 @@ View printable version. </a></p>
             <span class="property-name">Pickup Date </span>
         </td>
         <td>
-            @Model.PickupDateTime.ToString("MMMM dd yyyy")
+            @Model.PickupOrDelivery.PickupDateTime.ToString("MMMM dd yyyy")
         </td>
     </tr>
 
@@ -39,19 +39,19 @@ View printable version. </a></p>
             <span class="property-name">Phone Number</span>
         </td>
         <td>
-            @Model.PhoneNumber
+            @Model.DonorCustomer.PhoneNumber
         </td>
     </tr>
 
 
-    @if (!String.IsNullOrEmpty(Model.PhoneNumberTwo))
+    @if (!String.IsNullOrEmpty(Model.DonorCustomer.PhoneNumberTwo))
     {
         <tr>
             <td>
                 <span class="property-name">Phone Number 2</span>
             </td>
             <td>
-                @Model.PhoneNumberTwo
+                @Model.DonorCustomer.PhoneNumberTwo
             </td>
         </tr>}
 
@@ -60,22 +60,22 @@ View printable version. </a></p>
             <span class="property-name">Address</span>
         </td>
         <td>
-            @Model.StreetAddress
-            @if (!String.IsNullOrEmpty(Model.Apt))
-            {<span>#</span> @Model.Apt
+            @Model.Address.Street
+            @if (!String.IsNullOrEmpty(Model.Address.Apartment))
+            {@:# @Model.Address.Apartment
         }<br />
-            @Model.City, @Model.ZIP
+            @Model.Address.City, @Model.Address.ZIP
         </td>
     </tr>
 
-    @if (!String.IsNullOrEmpty(Model.Neighborhood))
+    @if (!String.IsNullOrEmpty(Model.Address.Neighborhood))
     {
         <tr>
             <td>
                 <span class="property-name">Neighborhood</span>
             </td>
             <td>
-                @Model.Neighborhood
+                @Model.Address.Neighborhood
             </td>
         </tr>}
 
@@ -85,24 +85,24 @@ View printable version. </a></p>
             <span class="property-name">Call En Route</span>
         </td>
         <td>
-            @Model.CallEnRoute
+            @Model.PickupOrDelivery.CallEnRoute
         </td>
     </tr>
 
 
-    @if (!String.IsNullOrEmpty(Model.SpecialInstructions))
+    @if (!String.IsNullOrEmpty(Model.PickupOrDelivery.SpecialInstructions))
     {
         <tr>
             <td>
                 <span class="property-name">Special Instructions</span>
             </td>
             <td>
-                @Model.SpecialInstructions
+                @Model.PickupOrDelivery.SpecialInstructions
             </td>
         </tr>}
 
     <tr>
-        <td><span class="property-name">Furniture Donated</span> </td>
+        <td><span class="property-name">Items Donated</span> </td>
         <td>
             <table id="furniture-list-view">
                
@@ -110,7 +110,7 @@ View printable version. </a></p>
         {
             <tr>
                 <td class="furniture-count-descr">
-                    @if (Model.Delivery)
+                    @if (Model.PickupOrDelivery.Delivery)
             {@x.Description}
 else
 { @x.Quantity}
@@ -132,17 +132,17 @@ else
         </td>
         <td>
             @Model.Scheduler <br />
-            @Model.ScheduleDateTime
+            @Model.PickupOrDelivery.ScheduleDateTime
 
         </td>
     </tr>
 </table>
 @{ 
     string pd = "Pickup";
-    if (Model.Delivery) {
+    if (Model.PickupOrDelivery.Delivery) {
         pd = "Delivery"; }
 }
-@if (!Model.Cancelled) {
+@if (!Model.PickupOrDelivery.Cancelled) {
     <a class="button" asp-controller="CancelEditPickupDelivery" asp-action="Index" asp-route-pid="@Model.PickupID">Edit / Cancel @pd</a> 
 
 }
