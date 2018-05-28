@@ -38,7 +38,7 @@ namespace Pickup.Controllers
             if (individual == null)
                 return Redirect("/");
 
-            ViewInformationViewModel results = query.CreateQuery(context, id);
+            var results = query.CreateQuery(context, id).Cast<ViewInformationViewModel>().FirstOrDefault();
             results.Furniture = query.CreateFurnitureListQuery(context, id);
 
             if (popup)

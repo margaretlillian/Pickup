@@ -4,6 +4,11 @@
 
 <h2>Welcome!</h2>
    <h3>Today's Pickups and Deliveries</h3>
+@if (Model.Count == 0)
+{
+    <p>There are no pickups/deliveries scheduled for today.</p>
+
+}
     @foreach (var item in Model)
     {@if (!item.Cancelled)
         {

@@ -24,21 +24,23 @@
     font-weight: bold;
 }
 
-table.furniture-list-view, .furniture-list-view td {
+table#furniture-list-view {
     padding: 0;
     margin: 0;
 }
 
-.furniture-list-view tr {
+#furniture-list-view tr, #furniture-list-view tr:nth-child(odd) {
     height: 1.6em;
+    background: transparent;
 }
 
-.furniture-list-view :nth-child(odd) {
+#pickupinfo .furniture-list-view {
     background: transparent;
 }
 
 #furniture-count-descr {
     padding-right: 15px;
+    background: transparent;
 }
 
 #view-options {

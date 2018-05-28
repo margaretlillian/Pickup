@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
+using Pickup.Models.HomeViewModel;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.ScheduleViewModels;
 using Pickup.QueryClasses;
 
@@ -55,6 +57,16 @@ namespace Pickup.Controllers
                 return View("SchedulePopup", pickupsDates);
             
             return View(pickupsDates);
+        }
+
+        public IActionResult DailySchedule(int date)
+        {
+            AllPickupDeliveryInformationQuery dayQuery = new AllPickupDeliveryInformationQuery();
+           var model = dayQuery.CreateQuery(context, date).Cast<ViewInformationViewModel>().ToList();
+            foreach (var item in model) {
+                item.Furniture = dayQuery.CreateFurnitureListQuery(context, date);
+            }
+            return View(model);
         }
         
         public IActionResult MonthlyCalendar()

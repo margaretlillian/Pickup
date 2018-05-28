@@ -104,12 +104,12 @@ View printable version. </a></p>
     <tr>
         <td><span class="property-name">Furniture Donated</span> </td>
         <td>
-            <table class="furniture-list-view">
+            <table id="furniture-list-view">
                
                 @foreach (var x in Model.Furniture)
         {
             <tr>
-                <td id="furniture-count-descr">
+                <td class="furniture-count-descr">
                     @if (Model.Delivery)
             {@x.Description}
 else

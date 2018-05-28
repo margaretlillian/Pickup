@@ -37,9 +37,9 @@ namespace Pickup.Models.QueryClasses
             return listItems;
         }
 
-        public ViewInformationViewModel CreateQuery(ApplicationDbContext context, int id)
+        public IQueryable CreateQuery(ApplicationDbContext context, int id)
 {
-   ViewInformationViewModel results =
+   IQueryable results =
    (from p in context.PickupsDeliveries
              join s in context.Users on p.UserId equals s.Id
              join a in context.Addresses on p.AddressID equals a.ID
@@ -64,7 +64,7 @@ namespace Pickup.Models.QueryClasses
                  Scheduler = s.FullName,
                  PickupID = p.ID,
                  Cancelled = p.Cancelled,
-             }).FirstOrDefault();
+             });
             return results;
         }
 
