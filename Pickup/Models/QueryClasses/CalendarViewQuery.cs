@@ -26,14 +26,5 @@ namespace Pickup.QueryClasses
                            }).ToList();
             return results;
         }
-        public IList<MonthlyMiniCalendarViewModel> CreateMonthlyQuery(ApplicationDbContext context, string date) {
-            var results = (from p in context.PickupsDeliveries
-                           where p.PickupDateTime.ToShortDateString() == date
-                           select new MonthlyMiniCalendarViewModel
-                           {
-                               PickupID = p.ID
-                           }).ToList();
-            return results;
-        }
     }
 }

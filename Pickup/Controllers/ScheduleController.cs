@@ -71,16 +71,5 @@ namespace Pickup.Controllers
             return View(model);
         }
         
-        public IActionResult MonthlyCalendar()
-        {
-            Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>>();
-            for (var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); date.Month == DateTime.Now.Month; date = date.AddDays(1))
-            {
-                IList<MonthlyMiniCalendarViewModel> results = query.CreateMonthlyQuery(context, date.ToShortDateString());
-                pickupsDates.Add(date, results);
-
-            }
-            return View(pickupsDates);
-        }
     }
 }
