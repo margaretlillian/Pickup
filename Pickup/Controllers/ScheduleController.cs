@@ -32,7 +32,7 @@ namespace Pickup.Controllers
         [Route("/")]
         public IActionResult HomePage()
         {
-            IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, DateTime.Today.ToString());
+            IList<WeeklyCalendarViewModel> results = query.CreateWeeklyQuery(context, DateTime.Today.ToString());
             return View(results);
         }
 
@@ -45,7 +45,7 @@ namespace Pickup.Controllers
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
-                IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, theDate.ToShortDateString());
+                IList<WeeklyCalendarViewModel> results = query.CreateWeeklyQuery(context, theDate.ToShortDateString());
                 
                     pickupsDates.Add(theDate, results);
                 
@@ -57,16 +57,16 @@ namespace Pickup.Controllers
             return View(pickupsDates);
         }
         
-        public IActionResult MonthlyCalendarSmall(int year, int month)
+        public IActionResult MonthlyCalendar()
         {
-            Dictionary<DateTime, IList<WeeklyCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<WeeklyCalendarViewModel>>();
-            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>>();
+            for (var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); date.Month == DateTime.Now.Month; date = date.AddDays(1))
             {
-                IList<WeeklyCalendarViewModel> results = query.CreateQuery(context, date.ToShortDateString());
+                IList<MonthlyMiniCalendarViewModel> results = query.CreateMonthlyQuery(context, date.ToShortDateString());
                 pickupsDates.Add(date, results);
 
             }
-            return View("MonthlyCalendar", pickupsDates);
+            return View(pickupsDates);
         }
     }
 }

@@ -154,7 +154,6 @@ footer {
 .sidebar {
     margin-bottom: 10px;
 }
-
 /* CONTENT*/
 
 #content {
@@ -440,6 +439,11 @@ display: none;}
 }
 
 /* MONTHLY CALENDAR MINI*/
+
+#monthly-calendar-mini {width: 97%;
+                        margin:auto;
+                        text-align: center;
+}
 .pickups-0 {background: #fff;}
 
 .pickups-1 {

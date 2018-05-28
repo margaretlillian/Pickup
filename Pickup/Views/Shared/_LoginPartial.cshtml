@@ -19,7 +19,9 @@
 
         <div class="sidebar">
             <h2>Calendar</h2>
-            <p>Coming soon!</p>
+            <div id="minicalendar">
+            @await Component.InvokeAsync("Calendar")
+                </div>
         </div>
 
         <div class="sidebar">
