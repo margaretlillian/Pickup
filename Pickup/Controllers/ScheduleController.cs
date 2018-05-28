@@ -66,7 +66,7 @@ namespace Pickup.Controllers
                 .Cast<ViewInformationViewModel>()
                 .Where(day => day.PickupOrDelivery.PickupDateTime.ToShortDateString() == date).ToList();
             foreach (var item in model) {
-                item.Furniture = dayQuery.CreateFurnitureListQuery(context, item.PickupID);
+                item.Furniture = dayQuery.CreateFurnitureListQuery(context, item.PickupOrDelivery.ID);
             }
             return View(model);
         }

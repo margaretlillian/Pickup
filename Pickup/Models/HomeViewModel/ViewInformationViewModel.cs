@@ -7,13 +7,9 @@ namespace Pickup.Models.HomeViewModel
 {
     public class ViewInformationViewModel
     {
-        public int PickupID { get; set; }
         public DonorCustomer DonorCustomer { get; set; }
-
         public Address Address { get; set; }
-
         public PickupOrDelivery PickupOrDelivery { get; set; }
-
         public string Scheduler { get; set; }
 
         public List<FurnitureListing> Furniture { get; set; }
