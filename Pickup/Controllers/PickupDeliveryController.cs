@@ -162,13 +162,13 @@ namespace Pickup.Controllers
 
         }
 
-        public IActionResult FurniturePickup(int pickupId) {
+        public IActionResult ItemPickup(int pickupId) {
             PickupOrDelivery pd = context.PickupsDeliveries.Where(p => p.ID == pickupId).SingleOrDefault();
             IList<FurniturePickupOrDelivery> existingItem = context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == pickupId).ToList();
             if (pd == null || existingItem.Count > 0)
                 return Redirect("/");
 
-            FurniturePickupViewModel model = new FurniturePickupViewModel();
+            ItemPickupViewModel model = new ItemPickupViewModel();
             var furnitureItems = context.Furniture.ToList(); 
             var quantityListItems = new List<QuantityList>();
             foreach (var item in furnitureItems)
@@ -186,7 +186,7 @@ namespace Pickup.Controllers
         }
 
         [HttpPost]
-        public IActionResult FurniturePickup(FurniturePickupViewModel model) {
+        public IActionResult FurniturePickup(ItemPickupViewModel model) {
             var selectedFurniture = model.FurnitureList.Where(x => x.Quantity > 0).ToList();
             foreach (var furniturePiece in selectedFurniture) {
                 FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery {

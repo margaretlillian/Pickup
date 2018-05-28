@@ -8,16 +8,17 @@ using Pickup.Models;
 
 namespace Pickup.Models.DonationPickupViewModels
 {
-    public class FurniturePickupViewModel
+    public class ItemPickupViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int PickupID { get; set; }
 
         public List<QuantityList> FurnitureList { get; set; }
 
-        public FurniturePickupViewModel() {
+        public ItemPickupViewModel() {
             FurnitureList = new List<QuantityList>();
 }
 
     }
+
 }
