@@ -1,25 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Pickup.Models.ScheduleViewModels
-@model IList<WeeklyCalendarViewModel>
+@model IList<CalendarViewModel>
 
 <h2>Welcome!</h2>
    <h3>Today's Pickups and Deliveries</h3>
     @foreach (var item in Model)
-    {@if (!item.Cancelled)
+    {@if (!item.PickupOrDelivery.Cancelled)
         {
    <div class="pdschedule">
        <ul>
            <li><h4>
-    <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupID">
-        @item.FirstName @item.LastName
+    <a asp-controller="Home" asp-action="View" asp-route-id="@item.PickupOrDelivery.ID">
+        @item.DonorCustomer.FirstName @item.DonorCustomer.LastName
 </a></h4></li>
-           <li>@item.PickupTime.ToString("hh:mm tt")</li>
+           <li>@item.PickupOrDelivery.PickupDateTime.ToString("hh:mm tt")</li>
 
-           <li> @item.City</li>
-           <li>@item.Phone</li>
-           @if (item.Delivery)
+           <li> @item.Address.City</li>
+           <li>@item.DonorCustomer.PhoneNumber</li>
+           @if (item.PickupOrDelivery.Delivery)
         {
-           <li>@item.Delivery</li>}
+           <li> Delivery</li>}
        </ul>
    </div>}
 }

@@ -10,23 +10,18 @@ namespace Pickup.QueryClasses
     public class CalendarViewQuery
     {
         
-        public IList<WeeklyCalendarViewModel> CreateWeeklyQuery(ApplicationDbContext context, string date)
+        public IList<CalendarViewModel> CreateWeeklyQuery(ApplicationDbContext context, string date)
         {
 
             var results = (from p in context.PickupsDeliveries
                            where p.PickupDateTime.ToShortDateString() == date
                            join a in context.Addresses on p.AddressID equals a.ID
                            join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
-                           select new WeeklyCalendarViewModel
+                           select new CalendarViewModel
                            {
-                               City = a.City,
-                               FirstName = dc.FirstName,
-                               LastName = dc.LastName,
-                               PickupID = p.ID,
-                               Phone = dc.PhoneNumber,
-                               PickupTime = p.PickupDateTime,
-                               Cancelled = p.Cancelled,
-                               Delivery = p.Delivery
+                               DonorCustomer = dc,
+                               Address = a,
+                               PickupOrDelivery = p
                            }).ToList();
             return results;
         }

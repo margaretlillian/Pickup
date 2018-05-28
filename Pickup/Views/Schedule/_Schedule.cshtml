@@ -1,5 +1,5 @@
 ﻿@using Pickup.Models.ScheduleViewModels
-@model Dictionary<DateTime, IList<WeeklyCalendarViewModel>>
+@model Dictionary<DateTime, IList<CalendarViewModel>>
 
 <h2>Schedule Matrix</h2>
 @{var week = Context.Request.Query["weekId"];
@@ -26,23 +26,23 @@
 
 
 <div id="schedulematrix">
-    @foreach (KeyValuePair<DateTime, IList<WeeklyCalendarViewModel>> date in Model)
+    @foreach (KeyValuePair<DateTime, IList<CalendarViewModel>> date in Model)
 
     {<section class="day" id="@date.Key.ToString("dddd").ToLower()">
             <h3>@date.Key.ToString("dddd")</h3>
             <h4 class="the-date">@date.Key.ToString("MMM dd")</h4>
             <ul>
                 @foreach (var pickup in date.Value)
-                {@if (!pickup.Cancelled)
+                {@if (!pickup.PickupOrDelivery.Cancelled)
 {
                     <li class="schedule">
-                        <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupID">
+                        <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupOrDelivery.ID">
                             <ul>
-                                <li><h3 class="thetime">@pickup.PickupTime.ToString("hh:mm tt")</h3></li>
-                                <li>@pickup.FirstName @pickup.LastName</li>
-                                <li>@pickup.City</li>
-                                <li>@pickup.Phone</li>
-                                @if (pickup.Delivery)
+                                <li><h3 class="thetime">@pickup.PickupOrDelivery.PickupDateTime.ToString("hh:mm tt")</h3></li>
+                                <li>@pickup.DonorCustomer.FirstName @pickup.DonorCustomer.LastName</li>
+                                <li>@pickup.Address.City</li>
+                                <li>@pickup.DonorCustomer.PhoneNumber </li>
+                                @if (pickup.PickupOrDelivery.Delivery)
                                 {
                                     <li class="delivery">Delivery</li>
 
