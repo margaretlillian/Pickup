@@ -23,10 +23,10 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IViewComponentResult Invoke()
         {
-            Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>>();
+            Dictionary<DateTime, IList<CalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<CalendarViewModel>>();
             for (var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); date.Month == DateTime.Now.Month; date = date.AddDays(1))
             {
-                IList<MonthlyMiniCalendarViewModel> results = query.CreateMonthlyQuery(context, date.ToShortDateString());
+                IList<CalendarViewModel> results = query.CreateScheduleQuery(context, date.ToShortDateString());
                 pickupsDates.Add(date, results);
 
             }

@@ -5,8 +5,7 @@
 <h2>Welcome!</h2>
    <h3>Today's Pickups and Deliveries</h3>
     @foreach (var item in Model)
-    {@if (!item.PickupOrDelivery.Cancelled)
-        {
+    { 
    <div class="pdschedule">
        <ul>
            <li><h4>
@@ -21,7 +20,7 @@
         {
            <li> Delivery</li>}
        </ul>
-   </div>}
+   </div>
 }
 
  

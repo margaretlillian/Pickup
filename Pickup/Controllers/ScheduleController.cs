@@ -34,7 +34,7 @@ namespace Pickup.Controllers
         [Route("/")]
         public IActionResult HomePage()
         {
-            IList<CalendarViewModel> results = query.CreateWeeklyQuery(context, DateTime.Today.ToShortDateString());
+            IList<CalendarViewModel> results = query.CreateScheduleQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }
 
@@ -47,7 +47,7 @@ namespace Pickup.Controllers
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
-                IList<CalendarViewModel> results = query.CreateWeeklyQuery(context, theDate.ToShortDateString());
+                IList<CalendarViewModel> results = query.CreateScheduleQuery(context, theDate.ToShortDateString());
                 
                     pickupsDates.Add(theDate, results);
                 
