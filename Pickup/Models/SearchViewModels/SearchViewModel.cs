@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pickup.Models.SearchViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,9 +15,6 @@ namespace Pickup.Models.DonationPickupViewModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-
-        public IList<DonorCustomer> Donors { get; set; }
-        public IList<Address> Addresses { get; set; }
-
+        public IList<CustomerSearchResults> SearchResults { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.DonationPickupViewModels;
+using Pickup.Models.SearchViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,23 +28,12 @@ namespace Pickup.Controllers
 
         public IActionResult SearchResults(SearchViewModel model)
         {
-
-            model.Donors = context.DonorsCustomers
-                    .Where(d => d.FirstName == model.FirstName || d.LastName == model.LastName)
-                    .ToList();
-            model.Addresses = new List<Address>();
-            foreach (DonorCustomer donor in model.Donors)
-            {
-                List<Address> donorAddresses = context.Addresses.Where(a => a.DonorCustomerID == donor.ID).ToList();
-
-                if (donorAddresses != null)
-                {
-                    foreach (Address donorAddress in donorAddresses)
-                    {
-                        model.Addresses.Add(donorAddress);
-                    }
-                }
-            }
+            List<CustomerSearchResults> query = (from dc in context.DonorsCustomers
+                         where dc.FirstName == model.FirstName || dc.LastName == model.LastName
+                         select new CustomerSearchResults {
+                         DonorCustomer = dc,
+                         Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList()}).ToList();
+            model.SearchResults = query;
             return View("Index", model);
         }
     }

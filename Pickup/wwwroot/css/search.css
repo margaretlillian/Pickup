@@ -20,13 +20,19 @@
         padding-left: 0;
     }
 
-.result {
+.donor-result {
     background: #ede4dc;
     box-shadow: 3px 3px 3px #dbcec3;
     padding: 5px;
     margin: 10px;
 }
-
+.address {
+    border-left: 1px dashed #ddd;
+}
+.address p {margin-top: 0;
+              padding-top: 0;
+}
+.pickup-link {padding-bottom: 20px;}
 .name {
     font-weight: bolder;
 }
