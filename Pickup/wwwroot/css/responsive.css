@@ -62,7 +62,7 @@
     }
 
     header {
-        background: #fff url('hep-logo.png') top center no-repeat;
+        background: #fff url('/images/hep-logo.png') top center no-repeat;
         height: 170px;
         width: 99%;
     }

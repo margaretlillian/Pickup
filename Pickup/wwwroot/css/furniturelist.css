@@ -1,0 +1,46 @@
+﻿
+/* Furniture List */
+#content .quantity {
+    width: 45px;
+    float: none;
+}
+
+label.furn-item {
+    float: none;
+}
+
+span.furn-item {
+    border-radius: 10px;
+    margin: 3px;
+    padding: 6px;
+    cursor: default;
+}
+
+.piece {
+    margin: 6px;
+}
+
+#content .furniture-group ul {
+    padding: 0 0 10px 0;
+}
+
+.furniture-group li {
+    margin: 0 0 8px 0;
+}
+
+.furniture-group {
+    float: left;
+    margin: 15px;
+    padding: 10px;
+    background: #f2ede6;
+    box-shadow: 3px 2px 3px #e2ddd7;
+}
+
+    .furniture-group h3 {
+        padding: 2px;
+        margin: 3px;
+    }
+
+#content #clear {
+    clear: both;
+}

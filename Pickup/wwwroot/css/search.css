@@ -1,0 +1,32 @@
+﻿
+/*SEARCH*/
+
+#content-search {
+    margin: 15px;
+    padding: 15px;
+}
+
+    #content-search h2 {
+        font-size: 1.6em;
+    }
+
+    #content-search h3 {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    #content-search ul {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+.result {
+    background: #ede4dc;
+    box-shadow: 3px 3px 3px #dbcec3;
+    padding: 5px;
+    margin: 10px;
+}
+
+.name {
+    font-weight: bolder;
+}
