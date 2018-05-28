@@ -59,12 +59,14 @@ namespace Pickup.Controllers
             return View(pickupsDates);
         }
 
-        public IActionResult DailySchedule(int date)
+        public IActionResult DaySchedule(string date)
         {
             AllPickupDeliveryInformationQuery dayQuery = new AllPickupDeliveryInformationQuery();
-           var model = dayQuery.CreateQuery(context, date).Cast<ViewInformationViewModel>().ToList();
+           var model = dayQuery.CreateQuery(context)
+                .Cast<ViewInformationViewModel>()
+                .Where(day => day.PickupDateTime.ToShortDateString() == date).ToList();
             foreach (var item in model) {
-                item.Furniture = dayQuery.CreateFurnitureListQuery(context, date);
+                item.Furniture = dayQuery.CreateFurnitureListQuery(context, item.PickupID);
             }
             return View(model);
         }

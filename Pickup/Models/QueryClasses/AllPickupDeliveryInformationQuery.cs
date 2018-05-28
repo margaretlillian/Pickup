@@ -37,14 +37,13 @@ namespace Pickup.Models.QueryClasses
             return listItems;
         }
 
-        public IQueryable CreateQuery(ApplicationDbContext context, int id)
+        public IQueryable CreateQuery(ApplicationDbContext context)
 {
    IQueryable results =
    (from p in context.PickupsDeliveries
              join s in context.Users on p.UserId equals s.Id
              join a in context.Addresses on p.AddressID equals a.ID
              join d in context.DonorsCustomers on a.DonorCustomerID equals d.ID
-             where p.ID == id
              select new ViewInformationViewModel()
              {
                  FirstName = d.FirstName,
