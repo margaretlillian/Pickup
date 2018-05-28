@@ -110,6 +110,10 @@ h3.thetime {
     text-align: center;
 }
 
+#monthly-calendar-mini th {padding: 6px;
+   font-weight: bold;
+}
+
 .pickups-0 {
     background: #fff;
 }
@@ -138,4 +142,8 @@ td div {
     padding: 5px;
     border-radius: 5px;
     background: #51777c;
+}
+
+td a {color: #000;
+          border: none;
 }

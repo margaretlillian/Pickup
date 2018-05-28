@@ -2,7 +2,12 @@
 @using Pickup.Models.ScheduleViewModels
 @model Dictionary<DateTime, IList<MonthlyMiniCalendarViewModel>>
 
+
+
 <table id="monthly-calendar-mini">
+    <th colspan="7">
+        @DateTime.Now.ToString("MMMM") @DateTime.Now.Year
+    </th>
     <tr>
         <td>Su</td>
         <td>Mo</td>
@@ -21,21 +26,25 @@
             {
                 @for (int i = 0; i < day; i++)
                 {
-                <td></td>
+                    <td></td>
                 }}
             <td>
                 <div class="pickups-@date.Value.Count" title="@date.Value.Count">
-                <a asp-controller="Schedule" 
-                   asp-action="DaySchedule" 
-                   asp-route-date="@date.Key.ToShortDateString()">
-                    @date.Key.Day
-                    </a>
+                    @if (date.Value.Count > 0)
+                    {
+                        <a asp-controller="Schedule"
+                           asp-action="DaySchedule"
+                           asp-route-date="@date.Key.ToShortDateString()">
+                            @date.Key.Day
+                        </a> }
+                    else
+                    {
+                        @date.Key.Day}
                 </div>
             </td>
 
             @if (date.Key.ToString("dddd") == "Saturday")
-            {
-                @:</tr>
+            {@:</tr>
             @:<tr>
             }
         }

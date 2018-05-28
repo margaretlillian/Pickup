@@ -4,15 +4,15 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
-{<nav id="top">
-<ul id="navigation-bar">
-    <li><a asp-controller="PickupDelivery" asp-action="Customer">New Pickup/Delivery</a></li>
-    <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
-</ul>
+    @if (SignInManager.IsSignedIn(User))
+    {<nav id="top">
+        <ul id="navigation-bar">
+            <li><a asp-controller="PickupDelivery" asp-action="Customer">New Pickup/Delivery</a></li>
+            <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
+        </ul>
 
-    
-</nav>
+
+    </nav>
 
 
     <nav id="side">
@@ -20,19 +20,19 @@
         <div class="sidebar">
             <h2>Calendar</h2>
             <div id="minicalendar">
-            @await Component.InvokeAsync("Calendar")
-                </div>
+                @await Component.InvokeAsync("Calendar")
+            </div>
         </div>
 
         <div class="sidebar">
             <h2>Account</h2>
-            <p>Logged in as <a asp-controller="Manage" asp-action="Index">@User.Identity.Name </a></p>
+            <p>Logged in as <a asp-controller="Manage" asp-action="Index">@User.Identity.Name</a></p>
 
             @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <input type="submit" value="Logout" />
-}
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Logout" />
+            }
         </div>
 
     </nav>

@@ -34,7 +34,7 @@ namespace Pickup.Controllers
         [Route("/")]
         public IActionResult HomePage()
         {
-            IList<WeeklyCalendarViewModel> results = query.CreateWeeklyQuery(context, DateTime.Today.ToString());
+            IList<WeeklyCalendarViewModel> results = query.CreateWeeklyQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }
 
