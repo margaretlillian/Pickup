@@ -3,7 +3,7 @@
 
 <h2>Schedule Matrix</h2>
 
-<table>
+<table id="monthly-calendar-mini">
     <tr>
         <td>Su</td>
         <td>Mo</td>
@@ -25,7 +25,7 @@
                 <td></td>
                 }}
             <td>
-                <span class="@date.Value.Count" title="@date.Value.Count">@date.Key.Day</span>
+                <div class="pickups-@date.Value.Count" title="@date.Value.Count">@date.Key.Day</div>
             </td>
 
             @if (date.Key.ToString("dddd") == "Saturday")

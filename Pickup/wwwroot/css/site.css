@@ -397,20 +397,20 @@ font-size: 1.2em;
 
 /* VIEW PICKUP/DELIVERY */
 
-table {margin: 16px 0 20px 35px;
+#pickupinfo {margin: 16px 0 20px 35px;
        border-collapse: collapse;
        line-height: 1.2em;
 }
 
-td {padding: 16px;
+#pickupinfo td {padding: 16px;
     vertical-align: top;
 }
 
-    tr:nth-child(odd) {
-        background: #f2ede3;
-    }
+#pickupinfo tr:nth-child(odd) {
+    background: #f2ede3;
+}
 
-th {font-size: 1.5em;
+#pickupinfo th {font-size: 1.5em;
     padding: 10px;
 }
 
@@ -437,6 +437,34 @@ display: none;}
     color: #99410f;
     font-size: 1.7em;
     text-shadow: 1px 1px 1px #ddd;
+}
+
+/* MONTHLY CALENDAR MINI*/
+.pickups-0 {background: #fff;}
+
+.pickups-1 {
+    background: #d7eff2;
+}
+
+.pickups-2 {
+    background: #bedce0;
+}
+
+.pickups-3 {
+    background: #8bbdc4;
+}
+.pickups-4 {
+    background: #7fbac1;
+}
+
+.pickups-5 {
+    background: #6b9399;
+}
+
+td div {
+    padding: 5px;
+    border-radius: 5px;
+    background: #51777c;
 }
 
 /* MULTIPLES */
