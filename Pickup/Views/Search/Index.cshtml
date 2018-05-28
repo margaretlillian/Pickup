@@ -42,22 +42,24 @@
                 Use new address for this person.
             </a>
         </p>
-        <h4>Addresses for @result.DonorCustomer.FirstName
-    @result.DonorCustomer.LastName: </h4>
 
         <div class="address-result">
-            @foreach (var address in result.Addresses)
-            {<div class="address">
+            @for (int i = 0; i < result.Addresses.Count; i++)
+            {
+                var a = result.Addresses[i];
+                int j = i + 1;
+                <div class="address">
+                    <h4>Address #@j </h4>
                 <p>
-                    @address.Street @if (address.Apartment != null)
+                    @a.Street @if (a.Apartment != null)
                     {
-                        @:# @address.Apartment
+                        @:# @a.Apartment
                     }
-                    <br /> @address.City @address.ZIP
+                    <br /> @a.City @a.ZIP
                 </p>
                 <p class="pickup-link">
                     <a href="JavaScript:void(0);"
-                       onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@address.ID');">
+                       onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@a.ID');">
                         Create new pickup using this address.
                     </a>
                 </p>
@@ -68,67 +70,6 @@
     </div>}
 </section>
 }
-
-@*@if (Model.Donors != null)
-    {@if (@Model.Donors.Count == 0)
-        {<h3>No Results</h3>}
-    @foreach (DonorCustomer donor in Model.Donors)
-    {
-
-        <section class="result">
-            <h3>@donor.FirstName @donor.LastName</h3>
-            <ul>
-                <li><span class="name">Phone Number: </span>@donor.PhoneNumber</li>
-                @if (donor.PhoneNumberTwo != null)
-                {
-                    <li><span class="name">Phone #2: </span>@donor.PhoneNumberTwo</li>}
-            </ul>
-            <p>
-                <a href="JavaScript:void(0);"
-                   onclick="openInParent('/PickupDelivery/Address?customerId=@donor.ID');">
-                    Use new address for this donor.
-                </a>
-            </p>
-
-        </section>
-    }
-    }
-    @if (Model.Addresses != null)
-    {
-        @foreach (Address address in Model.Addresses)
-        {
-            <section class="result">
-            <h3>Address for: @address.DonorCustomer.FirstName @address.DonorCustomer.LastName</h3>
-            <ul>
-                <li>
-                    <span class="name">Phone Number: </span>
-                    @address.DonorCustomer.PhoneNumber
-                </li>
-                @if (address.DonorCustomer.PhoneNumberTwo != null)
-                {
-                    <li>
-                        <span class="name">Phone #2: </span>
-                        @address.DonorCustomer.PhoneNumberTwo
-                    </li>}
-
-                <li>
-                    <span class="name">Address: </span>
-                    @address.Street @address.Apartment <br /> @address.City  @address.ZIP
-                </li>
-            </ul>
-
-            <p>
-                <a href="JavaScript:void(0);"
-                   onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@address.ID');">
-                    Create new pickup using this address.
-                </a>
-            </p></section>
-
-
-        }
-
-    }*@
-
 <script>
     function openInParent(url) {
         window.opener.location.href = url;
