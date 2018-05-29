@@ -1,8 +1,28 @@
 ﻿@using Pickup.Models.HomeViewModel
 @model IList<ViewInformationViewModel>
 
+<h2>@Context.Request.Query["date"] Schedule</h2>
 @foreach (var x in Model)
+{@if (!x.PickupOrDelivery.Cancelled)
 {
-    @x.City
+    <h3>@x.DonorCustomer.FirstName @x.DonorCustomer.LastName</h3>
+<ul>
+    <li><span class="name">Phone Number</span>: @x.DonorCustomer.PhoneNumber</li>
+    @if (x.DonorCustomer.PhoneNumberTwo != null)
+    {
+        <li><span class="name">2nd Phone Number</span>: @x.DonorCustomer.PhoneNumberTwo</li>
+    }
+    <li><span class="name">City</span>: @x.Address.City</li>
+    <li>
+        <h4>Items Donated/Delivered</h4>
+        <ul>
+    @foreach (var y in x.Furniture)
+    {
+        <li>@y.Name</li>
 
+    }
+            </ul>
+        </li>
+</ul>
+}
 }
