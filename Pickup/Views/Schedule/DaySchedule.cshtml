@@ -7,6 +7,10 @@
 {
     <h3>@x.DonorCustomer.FirstName @x.DonorCustomer.LastName</h3>
 <ul>
+    <li>
+    <span class="name">Time</span>:
+    @x.PickupOrDelivery.PickupDateTime.ToString("h:mm tt")</li>
+
     <li><span class="name">Phone Number</span>: @x.DonorCustomer.PhoneNumber</li>
     @if (x.DonorCustomer.PhoneNumberTwo != null)
     {

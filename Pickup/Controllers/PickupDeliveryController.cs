@@ -90,7 +90,6 @@ namespace Pickup.Controllers
         public IActionResult Address(AddressViewModel model)
         {
             ViewBag.Title = "Address Information";
-
             if (ModelState.IsValid && model.Street !=null && model.City != null && model.ZIP != null)
             {
                 Address newAddress = new Address
@@ -100,6 +99,7 @@ namespace Pickup.Controllers
                     City = model.City,
                     ZIP = model.ZIP,
                     Neighborhood = model.Neighborhood,
+                    BottomFloor = Request.Form["BottomFloor"],
                     DonorCustomerID = model.CustomerId
                 };
 

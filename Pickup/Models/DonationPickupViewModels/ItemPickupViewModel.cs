@@ -14,10 +14,8 @@ namespace Pickup.Models.DonationPickupViewModels
         public int PickupID { get; set; }
 
         public IList<CategoryBlock> FurnitureList { get; set; }
-
- 
-
     }
+
     public class CategoryBlock
     {
         public FurnitureCategory Category { get; set; }

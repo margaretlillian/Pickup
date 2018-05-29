@@ -33,5 +33,8 @@ namespace Pickup.Models.DonationPickupViewModels
 
         public string Neighborhood {get; set; }
 
+        [Required]
+        [Display(Name = "Bottom Floor? *")]
+        public List<SelectListItem> BottomFloor { get; set; }
     }
 }
