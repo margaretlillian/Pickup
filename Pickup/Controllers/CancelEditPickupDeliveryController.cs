@@ -55,6 +55,8 @@ namespace Pickup.Controllers
         public IActionResult EditCustomer(int customerId)
         {
             ViewBag.Title = "Edit Customer Information";
+            ViewBag.Button = ViewBag.Title;
+
             DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == customerId).FirstOrDefault();
             if (donorCustomer == null)
                 return Redirect("/");
@@ -65,7 +67,7 @@ namespace Pickup.Controllers
             PhoneNumber = donorCustomer.PhoneNumber,
             PhoneNumberTwo = donorCustomer.PhoneNumberTwo,
             FOT = donorCustomer.FOT};
-            return View("PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/Customer", model);
         }
 
         [Route("/EditCustomer")]
@@ -74,7 +76,7 @@ namespace Pickup.Controllers
         {
             DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == model.CustomerId).FirstOrDefault();
             if (donorCustomer == null && !ModelState.IsValid)
-                return View("PickupDelivery/FormDefault", model);
+                return View("PickupDelivery/Customer", model);
 
                 donorCustomer.FirstName = model.FirstName;
                 donorCustomer.LastName = model.LastName;
@@ -92,6 +94,7 @@ namespace Pickup.Controllers
         public IActionResult EditAddress(int addressId)
         {  ViewBag.Title = "Edit Address Information";
             ViewBag.Button = ViewBag.Title;
+
             Address address = context.Addresses.Where(dc => dc.ID == addressId).FirstOrDefault();
             if (address == null)
                 return Redirect("/");
@@ -106,16 +109,17 @@ namespace Pickup.Controllers
             Neighborhood = address.Neighborhood,
             BottomFloor = address.BottomFloor
             };
-            return View("PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/Address", model);
         }
 
         [Route("/EditAddress")]
         [HttpPost]
         public IActionResult EditAddress(AddressViewModel model)
         {
+
             Address address = context.Addresses.Single(a => a.ID == model.AddressId);
             if (address == null && !ModelState.IsValid)
-                return View("PickupDelivery/FormDefault", model);
+                return View("PickupDelivery/Address", model);
 
             address.Street = model.Street;
             address.Apartment = model.Apartment;
@@ -133,7 +137,9 @@ namespace Pickup.Controllers
         [Route("/EditPD")]
         public IActionResult EditPickupDelivery(int pid)
         {
-            ViewBag.Title = "Edit Address Information";
+            ViewBag.Title = "Edit Pickup/Delivery Information";
+            ViewBag.Button = ViewBag.Title;
+
             PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(dc => dc.ID == pid).FirstOrDefault();
             if (pickupOrDelivery == null)
                 return Redirect("/");
@@ -146,7 +152,7 @@ namespace Pickup.Controllers
             PickupDate = DateTime.Parse(pickupOrDelivery.PickupDateTime.ToShortDateString()),
             PickupTime = DateTime.Parse(pickupOrDelivery.PickupDateTime.ToShortTimeString())
             };
-            return View("PickupDelivery/FormDefault", model);
+            return View("PickupDelivery/CreateNew", model);
         }
 
         [Route("/EditPD")]
@@ -155,7 +161,7 @@ namespace Pickup.Controllers
         {
             PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(a => a.ID == model.PickupId);
             if (pickupOrDelivery == null && !ModelState.IsValid)
-                return View("PickupDelivery/FormDefault", model);
+                return View("PickupDelivery/CreateNew", model);
             DateTime pickupDateTime = new DateTime(model.PickupDate.Year,
                     model.PickupDate.Month,
                     model.PickupDate.Day,
