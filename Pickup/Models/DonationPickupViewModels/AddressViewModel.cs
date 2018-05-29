@@ -35,6 +35,6 @@ namespace Pickup.Models.DonationPickupViewModels
 
         [Required]
         [Display(Name = "Bottom Floor? *")]
-        public List<SelectListItem> BottomFloor { get; set; }
+        public string BottomFloor { get; set; }
     }
 }

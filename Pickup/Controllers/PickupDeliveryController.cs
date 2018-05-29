@@ -58,6 +58,7 @@ namespace Pickup.Controllers
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
                     PhoneNumberTwo = model.PhoneNumberTwo,
+                    Email = model.Email,
                     FOT = model.FOT
                 };
                 context.Add(newPerson);
@@ -99,7 +100,7 @@ namespace Pickup.Controllers
                     City = model.City,
                     ZIP = model.ZIP,
                     Neighborhood = model.Neighborhood,
-                    BottomFloor = Request.Form["BottomFloor"],
+                    BottomFloor = model.BottomFloor,
                     DonorCustomerID = model.CustomerId
                 };
 
