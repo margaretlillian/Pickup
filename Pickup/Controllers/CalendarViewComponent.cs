@@ -26,7 +26,7 @@ namespace Pickup.Controllers
             Dictionary<DateTime, IList<MiniCalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<MiniCalendarViewModel>>();
             for (DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); date.Month == DateTime.Now.Month; date = date.AddDays(1))
             {
-                IList<MiniCalendarViewModel> results = query.MiniCalendarCountQuery(context, date);
+                IList<MiniCalendarViewModel> results = query.MiniCalendarCountQuery(context, date.ToShortDateString());
                 pickupsDates.Add(date, results);
 
             }

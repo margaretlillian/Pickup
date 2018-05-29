@@ -30,6 +30,7 @@ namespace Pickup.QueryClasses
         {
             var results = (from p in context.PickupsDeliveries
                            where p.PickupDateTime.ToShortDateString() == date
+                           where p.Cancelled == false
                            select new MiniCalendarViewModel {
                            PickupID = p.ID}).ToList();
             return results;
