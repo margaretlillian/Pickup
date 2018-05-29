@@ -1,4 +1,7 @@
-﻿@using Pickup.Models.HomeViewModel
+﻿@{ 
+    Layout = "_Popup";
+}
+@using Pickup.Models.HomeViewModel
 @model IList<ViewInformationViewModel>
 
 <h2>@Context.Request.Query["date"] Schedule</h2>

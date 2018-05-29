@@ -31,17 +31,20 @@
                     <td></td>
                 }}
             <td>
-                <div class="pickups-@date.Value.Count" title="@date.Value.Count">
+                <div class="pickups-@date.Value.Count">
                     @if (date.Value.Count > 0)
-                    {
-                        <a asp-controller="Schedule"
-                           asp-action="DaySchedule"
-                           asp-route-date="@date.Key.ToShortDateString()">
-                            @date.Key.Day
-                        </a> }
-                    else
-                    {
-                        @date.Key.Day}
+    {
+                    <a href="/Schedule/DaySchedule?date=@date.Key.ToShortDateString()"
+                       target="popup"
+                       onclick="window.open('/Schedule/DaySchedule?date=@date.Key.ToShortDateString()',
+           'popup', 'width=600,height=600');
+    return false;" title="@date.Value.Count">
+                        @date.Key.Day
+                    </a>
+                 }
+else
+{
+                @date.Key.Day}
                 </div>
             </td>
 
