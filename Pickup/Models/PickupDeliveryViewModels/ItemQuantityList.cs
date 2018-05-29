@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pickup.Models.DonationPickupViewModels
+namespace Pickup.Models.PickupDeliveryViewModels
 {
-    public class QuantityList
+    public class ItemQuantityList
     {
         public int CategoryID { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
 
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        [System.ComponentModel.DataAnnotations.Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer.")]
         public int Quantity { get; set; }
 
     }

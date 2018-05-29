@@ -1,12 +1,55 @@
-﻿<h2>@ViewBag.Title</h2>
+﻿@model Pickup.Models.PickupDeliveryViewModels.CustomerViewModel
+
+<h2>@ViewBag.Title</h2>
 <p>
-    Fields marked with a * are required. <a href="Search"
+    Fields marked with an * are required. <a href="Search"
                                             target="popup"
                                             onclick="window.open('/Search','popup','width=600,height=600'); return false;" title="LOOKUP DONOR">
         Search for existing donor.
     </a>
 </p>
+<form method="post">
+    <input asp-for="CustomerId" />
 
-@await Html.PartialAsync("_FormPartial")
+    <div class="form-group">
+        <label asp-for="FirstName">First Name *</label>
+        <input asp-for="FirstName" required />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+
+    <div class="form-group">
+
+        <label asp-for="LastName">Last Name *</label> 
+        <input asp-for="LastName" required />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number *</label>
+        <input asp-for="PhoneNumber" required />
+    </div>
+
+    <div class="form-group">
+
+        <label asp-for="PhoneNumberTwo"></label>
+        <input asp-for="PhoneNumberTwo" />
+
+    </div>
+
+    <div class="form-group">
+
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FOT"></label>
+        <input asp-for="FOT" />
+    </div>
+
+    <button type="submit">@ViewBag.Button</button>
+
+</form>
 
 

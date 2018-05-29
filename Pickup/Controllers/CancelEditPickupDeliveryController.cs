@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
-using Pickup.Models.DonationPickupViewModels;
+using Pickup.Models.PickupDeliveryViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -80,6 +80,7 @@ namespace Pickup.Controllers
                 donorCustomer.LastName = model.LastName;
                 donorCustomer.PhoneNumber = model.PhoneNumber;
                 donorCustomer.PhoneNumberTwo = model.PhoneNumberTwo;
+                donorCustomer.Email = model.Email;
                 donorCustomer.FOT = model.FOT;
 
                 context.SaveChanges();
@@ -90,6 +91,7 @@ namespace Pickup.Controllers
         [Route("/EditAddress")]
         public IActionResult EditAddress(int addressId)
         {  ViewBag.Title = "Edit Address Information";
+            ViewBag.Button = ViewBag.Title;
             Address address = context.Addresses.Where(dc => dc.ID == addressId).FirstOrDefault();
             if (address == null)
                 return Redirect("/");
@@ -101,7 +103,8 @@ namespace Pickup.Controllers
             Apartment = address.Apartment,
             City = address.City,
             ZIP = address.ZIP,
-            Neighborhood = address.Neighborhood
+            Neighborhood = address.Neighborhood,
+            BottomFloor = address.BottomFloor
             };
             return View("PickupDelivery/FormDefault", model);
         }
@@ -119,6 +122,7 @@ namespace Pickup.Controllers
             address.City = model.City;
             address.ZIP = model.ZIP;
             address.Neighborhood = model.Neighborhood;
+            address.BottomFloor = model.BottomFloor;
 
             context.SaveChanges();
 
@@ -134,24 +138,34 @@ namespace Pickup.Controllers
             if (pickupOrDelivery == null)
                 return Redirect("/");
 
-            PickupDeliveryViewModel model = new PickupDeliveryViewModel()
+            CreatePickupDeliveryViewModel model = new CreatePickupDeliveryViewModel()
             {PickupId = pickupOrDelivery.ID,
             CallEnRoute = pickupOrDelivery.CallEnRoute,
-            SpecialInstructions = pickupOrDelivery.SpecialInstructions
+            Delivery = pickupOrDelivery.Delivery,
+            SpecialInstructions = pickupOrDelivery.SpecialInstructions,
+            PickupDate = DateTime.Parse(pickupOrDelivery.PickupDateTime.ToShortDateString()),
+            PickupTime = DateTime.Parse(pickupOrDelivery.PickupDateTime.ToShortTimeString())
             };
             return View("PickupDelivery/FormDefault", model);
         }
 
         [Route("/EditPD")]
         [HttpPost]
-        public IActionResult EditPickupDelivery(PickupDeliveryViewModel model)
+        public IActionResult EditPickupDelivery(CreatePickupDeliveryViewModel model)
         {
             PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(a => a.ID == model.PickupId);
             if (pickupOrDelivery == null && !ModelState.IsValid)
                 return View("PickupDelivery/FormDefault", model);
-
+            DateTime pickupDateTime = new DateTime(model.PickupDate.Year,
+                    model.PickupDate.Month,
+                    model.PickupDate.Day,
+                    model.PickupTime.Hour,
+                    model.PickupTime.Minute,
+                    0);
+            pickupOrDelivery.Delivery = model.Delivery;
             pickupOrDelivery.CallEnRoute = model.CallEnRoute;
             pickupOrDelivery.SpecialInstructions = model.SpecialInstructions;
+            pickupOrDelivery.PickupDateTime = pickupDateTime;
 
             context.SaveChanges();
 

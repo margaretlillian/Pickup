@@ -1,7 +1,5 @@
-﻿@using Pickup.Models.DonationPickupViewModels
-@model ItemPickupViewModel
-
-<h2>Furniture Picked Up</h2>
+﻿@model Pickup.Models.PickupDeliveryViewModels.ItemPickupViewModel
+<h2>@ViewBag.Title</h2>
 <p>
     Enter the quantity next to the items being donated. Boxes must either be left blank or
     be a valid number.
@@ -18,5 +16,5 @@
     }
 
 
-    <button id="clear" type="submit">Add Furniture Picked Up</button>
+    <button id="clear" type="submit">@ViewBag.Button</button>
 }

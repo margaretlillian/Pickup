@@ -1,0 +1,45 @@
+﻿@model Pickup.Models.PickupDeliveryViewModels.CreatePickupDeliveryViewModel
+<h2>@ViewBag.Title</h2>
+<a href="Search"
+   target="popup"
+   onclick="window.open('/Schedule/?weekId=0&popup=true','popup','width=800,height=600'); return false;" title="Week's schedule">
+    This week's schedule
+</a>
+
+
+<form method="post">
+    <input asp-for="PickupId" />
+    <input asp-for="AddressId" />
+
+    <div class="form-group">
+        <label asp-for="Delivery"></label>
+        <input asp-for="Delivery" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PickupDate">Date of Pickup *</label>
+        <input asp-for="PickupDate" required />
+    </div>
+
+
+    <div class="form-group">
+
+        <label asp-for="PickupTime">Pickup Time *</label>
+        <input asp-for="PickupTime" required />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CallEnRoute"></label>
+        <input asp-for="CallEnRoute" />
+    </div>
+
+    <div class="form-group">
+
+        <label asp-for="SpecialInstructions"></label>
+        <input asp-for="SpecialInstructions" />
+
+    </div>
+    
+    <button type="submit">@ViewBag.Button</button>
+</form>

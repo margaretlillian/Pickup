@@ -1,14 +1,13 @@
-﻿@using Pickup.Models.DonationPickupViewModels
-@model AddressViewModel
+﻿@model Pickup.Models.PickupDeliveryViewModels.AddressViewModel
 
-<h2>Address Information</h2>
+<h2>@ViewBag.Title</h2>
 <p>Fields marked with an * are required.</p>
 <form autocomplete="off" method="post">
 <input asp-for="CustomerId" />
     <input asp-for="AddressId" />
 
 <div class="form-group">
-    <label asp-for="Street"></label>
+    <label asp-for="Street">Street Address *</label>
     <input asp-for="Street" required />
     <span asp-validation-for="Street"></span>
 </div>
@@ -22,13 +21,13 @@
 </div>
 
 <div class="autocomplete">
-    <label asp-for="City"></label>
+    <label asp-for="City">City *</label>
     <input asp-for="City" id="myInput" required />
 </div>
 
 <div class="form-group">
 
-    <label asp-for="ZIP"></label>
+    <label asp-for="ZIP">ZIP Code *</label>
     <input asp-for="ZIP" required />
 
 </div>
@@ -40,7 +39,7 @@
     </div>
 
 <div class="form-group">
-    <label asp-for="BottomFloor"></label>
+    <label asp-for="BottomFloor">Bottom Floor? *</label>
     <select asp-for="BottomFloor">
         <option value="Yes">Yes</option>
         <option value="No - There is an elevator">No - There is an elevator</option>
@@ -49,5 +48,6 @@
 </div>
 
 
-    <button type="submit">Add Address Information</button>
+    <button type="submit">@ViewBag.Button</button>
     </form>
+<script src="~/js/cityautocomplete.js"></script>

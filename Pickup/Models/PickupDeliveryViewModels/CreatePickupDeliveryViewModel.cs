@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Pickup.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Pickup.Models.DonationPickupViewModels
+namespace Pickup.Models.PickupDeliveryViewModels
 {
-    public class PickupDeliveryViewModel
+    public class CreatePickupDeliveryViewModel
     {
         [HiddenInput(DisplayValue = false)]
         public int PickupId { get; set; }
@@ -22,12 +20,12 @@ namespace Pickup.Models.DonationPickupViewModels
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Pickup Date *")]
+        [Display(Name = "Pickup Date")]
         public DateTime PickupDate { get; set; } = DateTime.Now;
 
         [Required]
         [DataType(DataType.Time)]
-        [Display(Name = "Pickup Time *")]
+        [Display(Name = "Pickup Time")]
         public DateTime PickupTime { get; set; }
 
         [Display(Name = "Call en route")]
@@ -35,7 +33,5 @@ namespace Pickup.Models.DonationPickupViewModels
 
         [Display(Name = "Special Instructions")]
         public string SpecialInstructions { get; set; }
-        
-
     }
 }
