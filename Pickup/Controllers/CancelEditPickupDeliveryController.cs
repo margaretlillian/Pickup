@@ -191,26 +191,35 @@ namespace Pickup.Controllers
             ViewBag.Title = "Edit Items Picked Up/Delivered";
             ViewBag.Button = ViewBag.Title;
 
-            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(dc => dc.ID == pid).FirstOrDefault();
-            if (pickupOrDelivery == null)
+            PickupOrDelivery pd = context.PickupsDeliveries.Where(p => p.ID == pid).FirstOrDefault();
+            if (pd == null)
                 return Redirect("/");
 
-            List<FurniturePickupOrDelivery> fpd = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pickupOrDelivery.ID).ToList();
-            CategoryBlock categoryBlock = new CategoryBlock();
-
-            foreach (var item in fpd)
+            var model = new ItemPickupViewModel();
+            var furnitureItems = context.Furniture.ToList();
+            var selectedPieces = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pd.ID).ToList();
+            List<ItemQuantityList> quantityListItems = new List<ItemQuantityList>();
+            foreach (var item in furnitureItems)
             {
-                ItemQuantityList model = new ItemQuantityList()
-                {ID = item.FurnitureID,
-                Name = item.Furniture.Name,
-                Quantity = item.Quantity
-                };
-                categoryBlock.Furniture.Add(model);
+                quantityListItems.Add(new ItemQuantityList()
+                {
+                    CategoryID = item.FurnitureCategoryID,
+                    ID = item.ID,
+                    Name = item.Name,
+                    Quantity = (from s in selectedPieces where s.FurnitureID == item.ID select s.Quantity).SingleOrDefault()
+                });
             }
-            
-            return View("PickupDelivery/ItemPickup");
+            IList<CategoryBlock> query = (from fc in context.FurnitureCategories
+                                          select new CategoryBlock
+                                          {
+                                              Category = fc,
+                                              Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
+                                          }).ToList();
+            model.FurnitureList = query;
+            return View("PickupDelivery/ItemPickup", model);
+
 
         }
-        
+
     }
 }
