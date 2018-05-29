@@ -156,7 +156,7 @@ namespace Pickup.Controllers
                 if (newPickup.Delivery)
                     return Redirect("FurnitureDelivery?deliveryId=" + newPickup.ID);
 
-                return Redirect("FurniturePickup?pickupId=" + newPickup.ID);
+                return Redirect("ItemPickup?pickupId=" + newPickup.ID);
             }
             return View("PickupDelivery/FormDefault", model);
 
@@ -167,6 +167,7 @@ namespace Pickup.Controllers
             IList<FurniturePickupOrDelivery> existingItem = context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == pickupId).ToList();
             if (pd == null || existingItem.Count > 0)
                 return Redirect("/");
+
             var model = new ItemPickupViewModel();
             var furnitureItems = context.Furniture.ToList(); 
             var quantityListItems = new List<QuantityList>();
@@ -190,8 +191,22 @@ namespace Pickup.Controllers
         }
 
         [HttpPost]
-        public IActionResult FurniturePickup(ItemPickupViewModel model) {
-        
+        public IActionResult ItemPickup(ItemPickupViewModel model) {
+            foreach (var x in model.FurnitureList)
+            {
+                var selectedFurniture = x.Furniture.Where(y => y.Quantity > 0).ToList();
+                foreach (var furniturePiece in selectedFurniture)
+                {
+                    FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
+                    {
+                        DonationPickupID = model.PickupID,
+                        FurnitureID = furniturePiece.ID,
+                        Quantity = furniturePiece.Quantity
+                    };
+                    context.Add(furnitureDonationPickup);
+                }
+            }
+            context.SaveChanges();
             return Redirect("/View?id=" + model.PickupID);
 
         }
