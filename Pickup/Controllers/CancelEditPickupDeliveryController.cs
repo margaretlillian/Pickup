@@ -23,11 +23,19 @@ namespace Pickup.Controllers
         [Route("/EditChoice")]
         public IActionResult Index(int pid)
         {
-            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
-            if (model != null)
+            PickupOrDelivery pickups = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
+            if (pickups == null)
+                return Redirect("/");
+            EditCancelViewModels model = (from p in context.PickupsDeliveries
+                                          where p.ID == pid
+                                          join a in context.Addresses on p.AddressID equals a.ID
+                                          join dc in context.DonorsCustomers on a.DonorCustomerID equals dc.ID
+                                          select new EditCancelViewModels {
+                                          AddressID = a.ID,
+                                          CustomerID = dc.ID,
+                                          PickupID = p.ID,
+                                          Delivery = p.Delivery}).FirstOrDefault();
             return View(model);
-
-            return Redirect("/");
         }
         [Route("/Cancel")]
         public IActionResult Cancel(int pid)

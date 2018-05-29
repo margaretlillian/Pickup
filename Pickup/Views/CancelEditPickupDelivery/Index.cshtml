@@ -1,4 +1,4 @@
-﻿@model Pickup.Models.PickupOrDelivery
+﻿@model Pickup.Models.EditCancelViewModels
 @{ 
     string pd = "Pickup";
     string verb = "Picked Up";
@@ -13,12 +13,12 @@
 
 <p>What would you like to do? </p>
 
-<h3><a asp-controller="CancelEditPickupDelivery" asp-action="Cancel" asp-route-pid="@Model.ID">Cancel this @pd</a></h3>
+<h3><a asp-controller="CancelEditPickupDelivery" asp-action="Cancel" asp-route-pid="@Model.PickupID">Cancel this @pd</a></h3>
 
 <h3>Edit @pd</h3>
 <ul>
-    <li><a href="#">Edit Customer Information </a></li>
+    <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditCustomer" asp-route-customerId="@Model.CustomerID">Edit Customer Information </a></li>
     <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditAddress" asp-route-addressId="@Model.AddressID">Edit Address Information</a></li>
-    <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditPickupDelivery" asp-route-pid="@Model.ID">Edit @pd Information</a></li>
+    <li><a asp-controller="CancelEditPickupDelivery" asp-action="EditPickupDelivery" asp-route-pid="@Model.PickupID">Edit @pd Information</a></li>
     <li><a href="#"> Edit Items @verb </a></li>
 </ul>
