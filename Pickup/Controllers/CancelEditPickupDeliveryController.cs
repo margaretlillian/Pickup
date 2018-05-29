@@ -196,6 +196,8 @@ namespace Pickup.Controllers
                 return Redirect("/");
 
             List<FurniturePickupOrDelivery> fpd = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pickupOrDelivery.ID).ToList();
+            CategoryBlock categoryBlock = new CategoryBlock();
+
             foreach (var item in fpd)
             {
                 ItemQuantityList model = new ItemQuantityList()
@@ -203,7 +205,9 @@ namespace Pickup.Controllers
                 Name = item.Furniture.Name,
                 Quantity = item.Quantity
                 };
+                categoryBlock.Furniture.Add(model);
             }
+            
             return View("PickupDelivery/ItemPickup");
 
         }
