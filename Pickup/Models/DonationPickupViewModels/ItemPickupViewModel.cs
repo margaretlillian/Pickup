@@ -13,12 +13,15 @@ namespace Pickup.Models.DonationPickupViewModels
         [HiddenInput(DisplayValue = false)]
         public int PickupID { get; set; }
 
-        public List<QuantityList> FurnitureList { get; set; }
+        public IList<CategoryBlock> FurnitureList { get; set; }
 
-        public ItemPickupViewModel() {
-            FurnitureList = new List<QuantityList>();
-}
+ 
 
+    }
+    public class CategoryBlock
+    {
+        public FurnitureCategory Category { get; set; }
+        public List<QuantityList> Furniture { get; set; }
     }
 
 }

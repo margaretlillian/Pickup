@@ -1,5 +1,5 @@
 ﻿@using Pickup.Models.DonationPickupViewModels
-@model FurniturePickupViewModel
+@model ItemPickupViewModel
 
 <h2>Furniture Picked Up</h2>
 <p>
@@ -8,8 +8,12 @@
 </p>
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m => m.PickupID)
-    <ul> @Html.EditorFor(m => m.FurnitureList)
-    </ul>
+    @for (int i = 0; i < Model.FurnitureList.Count; i++)
+    {
+        <h3>@Model.FurnitureList[i].Category.Name</h3>
+        @Html.EditorFor(m => m.FurnitureList[i].Furniture)
 
-    <button id="clear" type="submit">Add Furniture Picked Up</button>}
+    }
+
+    <button id="clear" type="submit">Add Furniture Picked Up</button>
+}

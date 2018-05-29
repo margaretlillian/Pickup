@@ -8,6 +8,7 @@ namespace Pickup.Models.DonationPickupViewModels
 {
     public class QuantityList
     {
+        public int CategoryID { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
 

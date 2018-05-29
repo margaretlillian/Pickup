@@ -167,36 +167,31 @@ namespace Pickup.Controllers
             IList<FurniturePickupOrDelivery> existingItem = context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == pickupId).ToList();
             if (pd == null || existingItem.Count > 0)
                 return Redirect("/");
-
-            ItemPickupViewModel model = new ItemPickupViewModel();
+            var model = new ItemPickupViewModel();
             var furnitureItems = context.Furniture.ToList(); 
             var quantityListItems = new List<QuantityList>();
             foreach (var item in furnitureItems)
             {
                 quantityListItems.Add(new QuantityList()
-                {
+                {   CategoryID = item.FurnitureCategoryID,
                     ID = item.ID,
                     Name = item.Name,
                     Quantity = 0
                 });
             }
-            model.FurnitureList = quantityListItems;
-            return View("PickupDelivery/FurniturePickup", model);
+            IList<CategoryBlock> query = (from fc in context.FurnitureCategories
+                         select new CategoryBlock
+                         {   Category = fc,
+                             Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
+                         }).ToList();
+            model.FurnitureList = query;
+            return View("PickupDelivery/ItemPickup", model);
 
         }
 
         [HttpPost]
         public IActionResult FurniturePickup(ItemPickupViewModel model) {
-            var selectedFurniture = model.FurnitureList.Where(x => x.Quantity > 0).ToList();
-            foreach (var furniturePiece in selectedFurniture) {
-                FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery {
-                    DonationPickupID = model.PickupID,
-                    FurnitureID = furniturePiece.ID,
-                    Quantity = furniturePiece.Quantity
-                };
-                context.Add(furnitureDonationPickup);
-            }
-            context.SaveChanges();
+        
             return Redirect("/View?id=" + model.PickupID);
 
         }
