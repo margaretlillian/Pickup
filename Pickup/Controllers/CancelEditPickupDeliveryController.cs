@@ -185,6 +185,28 @@ namespace Pickup.Controllers
 
             return Redirect("/");
         }
+
+        public IActionResult EditItems(int pid)
+        {
+            ViewBag.Title = "Edit Items Picked Up/Delivered";
+            ViewBag.Button = ViewBag.Title;
+
+            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(dc => dc.ID == pid).FirstOrDefault();
+            if (pickupOrDelivery == null)
+                return Redirect("/");
+
+            List<FurniturePickupOrDelivery> fpd = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pickupOrDelivery.ID).ToList();
+            foreach (var item in fpd)
+            {
+                ItemQuantityList model = new ItemQuantityList()
+                {ID = item.FurnitureID,
+                Name = item.Furniture.Name,
+                Quantity = item.Quantity
+                };
+            }
+            return View("PickupDelivery/ItemPickup");
+
+        }
         
     }
 }
