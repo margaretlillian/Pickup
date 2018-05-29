@@ -28,7 +28,7 @@ namespace Pickup.Controllers
         [Route("/")]
         public IActionResult HomePage()
         {
-            IList<CalendarViewModel> results = query.CreateScheduleQuery(context, DateTime.Today.ToShortDateString());
+            IOrderedEnumerable<CalendarViewModel> results = query.CreateScheduleQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }
 
@@ -37,11 +37,11 @@ namespace Pickup.Controllers
         public IActionResult Index(int weekId, bool popup)
         {
 
-            Dictionary<DateTime, IList<CalendarViewModel>> pickupsDates = new Dictionary<DateTime, IList<CalendarViewModel>>();
+            Dictionary<DateTime, IOrderedEnumerable<CalendarViewModel>> pickupsDates = new Dictionary<DateTime, IOrderedEnumerable<CalendarViewModel>>();
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
-                IList<CalendarViewModel> results = query.CreateScheduleQuery(context, theDate.ToShortDateString());
+                IOrderedEnumerable<CalendarViewModel> results = query.CreateScheduleQuery(context, theDate.ToShortDateString());
                 
                     pickupsDates.Add(theDate, results);
                 

@@ -1,6 +1,6 @@
 ﻿
 @using Pickup.Models.ScheduleViewModels
-@model Dictionary<DateTime, IList<CalendarViewModel>>
+@model Dictionary<DateTime, IList<MiniCalendarViewModel>>
 
 
 
@@ -20,7 +20,7 @@
         <td>Sa</td>
     </tr>
     <tr>
-        @foreach (KeyValuePair<DateTime, IList<CalendarViewModel>> date in Model)
+        @foreach (KeyValuePair<DateTime, IList<MiniCalendarViewModel>> date in Model)
 
         {
             int day = (int)date.Key.DayOfWeek;

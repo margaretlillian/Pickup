@@ -10,7 +10,7 @@ namespace Pickup.QueryClasses
     public class CalendarViewQuery
     {
         
-        public IList<CalendarViewModel> CreateScheduleQuery(ApplicationDbContext context, string date)
+        public IOrderedEnumerable<CalendarViewModel> CreateScheduleQuery(ApplicationDbContext context, string date)
         {
 
             var results = (from p in context.PickupsDeliveries
@@ -23,7 +23,15 @@ namespace Pickup.QueryClasses
                                DonorCustomer = dc,
                                Address = a,
                                PickupOrDelivery = p
-                           }).ToList();
+                           }).ToList().OrderBy(p => p.PickupOrDelivery.PickupDateTime);
+            return results;
+        }
+        public IList<MiniCalendarViewModel> MiniCalendarCountQuery(ApplicationDbContext context, string date)
+        {
+            var results = (from p in context.PickupsDeliveries
+                           where p.PickupDateTime.ToShortDateString() == date
+                           select new MiniCalendarViewModel {
+                           PickupID = p.ID}).ToList();
             return results;
         }
     }
