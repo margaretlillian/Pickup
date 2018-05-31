@@ -15,7 +15,7 @@ namespace Pickup.Controllers
     public class BlacklistController : Controller
     {
         private readonly ApplicationDbContext context;
-        GetByIDQuery query = new GetByIDQuery();
+        CheckForExistingQuery query = new CheckForExistingQuery();
 
         public BlacklistController(ApplicationDbContext applicationDbContext)
         {
@@ -45,7 +45,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult AddToBlacklist(AddtoBlacklistViewModel model)
         {
-            Blacklist checkBlacklist = query.CheckBlacklist(context, model.CustomerID);
+            Blacklist checkBlacklist = query.GetBlacklistedCustomer(context, model.CustomerID);
             if (ModelState.IsValid && checkBlacklist == null)
             {
                 Blacklist blacklistedPerson = new Blacklist
@@ -57,9 +57,7 @@ namespace Pickup.Controllers
                 context.SaveChanges();
                 return Redirect("/Blacklist");
             }
-            if (checkBlacklist != null)
-                return Redirect("/");
-
+            
             return View(model);
         }
     }

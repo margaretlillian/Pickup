@@ -20,7 +20,7 @@ namespace Pickup.Controllers
     {
 
         private readonly ApplicationDbContext context;
-        private GetByIDQuery query = new GetByIDQuery();
+        private CheckForExistingQuery query = new CheckForExistingQuery();
 
         public PickupDeliveryController(ApplicationDbContext applicationDbContext)
         {

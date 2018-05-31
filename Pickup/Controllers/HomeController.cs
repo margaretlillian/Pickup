@@ -18,7 +18,7 @@ namespace Pickup.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
-        AllPickupDeliveryInformationQuery query = new AllPickupDeliveryInformationQuery();
+        ViewInformationQuery query = new ViewInformationQuery();
 
         public HomeController(ApplicationDbContext applicationDbContext)
         {

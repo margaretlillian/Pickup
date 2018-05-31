@@ -55,7 +55,7 @@ namespace Pickup.Controllers
 
         public IActionResult DaySchedule(string date)
         {
-            AllPickupDeliveryInformationQuery dayQuery = new AllPickupDeliveryInformationQuery();
+            ViewInformationQuery dayQuery = new ViewInformationQuery();
            var model = dayQuery.CreateQuery(context)
                 .Cast<ViewInformationViewModel>()
                 .Where(day => day.PickupOrDelivery.PickupDateTime.ToShortDateString() == date).ToList();

@@ -1,1 +1,33 @@
-﻿
+﻿@model IList<Pickup.Models.HomeViewModel.ViewInformationViewModel>
+
+<h2>Blacklist</h2>
+
+<p>Customers who have been blacklisted are not allowed to be scheduled for any pickup or delivery.</p>
+<p>Search for blacklisted customer. </p>
+<h3>Blacklisted Customers</h3>
+<ul>
+@foreach (var customer in Model)
+{ 
+    <li>
+   <ul>
+    <li>
+       <h4>@customer.DonorCustomer.FirstName @customer.DonorCustomer.LastName</h4></li>
+
+       <li><span class="name">Phone Number</span>: @customer.DonorCustomer.PhoneNumber</li>
+
+       @if (customer.DonorCustomer.PhoneNumberTwo != null)
+       {
+           <li><span class="name">Second Phone Number</span>: @customer.DonorCustomer.PhoneNumberTwo</li>
+       }
+       <li><span class="name">Address</span>: @customer.Address.Street 
+       @if (customer.Address.Apartment != null)
+       {
+           @:#@customer.Address.Apartment
+
+       }<br />
+       @customer.Address.City @customer.Address.ZIP
+       </li>
+    </ul>
+    </li>
+}
+    </ul>
