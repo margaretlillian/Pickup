@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
-using Pickup.Models.DonationPickupViewModels;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.SearchViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,6 +15,7 @@ namespace Pickup.Controllers
     public class SearchController : Controller
     {
         private readonly ApplicationDbContext context;
+        private SearchQuery query = new SearchQuery();
 
         public SearchController(ApplicationDbContext applicationDbContext)
         {
@@ -28,12 +29,7 @@ namespace Pickup.Controllers
 
         public IActionResult SearchResults(SearchViewModel model)
         {
-            List<CustomerSearchResults> query = (from dc in context.DonorsCustomers
-                         where dc.FirstName == model.FirstName || dc.LastName == model.LastName
-                         select new CustomerSearchResults {
-                         DonorCustomer = dc,
-                         Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList()}).ToList();
-            model.SearchResults = query;
+            model.SearchResults = query.NameSearch(context, model.FirstName, model.LastName);
             return View("Index", model);
         }
     }

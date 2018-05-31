@@ -1,11 +1,10 @@
-﻿using Pickup.Models.SearchViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pickup.Models.DonationPickupViewModels
+namespace Pickup.Models.SearchViewModels
 {
     public class SearchViewModel
     {
