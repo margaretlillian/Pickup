@@ -11,6 +11,14 @@ namespace Pickup.Models.QueryClasses
         public DonorCustomer GetCustomer(ApplicationDbContext context, int id)
         { return context.DonorsCustomers.Where(d => d.ID == id).FirstOrDefault(); }
 
+        public IList<DonorCustomer> GetCustomerByFullName(ApplicationDbContext context, string firstName, string lastName)
+        {
+            return context.DonorsCustomers
+                  .Where(d => d.FirstName == firstName)
+                  .Where(d => d.LastName == lastName)
+                  .ToList();
+        }
+
         public Address GetAddress(ApplicationDbContext context, int id)
         { return context.Addresses.Where(a => a.ID == id).FirstOrDefault(); }
 

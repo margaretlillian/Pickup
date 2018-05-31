@@ -43,17 +43,9 @@ namespace Pickup.Controllers
         {
             if (ModelState.IsValid)
             {
-                DonorCustomer existingPerson = context.DonorsCustomers
-                      .Where(d => d.FirstName == model.FirstName)
-                      .Where(d => d.LastName == model.LastName)
-                      .Where(d => d.PhoneNumber == model.PhoneNumber)
-                      .FirstOrDefault();
-
-                if (existingPerson != null)
-                {
-                    return Redirect("Address?customerId=" + existingPerson.ID);
-                }
-
+                if (query.GetCustomerByFullName(context, model.FirstName, model.LastName).Count > 0)
+                  return Redirect(String.Format("Existing?firstName={0}&lastName={1}", model.FirstName, model.LastName));
+            
                 DonorCustomer newPerson = new DonorCustomer
                 {
                     FirstName = model.FirstName,
