@@ -36,3 +36,6 @@
 .name {
     font-weight: bolder;
 }
+
+/* Existing Donors */
+.existing-person-list {width: 60%;}

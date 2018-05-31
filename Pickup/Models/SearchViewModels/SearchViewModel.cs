@@ -14,6 +14,8 @@ namespace Pickup.Models.SearchViewModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public int CustomerID { get; set; }
+
         public IList<CustomerSearchResults> SearchResults { get; set; }
     }
 }

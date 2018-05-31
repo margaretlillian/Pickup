@@ -31,5 +31,12 @@ namespace Pickup.Models.QueryClasses
                     }).ToList();
         }
 
+        public DonorCustomer SpecificCustomerSearch(ApplicationDbContext context, string firstName, string lastName, string phone)
+        {
+            return (from dc in context.DonorsCustomers
+                    where dc.FirstName == firstName && dc.LastName == lastName && dc.PhoneNumber == phone
+                    select dc).FirstOrDefault();
+        }
+
     }
 }

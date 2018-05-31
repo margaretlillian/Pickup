@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.PickupDeliveryViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,6 +15,7 @@ namespace Pickup.Controllers
     public class CancelEditPickupDeliveryController : Controller
     {
         private readonly ApplicationDbContext context;
+        private CheckForExistingQuery query = new CheckForExistingQuery();
 
         public CancelEditPickupDeliveryController(ApplicationDbContext applicationDbContext)
         {
@@ -40,7 +42,8 @@ namespace Pickup.Controllers
         [Route("/Cancel")]
         public IActionResult Cancel(int pid)
         {
-            PickupOrDelivery model = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
+            var model = query.GetPickupOrDelivery(context, pid);
+
             if (model != null)
             return View(model);
 
@@ -51,7 +54,7 @@ namespace Pickup.Controllers
         [Route("/Cancel")]
         public IActionResult Cancel(PickupOrDelivery model)
         {
-            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(pickup => pickup.ID == model.ID).FirstOrDefault();
+            PickupOrDelivery pickupOrDelivery = query.GetPickupOrDelivery(context, model.ID);
             if (pickupOrDelivery != null)
             pickupOrDelivery.Cancelled = true;
 
@@ -65,7 +68,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Edit Customer Information";
             ViewBag.Button = ViewBag.Title;
 
-            DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == customerId).FirstOrDefault();
+            DonorCustomer donorCustomer = query.GetCustomer(context, customerId);
             if (donorCustomer == null)
                 return Redirect("/");
 
@@ -82,7 +85,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult EditCustomer(CustomerViewModel model)
         {
-            DonorCustomer donorCustomer = context.DonorsCustomers.Where(dc => dc.ID == model.CustomerId).FirstOrDefault();
+            DonorCustomer donorCustomer = query.GetCustomer(context, model.CustomerId);
             if (donorCustomer == null && !ModelState.IsValid)
                 return View("PickupDelivery/Customer", model);
 
@@ -103,7 +106,7 @@ namespace Pickup.Controllers
         {  ViewBag.Title = "Edit Address Information";
             ViewBag.Button = ViewBag.Title;
 
-            Address address = context.Addresses.Where(dc => dc.ID == addressId).FirstOrDefault();
+            Address address = query.GetAddress(context, addressId);
             if (address == null)
                 return Redirect("/");
 
@@ -125,7 +128,7 @@ namespace Pickup.Controllers
         public IActionResult EditAddress(AddressViewModel model)
         {
 
-            Address address = context.Addresses.Single(a => a.ID == model.AddressId);
+            Address address = query.GetAddress(context, model.AddressId);
             if (address == null && !ModelState.IsValid)
                 return View("PickupDelivery/Address", model);
 
@@ -148,7 +151,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Edit Pickup/Delivery Information";
             ViewBag.Button = ViewBag.Title;
 
-            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Where(dc => dc.ID == pid).FirstOrDefault();
+            PickupOrDelivery pickupOrDelivery = query.GetPickupOrDelivery(context, pid);
             if (pickupOrDelivery == null)
                 return Redirect("/");
 
@@ -167,7 +170,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult EditPickupDelivery(CreatePickupDeliveryViewModel model)
         {
-            PickupOrDelivery pickupOrDelivery = context.PickupsDeliveries.Single(a => a.ID == model.PickupId);
+            PickupOrDelivery pickupOrDelivery = query.GetPickupOrDelivery(context, model.PickupId);
             if (pickupOrDelivery == null && !ModelState.IsValid)
                 return View("PickupDelivery/CreateNew", model);
             DateTime pickupDateTime = new DateTime(model.PickupDate.Year,

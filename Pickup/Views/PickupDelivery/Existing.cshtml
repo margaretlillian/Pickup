@@ -4,7 +4,7 @@
 
 <p>This person may be in our system already! Please check the results below. </p>
 
-<section class="result">
+<section class="existing-person-list">
 
     @if (@Model.SearchResults.Count == 0)
     {
@@ -21,7 +21,7 @@
                 }
             </ul>
             <p>
-                <a asp-controller="PickupDelivery" asp-action="Address" asp-route-customerId="@result.DonorCustomer.ID">
+                <a asp-controller="PickupDelivery" asp-action="Address" asp-route-customerId="@Context.Request.Query["tid"]">
                     Use new address for this person.
                 </a>
             </p>
@@ -52,3 +52,5 @@
 
         </div>}
 </section>
+
+<p><a asp-controller="PickupDelivery" asp-action="NotExisting" asp-route-customerId="@Context.Request.Query["tid"]">This is a new person. </a></p>

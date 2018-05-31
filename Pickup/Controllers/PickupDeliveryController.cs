@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Pickup.Models.SearchViewModels;
+using Pickup.Services;
 //using System.Security.Principal;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,6 +23,7 @@ namespace Pickup.Controllers
 
         private readonly ApplicationDbContext context;
         private CheckForExistingQuery query = new CheckForExistingQuery();
+        private SearchQuery searchQuery = new SearchQuery();
 
         public PickupDeliveryController(ApplicationDbContext applicationDbContext)
         {
@@ -43,14 +46,18 @@ namespace Pickup.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (query.GetCustomerByFullName(context, model.FirstName, model.LastName).Count > 0)
-                  return Redirect(String.Format("Existing?firstName={0}&lastName={1}", model.FirstName, model.LastName));
-            
-                DonorCustomer newPerson = new DonorCustomer
+                string phone = PhoneNumberFormatter.FormatPhoneNumber(model.PhoneNumber);
+                DonorCustomer donor = searchQuery.SpecificCustomerSearch(context, model.FirstName, model.LastName, phone);
+                if (donor != null)
+                {
+                    return Redirect("Address?customerId=" + donor.ID);
+                }
+                        
+                        DonorCustomer newPerson = new DonorCustomer
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    PhoneNumber = model.PhoneNumber,
+                    PhoneNumber = phone,
                     PhoneNumberTwo = model.PhoneNumberTwo,
                     Email = model.Email,
                     FOT = model.FOT
@@ -63,6 +70,17 @@ namespace Pickup.Controllers
             }
 
             return View("PickupDelivery/Customer", model);
+        }
+
+        // Send scheduler to a landing page when there's a name match in the db.
+        public IActionResult Existing(string firstName, string lastName)
+        {
+            IList<CustomerSearchResults> customerSearchResults = searchQuery.FullNameSearch(context, firstName, lastName);
+            SearchViewModel model = new SearchViewModel
+            {
+                SearchResults = customerSearchResults
+            };
+            return View(model);
         }
 
         public IActionResult Address(int customerId)
@@ -206,10 +224,6 @@ namespace Pickup.Controllers
 
         }
         
-        public IActionResult Existing(string firstName, string lastName)
-        {
-            return View();
-        }
 
     }
 }
