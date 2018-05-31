@@ -186,6 +186,7 @@ namespace Pickup.Controllers
             return Redirect("/");
         }
 
+        [Route("/EditItems")]
         public IActionResult EditItems(int pid)
         {
             ViewBag.Title = "Edit Items Picked Up/Delivered";
@@ -217,7 +218,31 @@ namespace Pickup.Controllers
                                           }).ToList();
             model.FurnitureList = query;
             return View("PickupDelivery/ItemPickup", model);
+        }
 
+        [HttpPost]
+        [Route("/EditItems")]
+        public IActionResult EditItems(ItemPickupViewModel model)
+        {
+            var existingItems = context.FurnitureDonationPickups
+                .Where(f => f.DonationPickupID == model.PickupID).ToList();
+            foreach (CategoryBlock categoryBlock in model.FurnitureList)
+            {
+                List<ItemQuantityList> selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
+                foreach (ItemQuantityList furniturePiece in selectedFurniture)
+                {
+
+                    FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
+                    {
+                        DonationPickupID = model.PickupID,
+                        FurnitureID = furniturePiece.ID,
+                        Quantity = furniturePiece.Quantity
+                    };
+                    context.Add(furnitureDonationPickup);
+                }
+            }
+            context.SaveChanges();
+            return Redirect("/View?id=" + model.PickupID);
 
         }
 

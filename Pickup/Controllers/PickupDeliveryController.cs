@@ -77,13 +77,11 @@ namespace Pickup.Controllers
             ViewBag.Button = "Add " + ViewBag.Title;
 
             DonorCustomer donor = context.DonorsCustomers.Where(d => d.ID == customerId).SingleOrDefault();
-            if (donor != null)
-            {
-                return View("PickupDelivery/Address", new AddressViewModel());
-            }
-
-            else
+            if (donor == null)
                 return Redirect("/");
+
+            return View("PickupDelivery/Address", new AddressViewModel());
+          
 
 
                  }
@@ -196,9 +194,9 @@ namespace Pickup.Controllers
 
         [HttpPost]
         public IActionResult ItemPickup(ItemPickupViewModel model) {
-            foreach (var x in model.FurnitureList)
+            foreach (CategoryBlock categoryBlock in model.FurnitureList)
             {
-                var selectedFurniture = x.Furniture.Where(y => y.Quantity > 0).ToList();
+                var selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
                 foreach (var furniturePiece in selectedFurniture)
                 {
                     FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
