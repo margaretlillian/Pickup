@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.PickupDeliveryViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -19,6 +20,7 @@ namespace Pickup.Controllers
     {
 
         private readonly ApplicationDbContext context;
+        private GetByIDQuery query = new GetByIDQuery();
 
         public PickupDeliveryController(ApplicationDbContext applicationDbContext)
         {
@@ -76,8 +78,7 @@ namespace Pickup.Controllers
             ViewBag.Title = "Address Information";
             ViewBag.Button = "Add " + ViewBag.Title;
 
-            DonorCustomer donor = context.DonorsCustomers.Where(d => d.ID == customerId).SingleOrDefault();
-            if (donor == null)
+            if (query.GetCustomer(context, customerId) == null)
                 return Redirect("/");
 
             return View("PickupDelivery/Address", new AddressViewModel());
@@ -114,12 +115,12 @@ namespace Pickup.Controllers
             ViewBag.Title = "New Pickup/Delivery";
             ViewBag.Button = "Create " + ViewBag.Title;
 
-            Address address = context.Addresses.Where(d => d.ID == addressId).SingleOrDefault();
-            if (address != null)
-                return View("PickupDelivery/CreateNew", new CreatePickupDeliveryViewModel());
-
-            else
+            if (query.GetAddress(context, addressId) == null)
                 return Redirect("/");
+
+            return View("PickupDelivery/CreateNew", new CreatePickupDeliveryViewModel());
+
+    
         }
 
         [HttpPost]
@@ -160,34 +161,34 @@ namespace Pickup.Controllers
 
         }
 
-        public IActionResult ItemPickup(int pickupId) {
-
+        public IActionResult ItemPickup(int pickupId)
+        {
             ViewBag.Title = "Items Picked Up/Delivered";
             ViewBag.Button = "Add " + ViewBag.Title;
 
-            PickupOrDelivery pd = context.PickupsDeliveries.Where(p => p.ID == pickupId).SingleOrDefault();
-            IList<FurniturePickupOrDelivery> existingItem = context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == pickupId).ToList();
-            if (pd == null || existingItem.Count > 0)
+            if (query.GetPickupOrDelivery(context, pickupId) == null || query.GetItemsPD(context, pickupId).Count > 0)
                 return Redirect("/");
 
             var model = new ItemPickupViewModel();
-            var furnitureItems = context.Furniture.ToList(); 
+            var furnitureItems = context.Furniture.ToList();
             var quantityListItems = new List<ItemQuantityList>();
             foreach (var item in furnitureItems)
             {
                 quantityListItems.Add(new ItemQuantityList()
-                {   CategoryID = item.FurnitureCategoryID,
+                {
+                    CategoryID = item.FurnitureCategoryID,
                     ID = item.ID,
                     Name = item.Name,
                     Quantity = 0
                 });
             }
-            IList<CategoryBlock> query = (from fc in context.FurnitureCategories
-                         select new CategoryBlock
-                         {   Category = fc,
-                             Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
-                         }).ToList();
-            model.FurnitureList = query;
+            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.FurnitureCategories
+                                          select new CategoryBlock
+                                          {
+                                              Category = fc,
+                                              Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
+                                          }).ToList();
+            model.FurnitureList = itemsInCategoryBlock;
             return View("PickupDelivery/ItemPickup", model);
 
         }

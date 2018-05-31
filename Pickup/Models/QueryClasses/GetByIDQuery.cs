@@ -18,6 +18,12 @@ namespace Pickup.Models.QueryClasses
         public PickupOrDelivery GetPickupOrDelivery(ApplicationDbContext context, int id)
         { return context.PickupsDeliveries.Where(p => p.ID == id).FirstOrDefault(); }
 
+        public Blacklist CheckBlacklist(ApplicationDbContext context, int id)
+        { return context.BlacklistedDonors.Where(b => b.DonorCustomerID == id).FirstOrDefault(); }
+
+        public IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
+        { return context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == id).ToList(); }
+
         
     }
 }

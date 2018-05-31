@@ -45,7 +45,22 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult AddToBlacklist(AddtoBlacklistViewModel model)
         {
+            Blacklist checkBlacklist = query.CheckBlacklist(context, model.CustomerID);
+            if (ModelState.IsValid && checkBlacklist == null)
+            {
+                Blacklist blacklistedPerson = new Blacklist
+                {
+                    DonorCustomerID = model.CustomerID,
+                    Reason = model.Reason
+                };
+                context.Add(blacklistedPerson);
+                context.SaveChanges();
+                return Redirect("/Blacklist");
+            }
+            if (checkBlacklist != null)
+                return Redirect("/");
 
+            return View(model);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿@model Pickup.Models.BlacklistViewModels.AddtoBlacklistViewModel
 
-<h2>Add @Model.FirstName @Model.LastName to Blacklist</h2>
+<h2>Add to Blacklist</h2>
 
 <p> Please enter a reason for blacklisting. Schedulers will no longer be able to schedule a pickup or delivery for this person. </p>
-
+<h3>@Model.FirstName @Model.LastName </h3>
 <form method="post">
     <input asp-for="CustomerID" />
      <div class="form-group">
