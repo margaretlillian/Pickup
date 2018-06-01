@@ -50,6 +50,9 @@ namespace Pickup.Controllers
                 DonorCustomer donor = searchQuery.SpecificCustomerSearch(context, model.FirstName, model.LastName, phone);
                 if (donor != null)
                 {
+                    if (query.GetBlacklistedCustomer(context, donor.ID) != null)
+                        return Redirect("/");
+
                     return Redirect("Address?customerId=" + donor.ID);
                 }
                         
@@ -71,18 +74,7 @@ namespace Pickup.Controllers
 
             return View("PickupDelivery/Customer", model);
         }
-
-        // Send scheduler to a landing page when there's a name match in the db.
-        public IActionResult Existing(string firstName, string lastName)
-        {
-            IList<CustomerSearchResults> customerSearchResults = searchQuery.FullNameSearch(context, firstName, lastName);
-            SearchViewModel model = new SearchViewModel
-            {
-                SearchResults = customerSearchResults
-            };
-            return View(model);
-        }
-
+        
         public IActionResult Address(int customerId)
         {
             ViewBag.Title = "Address Information";
