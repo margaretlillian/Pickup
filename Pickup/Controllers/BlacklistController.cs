@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.BlacklistViewModels;
+using Pickup.Models.HomeViewModel;
 using Pickup.Models.QueryClasses;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,7 +16,8 @@ namespace Pickup.Controllers
     public class BlacklistController : Controller
     {
         private readonly ApplicationDbContext context;
-        CheckForExistingQuery query = new CheckForExistingQuery();
+        ViewInformationQuery viewInformationQuery = new ViewInformationQuery();
+        CheckForExistingQuery checkForExisting = new CheckForExistingQuery();
 
         public BlacklistController(ApplicationDbContext applicationDbContext)
         {
@@ -24,12 +26,13 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            
+           return View(viewInformationQuery.ViewBlacklisted(context));
         }
 
         public IActionResult AddToBlacklist(int customerId)
         {
-            DonorCustomer donor = query.GetCustomer(context, customerId);
+            DonorCustomer donor = checkForExisting.GetCustomer(context, customerId);
             if (donor == null)
                 return Redirect("/");
 
@@ -45,7 +48,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult AddToBlacklist(AddtoBlacklistViewModel model)
         {
-            Blacklist checkBlacklist = query.GetBlacklistedCustomer(context, model.CustomerID);
+            Blacklist checkBlacklist = checkForExisting.GetBlacklistedCustomer(context, model.CustomerID);
             if (ModelState.IsValid && checkBlacklist == null)
             {
                 Blacklist blacklistedPerson = new Blacklist
