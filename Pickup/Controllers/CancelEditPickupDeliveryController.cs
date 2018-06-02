@@ -195,13 +195,13 @@ namespace Pickup.Controllers
             ViewBag.Title = "Edit Items Picked Up/Delivered";
             ViewBag.Button = ViewBag.Title;
 
-            PickupOrDelivery pd = context.PickupsDeliveries.Where(p => p.ID == pid).FirstOrDefault();
+            PickupOrDelivery pd = query.GetPickupOrDelivery(context, pid);
             if (pd == null)
                 return Redirect("/");
 
             var model = new ItemPickupViewModel();
-            var furnitureItems = context.Furniture.ToList();
-            var selectedPieces = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pd.ID).ToList();
+            List<Furniture> furnitureItems = context.Furniture.ToList();
+            List<FurniturePickupOrDelivery> selectedPieces = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pd.ID).ToList();
             List<ItemQuantityList> quantityListItems = new List<ItemQuantityList>();
             foreach (var item in furnitureItems)
             {
@@ -213,13 +213,13 @@ namespace Pickup.Controllers
                     Quantity = (from s in selectedPieces where s.FurnitureID == item.ID select s.Quantity).SingleOrDefault()
                 });
             }
-            IList<CategoryBlock> query = (from fc in context.FurnitureCategories
+            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.FurnitureCategories
                                           select new CategoryBlock
                                           {
                                               Category = fc,
                                               Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
                                           }).ToList();
-            model.FurnitureList = query;
+            model.FurnitureList = itemsInCategoryBlock;
             return View("PickupDelivery/ItemPickup", model);
         }
 
