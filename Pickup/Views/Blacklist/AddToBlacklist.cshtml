@@ -5,7 +5,7 @@
 <p> Please enter a reason for blacklisting. Schedulers will no longer be able to schedule a pickup or delivery for this person. </p>
 <h3>@Model.Customer.FirstName @Model.Customer.LastName </h3>
 <form method="post">
-    <input asp-for="@Model.Customer.ID" />
+    <input asp-for="@Model.Customer.ID" type="hidden" />
      <div class="form-group">
         <label asp-for="Reason"></label>
         <textarea asp-for="Reason"></textarea>

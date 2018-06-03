@@ -4,7 +4,14 @@
 
 
 @if (Model.Results != null)
-{<ul>
+{
+    @if (Model.Results.Count == 0)
+    {
+        <p>No results where found for that name. 
+    <a asp-controller="Blacklist" asp-action="Index">Back to Blacklist page.</a></p>
+
+    }
+    <ul>
         @foreach (var customer in Model.Results)
         {
             <li>

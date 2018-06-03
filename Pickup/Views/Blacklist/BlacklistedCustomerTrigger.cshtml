@@ -1,0 +1,12 @@
+﻿@model Pickup.Models.Blacklist
+
+<h2>Blacklisted</h2>
+<p>This customer has been blacklisted for the following reason: </p>
+<p>@Model.Reason</p>
+<h3>Quick Links</h3>
+<ul>
+    <li><a asp-controller="Home" asp-action="Index"> Go back to homepage. </a></li>
+    <li><a asp-controller="Blacklist" asp-action="Index">View blacklist.</a></li>
+
+    <li><a asp-controller="PickupDelivery" asp-action="Customer">Create new pickup/delivery for another person.</a></li>
+</ul>

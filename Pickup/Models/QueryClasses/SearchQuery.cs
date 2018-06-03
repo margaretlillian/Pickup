@@ -39,5 +39,12 @@ namespace Pickup.Models.QueryClasses
                     select dc).FirstOrDefault();
         }
 
+        public Address SpecificAddressSearch(ApplicationDbContext context, string street, string apartment, string city, string zip)
+        {
+            return (from a in context.Addresses
+                    where a.Street == street && a.Apartment == apartment && a.City == city && a.ZIP == zip
+                    select a).FirstOrDefault();
+        }
+
     }
 }

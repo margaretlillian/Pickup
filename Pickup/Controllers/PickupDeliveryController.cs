@@ -53,7 +53,7 @@ namespace Pickup.Controllers
                     if (query.GetBlacklistedCustomer(context, donor.ID) != null)
                         return Redirect("/");
 
-                    return Redirect("Address?customerId=" + donor.ID);
+                    return RedirectToAction("Address", new { customerId=donor.ID});
                 }
                         
                         DonorCustomer newPerson = new DonorCustomer
@@ -68,8 +68,7 @@ namespace Pickup.Controllers
                 context.Add(newPerson);
                 context.SaveChanges();
 
-                // I suspect there is a better way to do this thing here....
-                return Redirect("Address?customerId=" + newPerson.ID);
+                return RedirectToAction("Address", new { customerId = newPerson.ID });
             }
 
             return View("PickupDelivery/Customer", model);
@@ -107,7 +106,7 @@ namespace Pickup.Controllers
 
                 context.Add(newAddress);
                 context.SaveChanges();
-                return Redirect("CreateNew?addressId=" + newAddress.ID);
+                return RedirectToAction("CreateNew", new { addressId = newAddress.ID });
             }
             return View("PickupDelivery/Address", model);
         }
