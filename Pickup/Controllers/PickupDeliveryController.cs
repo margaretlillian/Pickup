@@ -61,7 +61,7 @@ namespace Pickup.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     PhoneNumber = phone,
-                    PhoneNumberTwo = model.PhoneNumberTwo,
+                    PhoneNumberTwo = PhoneNumberFormatter.FormatPhoneNumber(model.PhoneNumberTwo),
                     Email = model.Email,
                     FOT = model.FOT
                 };

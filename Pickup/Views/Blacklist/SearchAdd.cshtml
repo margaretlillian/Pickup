@@ -1,18 +1,77 @@
-﻿@model Pickup.Models.BlacklistViewModels.AddtoBlacklistViewModel
+﻿@model Pickup.Models.SearchViewModels.SearchViewModel
+    
+<h2>Search Customers</h2>
 
-<h2> Search Name</h2>
-<p>All fields are required.</p>
-<form>
+<form asp-controller="Search" asp-action="SearchResults">
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" />
     </div>
-
 
     <div class="form-group">
         <label asp-for="LastName"></label>
         <input asp-for="LastName" />
     </div>
 
-    <button type="submit">Search Name</button>
+    <input type="submit" value="Search" />
 </form>
+@if (Model.SearchResults != null)
+{
+    <section class="result">
+
+        @if (@Model.SearchResults.Count == 0)
+        {
+            <h3>No Results</h3>
+        }
+        @foreach (var result in Model.SearchResults)
+        {<div class="donor-result">
+                <h3>@result.DonorCustomer.FirstName @result.DonorCustomer.LastName</h3>
+                <ul>
+                    <li><span class="name">Phone Number: </span>@result.DonorCustomer.PhoneNumber</li>
+                    @if (result.DonorCustomer.PhoneNumberTwo != null)
+                    {
+                        <li><span class="name">Phone #2: </span>@result.DonorCustomer.PhoneNumberTwo</li>
+                    }
+                </ul>
+                <p>
+                    <a href="JavaScript:void(0);"
+                       onclick="openInParent('/PickupDelivery/Address?customerId=@result.DonorCustomer.ID');">
+                        Use new address for this person.
+                    </a>
+                </p>
+
+                <div class="address-result">
+                    @for (int i = 0; i < result.Addresses.Count; i++)
+                    {
+                        var a = result.Addresses[i];
+                        int j = i + 1;
+                        <div class="address">
+                            <h4>Address @j </h4>
+                            <p>
+                                @a.Street @if (a.Apartment != null)
+                                {
+                                    @:# @a.Apartment
+                                }
+                                <br /> @a.City @a.ZIP
+                            </p>
+                            <p class="pickup-link">
+                                <a href="JavaScript:void(0);"
+                                   onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@a.ID');">
+                                    Create new pickup using this address.
+                                </a>
+                            </p>
+                        </div>
+                    }
+                </div>
+
+            </div>}
+    </section>
+}
+<script>
+    function openInParent(url) {
+        window.opener.location.href = url;
+        window.close();
+    }
+</script>
+
+

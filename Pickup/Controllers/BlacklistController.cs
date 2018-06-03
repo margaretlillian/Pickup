@@ -8,6 +8,7 @@ using Pickup.Models;
 using Pickup.Models.BlacklistViewModels;
 using Pickup.Models.HomeViewModel;
 using Pickup.Models.QueryClasses;
+using Pickup.Models.SearchViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,6 +29,11 @@ namespace Pickup.Controllers
         {
             
            return View(viewInformationQuery.ViewBlacklisted(context));
+        }
+
+        public IActionResult Search()
+        {
+            return View(new SearchViewModel());
         }
 
         public IActionResult AddToBlacklist(int customerId)
@@ -62,6 +68,11 @@ namespace Pickup.Controllers
             }
             
             return View(model);
+        }
+
+        public IActionResult BlackoutDay()
+        {
+            return View();
         }
     }
 }
