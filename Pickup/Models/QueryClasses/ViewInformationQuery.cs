@@ -56,15 +56,13 @@ namespace Pickup.Models.QueryClasses
             return results;
         }
 
-        public List<ViewBlacklistedViewModel> ViewBlacklisted(ApplicationDbContext context)
+        public IList<ViewBlacklistedViewModel> ViewBlacklisted(ApplicationDbContext context)
         {
             return (from b in context.BlacklistedDonors
                     join dc in context.DonorsCustomers on b.DonorCustomerID equals dc.ID
-                    join a in context.Addresses on dc.ID equals a.DonorCustomerID
                     select new ViewBlacklistedViewModel()
                     {
                         DonorCustomer = dc,
-                        Address = a,
                         Reason = b.Reason
                     }).ToList();
         }
