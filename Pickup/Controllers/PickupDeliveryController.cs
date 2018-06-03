@@ -93,6 +93,10 @@ namespace Pickup.Controllers
         {
             if (ModelState.IsValid && model.Street !=null && model.City != null && model.ZIP != null)
             {
+                Address address = searchQuery.SpecificAddressSearch(context, model.Street, model.Apartment, model.City, model.ZIP);
+                if (address != null)
+                    return RedirectToAction("CreateNew", new {addressId=address.ID});
+
                 Address newAddress = new Address
                 {
                     Street = model.Street,
@@ -156,7 +160,7 @@ namespace Pickup.Controllers
                 context.SaveChanges();
 
                
-                return Redirect("ItemPickup?pickupId=" + newPickup.ID);
+                return RedirectToAction("ItemPickup", new { pickupId = newPickup.ID });
             }
             return View("PickupDelivery/FormDefault", model);
 
@@ -211,7 +215,7 @@ namespace Pickup.Controllers
                 }
             }
             context.SaveChanges();
-            return Redirect("/View?id=" + model.PickupID);
+            return RedirectToAction("View", "Home", new { id = model.PickupID });
 
         }
         
