@@ -1,77 +1,38 @@
-﻿@model Pickup.Models.SearchViewModels.SearchViewModel
-    
-<h2>Search Customers</h2>
+﻿@model Pickup.Models.BlacklistViewModels.SearchToBlacklist
 
-<form asp-controller="Search" asp-action="SearchResults">
-    <div class="form-group">
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" />
-    </div>
+<h2>Search Results</h2>
 
-    <div class="form-group">
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" />
-    </div>
 
-    <input type="submit" value="Search" />
-</form>
-@if (Model.SearchResults != null)
-{
-    <section class="result">
-
-        @if (@Model.SearchResults.Count == 0)
+@if (Model.Results != null)
+{<ul>
+        @foreach (var customer in Model.Results)
         {
-            <h3>No Results</h3>
-        }
-        @foreach (var result in Model.SearchResults)
-        {<div class="donor-result">
-                <h3>@result.DonorCustomer.FirstName @result.DonorCustomer.LastName</h3>
+            <li>
                 <ul>
-                    <li><span class="name">Phone Number: </span>@result.DonorCustomer.PhoneNumber</li>
-                    @if (result.DonorCustomer.PhoneNumberTwo != null)
+                    <li>
+                        <h4>@customer.DonorCustomer.FirstName @customer.DonorCustomer.LastName</h4>
+                    </li>
+                   
+                    <li><span class="name">Phone Number</span>: @customer.DonorCustomer.PhoneNumber</li>
+
+                    @if (customer.DonorCustomer.PhoneNumberTwo != null)
                     {
-                        <li><span class="name">Phone #2: </span>@result.DonorCustomer.PhoneNumberTwo</li>
+                        <li><span class="name">Second Phone Number</span>: @customer.DonorCustomer.PhoneNumberTwo</li>
                     }
+                    @if (customer.Address != null)
+                    {
+                    <li>
+                        <span class="name">Address</span>: @customer.Address.Street
+                        @if (customer.Address.Apartment != null)
+                        {
+                            @:#@customer.Address.Apartment
+                        }<br />
+                        @customer.Address.City @customer.Address.ZIP
+                    </li>}
                 </ul>
-                <p>
-                    <a href="JavaScript:void(0);"
-                       onclick="openInParent('/PickupDelivery/Address?customerId=@result.DonorCustomer.ID');">
-                        Use new address for this person.
-                    </a>
-                </p>
-
-                <div class="address-result">
-                    @for (int i = 0; i < result.Addresses.Count; i++)
-                    {
-                        var a = result.Addresses[i];
-                        int j = i + 1;
-                        <div class="address">
-                            <h4>Address @j </h4>
-                            <p>
-                                @a.Street @if (a.Apartment != null)
-                                {
-                                    @:# @a.Apartment
-                                }
-                                <br /> @a.City @a.ZIP
-                            </p>
-                            <p class="pickup-link">
-                                <a href="JavaScript:void(0);"
-                                   onclick="openInParent('/PickupDelivery/CreateNew?AddressId=@a.ID');">
-                                    Create new pickup using this address.
-                                </a>
-                            </p>
-                        </div>
-                    }
-                </div>
-
-            </div>}
-    </section>
+                <p><a asp-controller="Blacklist" asp-action="AddToBlacklist" asp-route-customerId="@customer.DonorCustomer.ID">
+                Blacklist this person.</a></p>
+            </li>
+        }
+    </ul>   
 }
-<script>
-    function openInParent(url) {
-        window.opener.location.href = url;
-        window.close();
-    }
-</script>
-
-

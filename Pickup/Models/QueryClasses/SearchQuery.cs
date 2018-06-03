@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pickup.Data;
+using Pickup.Models.BlacklistViewModels;
 using Pickup.Models.SearchViewModels;
 
 namespace Pickup.Models.QueryClasses
@@ -20,14 +21,14 @@ namespace Pickup.Models.QueryClasses
                                                  }).ToList();
         }
 
-        public IList<CustomerSearchResults> FullNameSearch(ApplicationDbContext context, string firstName, string lastName)
+        public IList<ViewBlacklistedViewModel> SearchAddToBlacklist(ApplicationDbContext context, string firstName, string lastName)
         {
             return (from dc in context.DonorsCustomers
                     where dc.FirstName == firstName && dc.LastName == lastName
-                    select new CustomerSearchResults
+                    select new ViewBlacklistedViewModel
                     {
                         DonorCustomer = dc,
-                        Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList()
+                        Address = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).FirstOrDefault()
                     }).ToList();
         }
 

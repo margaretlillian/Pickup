@@ -19,6 +19,7 @@ namespace Pickup.Controllers
         private readonly ApplicationDbContext context;
         ViewInformationQuery viewInformationQuery = new ViewInformationQuery();
         CheckForExistingQuery checkForExisting = new CheckForExistingQuery();
+        SearchQuery searchQuery = new SearchQuery();
 
         public BlacklistController(ApplicationDbContext applicationDbContext)
         {
@@ -27,13 +28,18 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            
-           return View(viewInformationQuery.ViewBlacklisted(context));
+            SearchToBlacklist model = new SearchToBlacklist()
+            {
+                Results = viewInformationQuery.ViewBlacklisted(context)
+            };
+           return View(model);
         }
 
-        public IActionResult Search()
+
+        public IActionResult SearchAdd(SearchToBlacklist model)
         {
-            return View(new SearchViewModel());
+            model.Results = searchQuery.SearchAddToBlacklist(context, model.FirstName, model.LastName);
+            return View(model);
         }
 
         public IActionResult AddToBlacklist(int customerId)
@@ -43,9 +49,7 @@ namespace Pickup.Controllers
                 return Redirect("/");
 
             AddtoBlacklistViewModel model = new AddtoBlacklistViewModel()
-            {
-                FirstName = donor.FirstName,
-                LastName = donor.LastName
+            {Customer = donor
             };
 
             return View(model);
@@ -54,12 +58,12 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult AddToBlacklist(AddtoBlacklistViewModel model)
         {
-            Blacklist checkBlacklist = checkForExisting.GetBlacklistedCustomer(context, model.CustomerID);
+            Blacklist checkBlacklist = checkForExisting.GetBlacklistedCustomer(context, model.Customer.ID);
             if (ModelState.IsValid && checkBlacklist == null)
             {
                 Blacklist blacklistedPerson = new Blacklist
                 {
-                    DonorCustomerID = model.CustomerID,
+                    DonorCustomerID = model.Customer.ID,
                     Reason = model.Reason
                 };
                 context.Add(blacklistedPerson);
