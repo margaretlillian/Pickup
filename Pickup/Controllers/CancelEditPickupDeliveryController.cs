@@ -7,6 +7,7 @@ using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.QueryClasses;
 using Pickup.Models.PickupDeliveryViewModels;
+using Pickup.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -75,8 +76,8 @@ namespace Pickup.Controllers
             CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
             FirstName = donorCustomer.FirstName,
             LastName = donorCustomer.LastName,
-            PhoneNumber = donorCustomer.PhoneNumber,
-            PhoneNumberTwo = donorCustomer.PhoneNumberTwo,
+            PhoneNumber = PhoneNumberFormatter.FormatPhoneNumber(donorCustomer.PhoneNumber),
+            PhoneNumberTwo = PhoneNumberFormatter.FormatPhoneNumber(donorCustomer.PhoneNumberTwo),
             FOT = donorCustomer.FOT};
             return View("PickupDelivery/Customer", model);
         }
@@ -91,8 +92,8 @@ namespace Pickup.Controllers
 
                 donorCustomer.FirstName = model.FirstName;
                 donorCustomer.LastName = model.LastName;
-                donorCustomer.PhoneNumber = model.PhoneNumber;
-                donorCustomer.PhoneNumberTwo = model.PhoneNumberTwo;
+                donorCustomer.PhoneNumber = PhoneNumberFormatter.FormatPhoneNumber(model.PhoneNumber);
+                donorCustomer.PhoneNumberTwo = PhoneNumberFormatter.FormatPhoneNumber(model.PhoneNumberTwo);
                 donorCustomer.Email = model.Email;
                 donorCustomer.FOT = model.FOT;
 
