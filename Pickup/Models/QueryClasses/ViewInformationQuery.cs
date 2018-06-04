@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models.QueryClasses
 {
-    public class ViewInformationQuery
+    internal class ViewInformationQuery
     {
         internal List<FurnitureListing> CreateFurnitureListQuery(ApplicationDbContext context, int id)
         {

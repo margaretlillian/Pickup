@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pickup.QueryClasses
 {
-    public class CalendarViewQuery
+    internal class CalendarViewQuery
     {
         
         internal IOrderedEnumerable<CalendarViewModel> CreateScheduleQuery(ApplicationDbContext context, string date)

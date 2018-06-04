@@ -8,7 +8,7 @@ using Pickup.Models.SearchViewModels;
 
 namespace Pickup.Models.QueryClasses
 {
-    public class SearchQuery
+    internal class SearchQuery
     {
         internal IList<CustomerSearchResults> NameSearch(ApplicationDbContext context, string firstName, string lastName)
         {

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models.QueryClasses
 {
-    public class CheckForExistingQuery
+    internal class CheckForExistingQuery
     {
         internal DonorCustomer GetCustomer(ApplicationDbContext context, int id)
         { return context.DonorsCustomers.Where(d => d.ID == id).FirstOrDefault(); }
 
-        public IList<DonorCustomer> GetCustomerByFullName(ApplicationDbContext context, string firstName, string lastName)
+        internal IList<DonorCustomer> GetCustomerByFullName(ApplicationDbContext context, string firstName, string lastName)
         {
             return context.DonorsCustomers
                   .Where(d => d.FirstName == firstName)
