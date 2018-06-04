@@ -17,7 +17,8 @@ namespace Pickup.Models.QueryClasses
                                                  select new CustomerSearchResults
                                                  {
                                                      DonorCustomer = dc,
-                                                     Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList()
+                                                     Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList(),
+                                                     IsBlacklisted = context.BlacklistedDonors.Any(b => b.DonorCustomerID == dc.ID)
                                                  }).ToList();
         }
 

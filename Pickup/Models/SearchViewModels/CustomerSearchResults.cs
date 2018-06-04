@@ -9,5 +9,7 @@ namespace Pickup.Models.SearchViewModels
     {
         public DonorCustomer DonorCustomer { get; set; }
         public IList<Address> Addresses { get; set; }
+
+        public bool IsBlacklisted { get; set; }
     }
 }
