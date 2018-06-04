@@ -137,7 +137,9 @@ h3.thetime {
 .pickups-5 {
     background: #6b9399;
 }
-
+.blacked-out {
+    background: #263136;
+}
 td div {
     padding: 5px;
     border-radius: 5px;

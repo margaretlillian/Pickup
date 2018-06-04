@@ -35,7 +35,7 @@
 <td>
 
 @if(date.Key.IsBlackedOut) {
- <div class="blacked-out">@date.Key.Date.Day</div>
+ <div class="blacked-out" title="This date has been blacked out.">@date.Key.Date.Day</div>
 }
 else { 
 <div class="pickups-@date.Value.Count">
