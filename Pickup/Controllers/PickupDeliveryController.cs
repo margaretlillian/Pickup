@@ -138,7 +138,6 @@ namespace Pickup.Controllers
 
             if (ModelState.IsValid)
             {
-                DateTime currentDate = DateTime.Now;
                 string scheduler = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 DateTime pickupDateTime = new DateTime(model.PickupDate.Year,
                     model.PickupDate.Month,
@@ -151,7 +150,7 @@ namespace Pickup.Controllers
 
                 {
                     Delivery = model.Delivery,
-                    ScheduleDateTime = currentDate,
+                    ScheduleDateTime = DateTime.Now,
                     PickupDateTime = pickupDateTime,
                     CallEnRoute = model.CallEnRoute,
                     SpecialInstructions = model.SpecialInstructions,

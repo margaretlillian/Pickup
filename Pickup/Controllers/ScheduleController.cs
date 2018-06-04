@@ -19,7 +19,8 @@ namespace Pickup.Controllers
     public class ScheduleController : Controller
     {
         private readonly ApplicationDbContext context;
-        CalendarViewQuery query = new CalendarViewQuery();
+        private CalendarViewQuery query = new CalendarViewQuery();
+        private CheckForExistingQuery checkForExisting = new CheckForExistingQuery();
 
         public ScheduleController(ApplicationDbContext applicationDbContext)
         {
@@ -37,13 +38,17 @@ namespace Pickup.Controllers
         public IActionResult Index(int weekId, bool popup)
         {
 
-            Dictionary<DateTime, IOrderedEnumerable<CalendarViewModel>> pickupsDates = new Dictionary<DateTime, IOrderedEnumerable<CalendarViewModel>>();
+            Dictionary<DateViewModel, IOrderedEnumerable<CalendarViewModel>> pickupsDates = new Dictionary<DateViewModel, IOrderedEnumerable<CalendarViewModel>>();
             for (int i = 1; i < 7; i++)
             {
                 DateTime theDate = DateTime.Today.AddDays(weekId - 1 * (int)(DateTime.Today.DayOfWeek - i));
                 IOrderedEnumerable<CalendarViewModel> results = query.CreateScheduleQuery(context, theDate.ToShortDateString());
-                
-                    pickupsDates.Add(theDate, results);
+                DateViewModel model = new DateViewModel
+                {
+                    Date = theDate,
+                    IsBlackedOut = checkForExisting.GetBlackoutDay(context, theDate.ToShortDateString())
+                };
+                    pickupsDates.Add(model, results);
                 
             }
 

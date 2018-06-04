@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models.QueryClasses;
@@ -15,14 +16,15 @@ namespace Pickup.Controllers
     public class CalendarViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext context;
-        CalendarViewQuery query = new CalendarViewQuery();
-        CheckForExistingQuery checkForExisting = new CheckForExistingQuery();
+        private CalendarViewQuery query = new CalendarViewQuery();
+        private CheckForExistingQuery checkForExisting = new CheckForExistingQuery();
 
         public CalendarViewComponent(ApplicationDbContext applicationDbContext)
         {
             context = applicationDbContext;
         }
         // GET: /<controller>/
+        [Authorize]
         public IViewComponentResult Invoke()
         {
             Dictionary<DateViewModel, IList<int>> pickupsDates = new Dictionary<DateViewModel, IList<int>>();

@@ -1,5 +1,5 @@
 ﻿@using Pickup.Models.ScheduleViewModels
-@model Dictionary<DateTime, IOrderedEnumerable<CalendarViewModel>>
+@model Dictionary<DateViewModel, IOrderedEnumerable<CalendarViewModel>>
 
 <h2>Schedule Matrix</h2>
 @{var week = Context.Request.Query["weekId"];
@@ -26,34 +26,39 @@
 
 
 <div id="schedulematrix">
-    @foreach (KeyValuePair<DateTime, IOrderedEnumerable<CalendarViewModel>> date in Model)
+    @foreach (KeyValuePair<DateViewModel, IOrderedEnumerable<CalendarViewModel>> date in Model)
 
-    {<section class="day" id="@date.Key.ToString("dddd").ToLower()">
-            <h3>@date.Key.ToString("dddd")</h3>
-            <h4 class="the-date">@date.Key.ToString("MMM dd")</h4>
-            <ul>
-                @foreach (var pickup in date.Value)
-                {@if (!pickup.PickupOrDelivery.Cancelled)
-{
-                    <li class="schedule">
-                        <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupOrDelivery.ID">
-                            <ul>
-                                <li><h3 class="thetime">@pickup.PickupOrDelivery.PickupDateTime.ToString("hh:mm tt")</h3></li>
-                                <li>@pickup.DonorCustomer.FirstName @pickup.DonorCustomer.LastName</li>
-                                <li>@pickup.Address.City</li>
-                                <li>@pickup.DonorCustomer.PhoneNumber </li>
-                                @if (pickup.PickupOrDelivery.Delivery)
-                                {
-                                    <li class="delivery">Delivery</li>
+    {
+    <section class="day" id="@date.Key.Date.ToString("dddd").ToLower()">
 
-                                }
-                            </ul>
-                        </a>
-                    </li>
+        <h3>@date.Key.Date.ToString("dddd")</h3>
+        <h4 class="the-date">@date.Key.Date.ToString("MMM dd")</h4>
+        @if (date.Key.IsBlackedOut)
+    {
+<p>This date has been blocked off. Do not schedule anything here. </p>}
+        <ul>
+            @foreach (var pickup in date.Value)
+        {@if (!pickup.PickupOrDelivery.Cancelled)
+        {
+            <li class="schedule">
+                <a asp-controller="Home" asp-action="View" asp-route-id="@pickup.PickupOrDelivery.ID">
+                    <ul>
+                        <li><h3 class="thetime">@pickup.PickupOrDelivery.PickupDateTime.ToString("hh:mm tt")</h3></li>
+                        <li>@pickup.DonorCustomer.FirstName @pickup.DonorCustomer.LastName</li>
+                        <li>@pickup.Address.City</li>
+                        <li>@pickup.DonorCustomer.PhoneNumber </li>
+                        @if (pickup.PickupOrDelivery.Delivery)
+                    {
+                        <li class="delivery">Delivery</li>
+
+                }
+                    </ul>
+                </a>
+            </li>
     }
 }
-            </ul>
-        </section>
+        </ul>
+    </section>
     }
 </div>
 
