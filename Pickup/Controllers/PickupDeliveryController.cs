@@ -145,9 +145,10 @@ namespace Pickup.Controllers
                     model.PickupTime.Hour,
                     model.PickupTime.Minute,
                     0);
+                if (query.GetBlackoutDay(context, pickupDateTime.ToShortDateString()))
+                    return View("BlackedOutDay");
 
                 PickupOrDelivery newPickup = new PickupOrDelivery
-
                 {
                     Delivery = model.Delivery,
                     ScheduleDateTime = DateTime.Now,
