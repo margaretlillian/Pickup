@@ -25,7 +25,7 @@ namespace Pickup.Models.QueryClasses
         internal PickupOrDelivery GetPickupOrDelivery(ApplicationDbContext context, int id)
         { return context.PickupsDeliveries.Where(p => p.ID == id).FirstOrDefault(); }
 
-        internal Blacklist GetBlacklistedCustomer(ApplicationDbContext context, int id)
+        internal Blacklist GetBlacklistedCustomerById(ApplicationDbContext context, int id)
         { return context.BlacklistedDonors.Where(b => b.DonorCustomerID == id).FirstOrDefault(); }
 
         internal IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)

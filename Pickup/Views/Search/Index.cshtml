@@ -28,28 +28,29 @@
     }
     @foreach (var result in Model.SearchResults)
     {<div class="donor-result">
-        <h3>@result.DonorCustomer.FirstName @result.DonorCustomer.LastName</h3>
-        <ul>
-            <li><span class="name">Phone Number: </span>@result.DonorCustomer.PhoneNumber</li>
-            @if (result.DonorCustomer.PhoneNumberTwo != null)
-            {
-                <li><span class="name">Phone #2: </span>@result.DonorCustomer.PhoneNumberTwo</li>
-            }
-        </ul>
+    <h3>@result.DonorCustomer.FirstName @result.DonorCustomer.LastName</h3>
+    <ul>
+        <li><span class="name">Phone Number: </span>@result.DonorCustomer.PhoneNumber</li>
+        @if (result.DonorCustomer.PhoneNumberTwo != null)
+        {
+            <li><span class="name">Phone #2: </span>@result.DonorCustomer.PhoneNumberTwo</li>
+        }
+    </ul>
+    @if (!result.IsBlacklisted)
+    {
         <p>
             <a href="JavaScript:void(0);"
                onclick="openInParent('/PickupDelivery/Address?customerId=@result.DonorCustomer.ID');">
                 Use new address for this person.
             </a>
-        </p>
 
-        <div class="address-result">
-            @for (int i = 0; i < result.Addresses.Count; i++)
-            {
-                var a = result.Addresses[i];
-                int j = i + 1;
-                <div class="address">
-                    <h4>Address @j </h4>
+        </p>
+        @for (int i = 0; i < result.Addresses.Count; i++)
+        {
+            var a = result.Addresses[i];
+            int j = i + 1;
+            <div class="address">
+                <h4>Address @j </h4>
                 <p>
                     @a.Street @if (a.Apartment != null)
                     {
@@ -64,10 +65,14 @@
                     </a>
                 </p>
             </div>
-            }
-        </div>
+        }
+        } 
 
-    </div>}
+    else
+    { <p class="blacklisted">This customer is blacklisted.</p>}
+    
+
+</div>}
 </section>
 }
 <script>

@@ -16,6 +16,6 @@ namespace Pickup.Models.SearchViewModels
 
         public int CustomerID { get; set; }
 
-        public IList<CustomerSearchResults> SearchResults { get; set; }
+        public List<CustomerSearchResults> SearchResults { get; set; }
     }
 }

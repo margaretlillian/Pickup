@@ -58,7 +58,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult AddToBlacklist(AddtoBlacklistViewModel model)
         {
-            Blacklist checkBlacklist = checkForExisting.GetBlacklistedCustomer(context, model.Customer.ID);
+            Blacklist checkBlacklist = checkForExisting.GetBlacklistedCustomerById(context, model.Customer.ID);
             if (ModelState.IsValid && checkBlacklist == null)
             {
                 Blacklist blacklistedPerson = new Blacklist
@@ -77,7 +77,7 @@ namespace Pickup.Controllers
         [Route("/Blacklisted")]
         public IActionResult BlacklistedCustomerTrigger(int customerId)
         {
-            return View(checkForExisting.GetBlacklistedCustomer(context, customerId));
+            return View(checkForExisting.GetBlacklistedCustomerById(context, customerId));
         }
 
         public IActionResult BlackoutDay()

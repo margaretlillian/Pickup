@@ -10,16 +10,33 @@ namespace Pickup.Models.QueryClasses
 {
     internal class SearchQuery
     {
-        internal IList<CustomerSearchResults> NameSearch(ApplicationDbContext context, string firstName, string lastName)
+        internal List<CustomerSearchResults> NameSearch(ApplicationDbContext context, string firstName, string lastName)
         {
-            return (from dc in context.DonorsCustomers
-                    where dc.FirstName == firstName || dc.LastName == lastName
-                                                 select new CustomerSearchResults
-                                                 {
-                                                     DonorCustomer = dc,
-                                                     Addresses = context.Addresses.Where(a => a.DonorCustomerID == dc.ID).ToList(),
-                                                     IsBlacklisted = context.BlacklistedDonors.Any(b => b.DonorCustomerID == dc.ID)
-                                                 }).ToList();
+            CheckForExistingQuery query = new CheckForExistingQuery();
+            IList<DonorCustomer> donorCustomers = context.DonorsCustomers
+                 .Where(d => d.FirstName == firstName || d.LastName == lastName).ToList();
+            List<CustomerSearchResults> searchResults = new List<CustomerSearchResults>();
+            foreach (var person in donorCustomers)
+            {
+                if (query.GetBlacklistedCustomerById(context, person.ID) != null)
+                {
+                    searchResults.Add(new CustomerSearchResults
+                    {
+                        DonorCustomer = person,
+                        Addresses = null,
+                        IsBlacklisted = true
+                    });
+                }
+                else
+                {
+                    searchResults.Add(new CustomerSearchResults
+                    {
+                        DonorCustomer = person,
+                        Addresses = context.Addresses.Where(a => a.DonorCustomerID == person.ID).ToList()
+                    });
+                }
+            }
+            return searchResults;
         }
 
         internal IList<ViewBlacklistedViewModel> SearchAddToBlacklist(ApplicationDbContext context, string firstName, string lastName)

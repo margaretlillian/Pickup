@@ -50,7 +50,7 @@ namespace Pickup.Controllers
                 DonorCustomer donor = searchQuery.SpecificCustomerSearch(context, model.FirstName, model.LastName, phone);
                 if (donor != null)
                 {
-                    if (query.GetBlacklistedCustomer(context, donor.ID) != null)
+                    if (query.GetBlacklistedCustomerById(context, donor.ID) != null)
                         return RedirectToAction("BlacklistedCustomerTrigger", "Blacklist", new {customerId = donor.ID });
 
                     return RedirectToAction("Address", new { customerId=donor.ID});
@@ -82,7 +82,7 @@ namespace Pickup.Controllers
             if (query.GetCustomer(context, customerId) == null)
                return Redirect("/");
             
-            if (query.GetBlacklistedCustomer(context, customerId) != null)
+            if (query.GetBlacklistedCustomerById(context, customerId) != null)
                 return RedirectToAction("BlacklistedCustomerTrigger", "Blacklist", new { customerId });
 
             return View("PickupDelivery/Address", new AddressViewModel());
