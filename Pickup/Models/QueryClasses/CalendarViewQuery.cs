@@ -1,4 +1,5 @@
 ﻿using Pickup.Data;
+using Pickup.Models.QueryClasses;
 using Pickup.Models.ScheduleViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,10 @@ namespace Pickup.QueryClasses
 {
     internal class CalendarViewQuery
     {
-        
+        CheckForExistingQuery query = new CheckForExistingQuery();
+
         internal IOrderedEnumerable<CalendarViewModel> CreateScheduleQuery(ApplicationDbContext context, string date)
-        {
+        { 
 
             var results = (from p in context.PickupsDeliveries
                            where p.PickupDateTime.ToShortDateString() == date
@@ -26,13 +28,14 @@ namespace Pickup.QueryClasses
                            }).ToList().OrderBy(p => p.PickupOrDelivery.PickupDateTime);
             return results;
         }
-        internal IList<MiniCalendarViewModel> MiniCalendarCountQuery(ApplicationDbContext context, string date)
+        internal IList<int> MiniCalendarCountQuery(ApplicationDbContext context, string date)
         {
+            var blackoutDay = query.GetBlackoutDay(context, date);
+            
             var results = (from p in context.PickupsDeliveries
                            where p.PickupDateTime.ToShortDateString() == date
                            where p.Cancelled == false
-                           select new MiniCalendarViewModel {
-                           PickupID = p.ID}).ToList();
+                           select p.ID).ToList();
             return results;
         }
     }

@@ -1,6 +1,6 @@
 ﻿
 @using Pickup.Models.ScheduleViewModels
-@model Dictionary<DateTime, IList<MiniCalendarViewModel>>
+@model Dictionary<DateViewModel, IList<int>>
 
 
 
@@ -20,39 +20,50 @@
         <td>Sa</td>
     </tr>
     <tr>
-        @foreach (KeyValuePair<DateTime, IList<MiniCalendarViewModel>> date in Model)
+        @foreach (KeyValuePair<DateViewModel, IList<int>> date in Model)
 
         {
-            int day = (int)date.Key.DayOfWeek;
-            @if (date.Key.Day == 1)
+            int day = (int)date.Key.Date.DayOfWeek;
+            @if (date.Key.Date.Day == 1)
             {
                 @for (int i = 0; i < day; i++)
                 {
                     <td></td>
                 }}
-            <td>
-                <div class="pickups-@date.Value.Count">
-                    @if (date.Value.Count > 0)
-    {
-                    <a href="/Schedule/DaySchedule?date=@date.Key.ToShortDateString()"
-                       target="popup"
-                       onclick="window.open('/Schedule/DaySchedule?date=@date.Key.ToShortDateString()',
-           'popup', 'width=600,height=600');
-    return false;" title="@date.Value.Count">
-                        @date.Key.Day
-                    </a>
-                 }
-else
-{
-                @date.Key.Day}
-                </div>
-            </td>
 
-            @if (date.Key.ToString("dddd") == "Saturday")
+<!--Begin date -->
+<td>
+
+@if(date.Key.IsBlackedOut) {
+ <div class="blacked-out">@date.Key.Date.Day</div>
+}
+else { 
+<div class="pickups-@date.Value.Count">
+
+    @if (date.Value.Count > 0)
+    {
+      <a href="/Schedule/DaySchedule?date=@date.Key.Date.ToShortDateString()"
+         target="popup"
+         onclick="window.open('/Schedule/DaySchedule?date=@date.Key.Date.ToShortDateString()',
+           'popup', 'width=600,height=600');
+          return false;" title="@date.Value.Count">
+                        @date.Key.Date.Day
+      </a>
+    }
+
+    else
+    {
+        @date.Key.Date.Day} 
+       </div>
+    }
+ </td>
+ <!-- End Date -->
+
+            @if (date.Key.Date.ToString("dddd") == "Saturday")
             {@:</tr>
             @:<tr>
             }
-        }
+        } 
     </tr>
 </table>
 

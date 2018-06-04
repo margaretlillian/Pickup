@@ -31,8 +31,8 @@ namespace Pickup.Models.QueryClasses
         internal IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
         { return context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == id).ToList(); }
 
-        internal BlackoutDays GetBlackoutDay(ApplicationDbContext context, string date)
-        { return context.BlackoutDays.Where(d => d.DateBlackedOut.ToShortDateString() == date).FirstOrDefault();   }
+        internal bool GetBlackoutDay(ApplicationDbContext context, string date)
+        { return context.BlackoutDays.Any(d => d.DateBlackedOut.ToShortDateString() == date);   }
 
 
     }

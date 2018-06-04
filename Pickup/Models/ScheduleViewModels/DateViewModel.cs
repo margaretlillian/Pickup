@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models.ScheduleViewModels
 {
-    public class MiniCalendarViewModel
+    public class DateViewModel
     {
-        public int PickupID { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsBlackedOut { get; set; }
     }
 }

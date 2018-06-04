@@ -90,7 +90,7 @@ namespace Pickup.Controllers
         [HttpPost]
         public IActionResult BlackoutDay(BlackoutDayViewModel model)
         {
-            if (!ModelState.IsValid && checkForExisting.GetBlackoutDay(context, model.BlackoutDate.ToShortDateString()) != null)
+            if (!ModelState.IsValid || checkForExisting.GetBlackoutDay(context, model.BlackoutDate.ToShortDateString()))
                 return View(model);
                     
             BlackoutDays blackout = new BlackoutDays
