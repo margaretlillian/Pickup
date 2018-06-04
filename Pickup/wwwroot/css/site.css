@@ -50,6 +50,12 @@ input, textarea, select, button, span.furn-item, .button {
     box-shadow: 3px 3px 5px #3f2f0d;
 }
 
+input, textarea, select {
+    width: 56%;
+}
+
+textarea {height: 50px;}
+
     input:hover, button:hover, .button:hover {
         background: #b56a02;
     }
@@ -179,9 +185,6 @@ footer {
     margin-top: 10px;
 }
 
-    #content input, #content textarea, #content select {
-        width: 56%;
-    }
 
     #content h2 {
         text-shadow: 3px 3px 3px #e5e1dc;
@@ -212,10 +215,6 @@ footer {
     clear: both;
 }
 
-#AddressId, #CustomerId {
-    display: none;
-}
-
 .button, .button:hover {padding: 10px;
                         color: #fff;
                         cursor: default;
@@ -231,3 +230,18 @@ padding: 10px;
     margin: 0 20px;
     padding: 0;
 }
+
+/* OTHER */
+.form-side {float: left;
+               margin-bottom: 16px;
+               margin-right: 0;
+}
+
+    .form-side label, .form-side input {
+        width: auto;
+        margin-right: 16px;
+   }
+
+.extra-padding {padding-bottom: 30px;}
+    
+

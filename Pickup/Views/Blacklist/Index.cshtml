@@ -3,6 +3,8 @@
 <h2>Blacklist</h2>
 
 <p>Customers who have been blacklisted are not allowed to be scheduled for any pickup or delivery.</p>
+
+<h3>Search for Customer to Blacklist</h3>
 <form asp-controller="Blacklist" asp-action="SearchAdd">
     <div class="form-side">
         <label asp-for="FirstName"></label>
@@ -15,12 +17,14 @@
     </div>
 
     <button type="submit" class="form-side">Search</button>
+
+    <br style="clear:both;" />
 </form><h3>Blacklisted Customers</h3>
 <ul>
 @foreach (var customer in Model.Results)
 { 
     <li>
-   <ul>
+   <ul class="extra-padding">
     <li>
        <h4>@customer.DonorCustomer.FirstName @customer.DonorCustomer.LastName</h4></li>
        <li><span class="name">Reason for blacklisting:</span> <br />
