@@ -51,7 +51,7 @@ namespace Pickup.Controllers
                 if (donor != null)
                 {
                     if (query.GetBlacklistedCustomer(context, donor.ID) != null)
-                        return Redirect("/");
+                        return RedirectToAction("BlacklistedCustomerTrigger", "Blacklist", new {customerId = donor.ID });
 
                     return RedirectToAction("Address", new { customerId=donor.ID});
                 }
@@ -80,7 +80,10 @@ namespace Pickup.Controllers
             ViewBag.Button = "Add " + ViewBag.Title;
 
             if (query.GetCustomer(context, customerId) == null)
-                return Redirect("/");
+               return Redirect("/");
+            
+            if (query.GetBlacklistedCustomer(context, customerId) != null)
+                return RedirectToAction("BlacklistedCustomerTrigger", "Blacklist", new { customerId });
 
             return View("PickupDelivery/Address", new AddressViewModel());
           

@@ -73,6 +73,12 @@ namespace Pickup.Controllers
             
             return View(model);
         }
+        
+        [Route("/Blacklisted")]
+        public IActionResult BlacklistedCustomerTrigger(int customerId)
+        {
+            return View(checkForExisting.GetBlacklistedCustomer(context, customerId));
+        }
 
         public IActionResult BlackoutDay()
         {
