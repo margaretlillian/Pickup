@@ -8,5 +8,6 @@ namespace Pickup.Models.ScheduleViewModels
     public class MiniCalendarViewModel
     {
         public int PickupID { get; set; }
+        public bool IsBlackedOut { get; set; }
     }
 }
