@@ -242,7 +242,7 @@ namespace Pickup.Controllers
                         FurnitureID = furniturePiece.ID,
                         Quantity = furniturePiece.Quantity
                     };
-                    context.Add(furnitureDonationPickup);
+                    context.Attach(furnitureDonationPickup);
                 }
             }
             context.SaveChanges();

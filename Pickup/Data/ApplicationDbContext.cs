@@ -18,6 +18,8 @@ namespace Pickup.Data
         public DbSet<FurnitureCategory> FurnitureCategories { get; set; }
         public DbSet<FurniturePickupOrDelivery> FurnitureDonationPickups { get; set; }
         public DbSet<Blacklist> BlacklistedDonors { get; set; }
+        public DbSet<BlackoutDays> BlackoutDays { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
