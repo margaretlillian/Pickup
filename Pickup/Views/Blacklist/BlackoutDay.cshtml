@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Pickup.Models.BlacklistViewModels.BlackoutDayViewModel
+
+<h2> Blackout Date</h2>
+<p> On days where we are closed or otherwise won't be staffed properly, 
+    blacking the date out will prevent schedulers from scheduling something that day and causing conflict. </p>
+
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="BlackoutDate"></label>
+        <input asp-for="BlackoutDate" />
+    </div>
+
+    <button type="submit">Blackout Date</button>
+</form>

@@ -79,10 +79,28 @@ namespace Pickup.Controllers
         {
             return View(checkForExisting.GetBlacklistedCustomerById(context, customerId));
         }
-
+        
+        [Route("/BlackoutDay")]
         public IActionResult BlackoutDay()
         {
-            return View();
+            return View(new BlackoutDayViewModel());
+        }
+
+        [Route("/BlackoutDay")]
+        [HttpPost]
+        public IActionResult BlackoutDay(BlackoutDayViewModel model)
+        {
+            if (!ModelState.IsValid && checkForExisting.GetBlackoutDay(context, model.BlackoutDate.ToShortDateString()) != null)
+                return View(model);
+                    
+            BlackoutDays blackout = new BlackoutDays
+                {DateBlackedOut = model.BlackoutDate};
+            context.Add(blackout);
+            context.SaveChanges();
+            return Redirect("/");
+          
+
+
         }
     }
 }
