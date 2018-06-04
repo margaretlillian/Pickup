@@ -8,7 +8,7 @@ namespace Pickup.Models.QueryClasses
 {
     public class CheckForExistingQuery
     {
-        public DonorCustomer GetCustomer(ApplicationDbContext context, int id)
+        internal DonorCustomer GetCustomer(ApplicationDbContext context, int id)
         { return context.DonorsCustomers.Where(d => d.ID == id).FirstOrDefault(); }
 
         public IList<DonorCustomer> GetCustomerByFullName(ApplicationDbContext context, string firstName, string lastName)
@@ -19,16 +19,16 @@ namespace Pickup.Models.QueryClasses
                   .ToList();
         }
 
-        public Address GetAddress(ApplicationDbContext context, int id)
+        internal Address GetAddress(ApplicationDbContext context, int id)
         { return context.Addresses.Where(a => a.ID == id).FirstOrDefault(); }
 
-        public PickupOrDelivery GetPickupOrDelivery(ApplicationDbContext context, int id)
+        internal PickupOrDelivery GetPickupOrDelivery(ApplicationDbContext context, int id)
         { return context.PickupsDeliveries.Where(p => p.ID == id).FirstOrDefault(); }
 
-        public Blacklist GetBlacklistedCustomer(ApplicationDbContext context, int id)
+        internal Blacklist GetBlacklistedCustomer(ApplicationDbContext context, int id)
         { return context.BlacklistedDonors.Where(b => b.DonorCustomerID == id).FirstOrDefault(); }
 
-        public IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
+        internal IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
         { return context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == id).ToList(); }
 
 

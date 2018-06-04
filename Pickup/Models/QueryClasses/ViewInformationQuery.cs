@@ -10,7 +10,7 @@ namespace Pickup.Models.QueryClasses
 {
     public class ViewInformationQuery
     {
-        public List<FurnitureListing> CreateFurnitureListQuery(ApplicationDbContext context, int id)
+        internal List<FurnitureListing> CreateFurnitureListQuery(ApplicationDbContext context, int id)
         {
             List<FurnitureListing> furnitureItems = (from fpd in context.FurnitureDonationPickups
                                                      join f in context.Furniture on fpd.FurnitureID equals f.ID
@@ -23,7 +23,7 @@ namespace Pickup.Models.QueryClasses
                                                          Description = fpd.Description
                                                      }).ToList();
 
-            var listItems = new List<FurnitureListing>();
+            List<FurnitureListing> listItems = new List<FurnitureListing>();
             foreach (var item in furnitureItems)
             {
                 listItems.Add(new FurnitureListing()
@@ -39,7 +39,7 @@ namespace Pickup.Models.QueryClasses
             return listItems;
         }
 
-        public IQueryable CreateQuery(ApplicationDbContext context)
+        internal IQueryable CreateQuery(ApplicationDbContext context)
         {
             IQueryable results =
             (from p in context.PickupsDeliveries
@@ -56,7 +56,7 @@ namespace Pickup.Models.QueryClasses
             return results;
         }
 
-        public IList<ViewBlacklistedViewModel> ViewBlacklisted(ApplicationDbContext context)
+        internal IList<ViewBlacklistedViewModel> ViewBlacklisted(ApplicationDbContext context)
         {
             return (from b in context.BlacklistedDonors
                     join dc in context.DonorsCustomers on b.DonorCustomerID equals dc.ID

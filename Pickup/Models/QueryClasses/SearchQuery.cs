@@ -10,7 +10,7 @@ namespace Pickup.Models.QueryClasses
 {
     public class SearchQuery
     {
-        public IList<CustomerSearchResults> NameSearch(ApplicationDbContext context, string firstName, string lastName)
+        internal IList<CustomerSearchResults> NameSearch(ApplicationDbContext context, string firstName, string lastName)
         {
             return (from dc in context.DonorsCustomers
                     where dc.FirstName == firstName || dc.LastName == lastName
@@ -21,7 +21,7 @@ namespace Pickup.Models.QueryClasses
                                                  }).ToList();
         }
 
-        public IList<ViewBlacklistedViewModel> SearchAddToBlacklist(ApplicationDbContext context, string firstName, string lastName)
+        internal IList<ViewBlacklistedViewModel> SearchAddToBlacklist(ApplicationDbContext context, string firstName, string lastName)
         {
             return (from dc in context.DonorsCustomers
                     where dc.FirstName == firstName && dc.LastName == lastName
@@ -32,14 +32,14 @@ namespace Pickup.Models.QueryClasses
                     }).ToList();
         }
 
-        public DonorCustomer SpecificCustomerSearch(ApplicationDbContext context, string firstName, string lastName, string phone)
+        internal DonorCustomer SpecificCustomerSearch(ApplicationDbContext context, string firstName, string lastName, string phone)
         {
             return (from dc in context.DonorsCustomers
                     where dc.FirstName == firstName && dc.LastName == lastName && dc.PhoneNumber == phone
                     select dc).FirstOrDefault();
         }
 
-        public Address SpecificAddressSearch(ApplicationDbContext context, string street, string apartment, string city, string zip)
+        internal Address SpecificAddressSearch(ApplicationDbContext context, string street, string apartment, string city, string zip)
         {
             return (from a in context.Addresses
                     where a.Street == street && a.Apartment == apartment && a.City == city && a.ZIP == zip
