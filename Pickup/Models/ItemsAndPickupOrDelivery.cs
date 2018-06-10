@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models
 {
-    public class FurniturePickupOrDelivery
+    public class ItemsAndPickupOrDelivery
     {
-        public int FurnitureID { get; set; }
-        public Furniture Furniture { get; set; }
+        public int ItemID { get; set; }
+        public ItemDonatedSold ItemsDonatedSold { get; set; }
 
-        public int DonationPickupID { get; set; }
-        public PickupOrDelivery DonationPickup { get; set; }
+        public int PickupDeliveryID { get; set; }
+        public PickupOrDelivery PickupDelivery { get; set; }
 
         public int Quantity { get; set; } //for Pickups
         public string Description { get; set; } //for Deliveries

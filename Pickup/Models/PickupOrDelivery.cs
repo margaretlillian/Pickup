@@ -27,6 +27,6 @@ namespace Pickup.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public IList<FurniturePickupOrDelivery> FurnitureDonationPickups { get; set; }
+        public IList<ItemsAndPickupOrDelivery> FurnitureDonationPickups { get; set; }
     }
 }

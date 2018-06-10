@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Pickup.Models
 {
-    public class FurnitureCategory
+    public class ItemCategory
     {
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public IList<Furniture> Furniture { get; set; }
+        public IList<ItemDonatedSold> ItemsDonatedSold { get; set; }
     }
 }

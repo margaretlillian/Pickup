@@ -201,20 +201,20 @@ namespace Pickup.Controllers
                 return Redirect("/");
 
             var model = new ItemPickupViewModel();
-            List<Furniture> furnitureItems = context.Furniture.ToList();
-            List<FurniturePickupOrDelivery> selectedPieces = context.FurnitureDonationPickups.Where(f => f.DonationPickupID == pd.ID).ToList();
+            List<ItemDonatedSold> furnitureItems = context.ItemsDonatedSold.ToList();
+            List<ItemsAndPickupOrDelivery> selectedPieces = context.ItemsPickupsDeliveries.Where(f => f.PickupDeliveryID == pd.ID).ToList();
             List<ItemQuantityList> quantityListItems = new List<ItemQuantityList>();
             foreach (var item in furnitureItems)
             {
                 quantityListItems.Add(new ItemQuantityList()
                 {
-                    CategoryID = item.FurnitureCategoryID,
+                    CategoryID = item.ItemCategoryID,
                     ID = item.ID,
                     Name = item.Name,
-                    Quantity = (from s in selectedPieces where s.FurnitureID == item.ID select s.Quantity).SingleOrDefault()
+                    Quantity = (from s in selectedPieces where s.ItemID == item.ID select s.Quantity).SingleOrDefault()
                 });
             }
-            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.FurnitureCategories
+            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.ItemCategories
                                           select new CategoryBlock
                                           {
                                               Category = fc,
@@ -228,18 +228,18 @@ namespace Pickup.Controllers
         [Route("/EditItems")]
         public IActionResult EditItems(ItemPickupViewModel model)
         {
-            var existingItems = context.FurnitureDonationPickups
-                .Where(f => f.DonationPickupID == model.PickupID).ToList();
+            var existingItems = context.ItemsPickupsDeliveries
+                .Where(f => f.PickupDeliveryID == model.PickupID).ToList();
             foreach (CategoryBlock categoryBlock in model.FurnitureList)
             {
                 List<ItemQuantityList> selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
                 foreach (ItemQuantityList furniturePiece in selectedFurniture)
                 {
 
-                    FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
+                    ItemsAndPickupOrDelivery furnitureDonationPickup = new ItemsAndPickupOrDelivery
                     {
-                        DonationPickupID = model.PickupID,
-                        FurnitureID = furniturePiece.ID,
+                        PickupDeliveryID = model.PickupID,
+                        ItemID = furniturePiece.ID,
                         Quantity = furniturePiece.Quantity
                     };
                     context.Attach(furnitureDonationPickup);

@@ -12,9 +12,9 @@ namespace Pickup.Models.QueryClasses
     {
         internal List<FurnitureListing> CreateFurnitureListQuery(ApplicationDbContext context, int id)
         {
-            List<FurnitureListing> furnitureItems = (from fpd in context.FurnitureDonationPickups
-                                                     join f in context.Furniture on fpd.FurnitureID equals f.ID
-                                                     where fpd.DonationPickupID == id
+            List<FurnitureListing> furnitureItems = (from fpd in context.ItemsPickupsDeliveries
+                                                     join f in context.ItemsDonatedSold on fpd.ItemID equals f.ID
+                                                     where fpd.PickupDeliveryID == id
                                                      select new FurnitureListing
                                                      {
                                                          Name = f.Name,

@@ -28,8 +28,8 @@ namespace Pickup.Models.QueryClasses
         internal Blacklist GetBlacklistedCustomerById(ApplicationDbContext context, int id)
         { return context.BlacklistedDonors.Where(b => b.DonorCustomerID == id).FirstOrDefault(); }
 
-        internal IList<FurniturePickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
-        { return context.FurnitureDonationPickups.Where(fpd => fpd.DonationPickupID == id).ToList(); }
+        internal IList<ItemsAndPickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
+        { return context.ItemsPickupsDeliveries.Where(fpd => fpd.PickupDeliveryID == id).ToList(); }
 
         internal bool GetBlackoutDay(ApplicationDbContext context, string date)
         { return context.BlackoutDays.Any(d => d.DateBlackedOut.ToShortDateString() == date);   }

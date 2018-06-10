@@ -14,9 +14,9 @@ namespace Pickup.Data
         public DbSet<DonorCustomer> DonorsCustomers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<PickupOrDelivery> PickupsDeliveries { get; set; }
-        public DbSet<Furniture> Furniture { get; set; }
-        public DbSet<FurnitureCategory> FurnitureCategories { get; set; }
-        public DbSet<FurniturePickupOrDelivery> FurnitureDonationPickups { get; set; }
+        public DbSet<ItemDonatedSold> ItemsDonatedSold { get; set; }
+        public DbSet<ItemCategory> ItemCategories { get; set; }
+        public DbSet<ItemsAndPickupOrDelivery> ItemsPickupsDeliveries { get; set; }
         public DbSet<Blacklist> BlacklistedDonors { get; set; }
         public DbSet<BlackoutDays> BlackoutDays { get; set; }
 
@@ -33,8 +33,8 @@ namespace Pickup.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<FurniturePickupOrDelivery>()
-                .HasKey(pickup => new { pickup.DonationPickupID, pickup.FurnitureID });
+            builder.Entity<ItemsAndPickupOrDelivery>()
+                .HasKey(pickup => new { pickup.PickupDeliveryID, pickup.ItemID });
         }
 
     }

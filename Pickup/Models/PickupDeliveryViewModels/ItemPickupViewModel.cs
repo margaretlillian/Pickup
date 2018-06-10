@@ -15,7 +15,7 @@ namespace Pickup.Models.PickupDeliveryViewModels
 
     public class CategoryBlock
     {
-        public FurnitureCategory Category { get; set; }
+        public ItemCategory Category { get; set; }
         public List<ItemQuantityList> Furniture { get; set; }
     }
 

@@ -178,19 +178,19 @@ namespace Pickup.Controllers
                 return Redirect("/");
 
             var model = new ItemPickupViewModel();
-            var furnitureItems = context.Furniture.ToList();
+            var furnitureItems = context.ItemsDonatedSold.ToList();
             var quantityListItems = new List<ItemQuantityList>();
             foreach (var item in furnitureItems)
             {
                 quantityListItems.Add(new ItemQuantityList()
                 {
-                    CategoryID = item.FurnitureCategoryID,
+                    CategoryID = item.ItemCategoryID,
                     ID = item.ID,
                     Name = item.Name,
                     Quantity = 0
                 });
             }
-            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.FurnitureCategories
+            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.ItemCategories
                                           select new CategoryBlock
                                           {
                                               Category = fc,
@@ -208,10 +208,10 @@ namespace Pickup.Controllers
                 var selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
                 foreach (var furniturePiece in selectedFurniture)
                 {
-                    FurniturePickupOrDelivery furnitureDonationPickup = new FurniturePickupOrDelivery
+                    ItemsAndPickupOrDelivery furnitureDonationPickup = new ItemsAndPickupOrDelivery
                     {
-                        DonationPickupID = model.PickupID,
-                        FurnitureID = furniturePiece.ID,
+                        PickupDeliveryID = model.PickupID,
+                        ItemID = furniturePiece.ID,
                         Quantity = furniturePiece.Quantity
                     };
                     context.Add(furnitureDonationPickup);
