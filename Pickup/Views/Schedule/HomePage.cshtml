@@ -2,6 +2,11 @@
 @model IOrderedEnumerable<CalendarViewModel>
 
 <h2>Welcome!</h2>
+<h3>Quick Links</h3>
+<ul>
+    <li><a href="#">Add Items/Categories.</a></li>
+    <li><a asp-controller="Blacklist" asp-action="BlackoutDay">Block out a date.</a></li>
+</ul>
    <h3>Today's Pickups and Deliveries</h3>
     @foreach (var item in Model)
     { 
@@ -17,7 +22,7 @@
            <li>@item.DonorCustomer.PhoneNumber</li>
            @if (item.PickupOrDelivery.Delivery)
         {
-           <li> Delivery</li>}
+           <li class="deliver"> Delivery</li>}
        </ul>
    </div>
 }
