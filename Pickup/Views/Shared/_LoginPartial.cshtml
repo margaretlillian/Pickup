@@ -4,8 +4,8 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-    @if (SignInManager.IsSignedIn(User))
-    {<nav id="top">
+@if (SignInManager.IsSignedIn(User))
+{<nav id="top">
         <ul id="navigation-bar">
             <li><a asp-controller="PickupDelivery" asp-action="Customer">New Pickup/Delivery</a></li>
             <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
@@ -14,7 +14,7 @@
 
 
     </nav>
-
+    
 
     <nav id="side">
 
@@ -42,8 +42,7 @@
 else
 { <nav id="top">
     </nav>
-
-
+   
     <nav id="side">
 
 

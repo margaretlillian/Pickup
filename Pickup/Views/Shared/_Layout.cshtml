@@ -20,12 +20,13 @@
 <body>
 
     <header><h1><a asp-controller="Home" asp-action="Index">Pickups and Deliveries</a></h1></header>
-   
     @await Html.PartialAsync("_LoginPartial")
+
     <div id="content">
         @RenderBody()
 
     </div>
+
     <footer>
         <p>&copy; 2018 <a href="https://github.com/margaretlillian">Margaret Kiley</a></p>
     </footer>

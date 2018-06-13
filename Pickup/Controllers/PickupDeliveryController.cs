@@ -80,7 +80,7 @@ namespace Pickup.Controllers
             ViewBag.Button = "Add " + ViewBag.Title;
 
             if (query.GetCustomer(context, customerId) == null)
-               return Redirect("/");
+               return View("ErrorPage");
             
             if (query.GetBlacklistedCustomerById(context, customerId) != null)
                 return RedirectToAction("BlacklistedCustomerTrigger", "Blacklist", new { customerId });
@@ -124,7 +124,7 @@ namespace Pickup.Controllers
             ViewBag.Button = "Create " + ViewBag.Title;
 
             if (query.GetAddress(context, addressId) == null)
-                return Redirect("/");
+                return View("ErrorPage");
 
             return View("PickupDelivery/CreateNew", new CreatePickupDeliveryViewModel());
 
@@ -175,7 +175,7 @@ namespace Pickup.Controllers
             ViewBag.Button = "Add " + ViewBag.Title;
 
             if (query.GetPickupOrDelivery(context, pickupId) == null || query.GetItemsPD(context, pickupId).Count > 0)
-                return Redirect("/");
+                return View("ErrorPage");
 
             var model = new ItemPickupViewModel();
             var furnitureItems = context.ItemsDonatedSold.ToList();

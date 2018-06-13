@@ -28,7 +28,7 @@ namespace Pickup.Controllers
         {
             PickupOrDelivery pickups = context.PickupsDeliveries.Where(pickup => pickup.ID == pid).FirstOrDefault();
             if (pickups == null)
-                return Redirect("/");
+                return View("ErrorPage");
             EditCancelViewModels model = (from p in context.PickupsDeliveries
                                           where p.ID == pid
                                           join a in context.Addresses on p.AddressID equals a.ID
@@ -71,7 +71,7 @@ namespace Pickup.Controllers
 
             DonorCustomer donorCustomer = query.GetCustomer(context, customerId);
             if (donorCustomer == null)
-                return Redirect("/");
+                return View("ErrorPage");
 
             CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
             FirstName = donorCustomer.FirstName,
@@ -109,7 +109,7 @@ namespace Pickup.Controllers
 
             Address address = query.GetAddress(context, addressId);
             if (address == null)
-                return Redirect("/");
+                return View("ErrorPage");
 
             AddressViewModel model = new AddressViewModel()
             {
@@ -154,7 +154,7 @@ namespace Pickup.Controllers
 
             PickupOrDelivery pickupOrDelivery = query.GetPickupOrDelivery(context, pid);
             if (pickupOrDelivery == null)
-                return Redirect("/");
+                return View("ErrorPage");
 
             CreatePickupDeliveryViewModel model = new CreatePickupDeliveryViewModel()
             {PickupId = pickupOrDelivery.ID,
@@ -198,7 +198,7 @@ namespace Pickup.Controllers
 
             PickupOrDelivery pd = query.GetPickupOrDelivery(context, pid);
             if (pd == null)
-                return Redirect("/");
+                return View("ErrorPage");
 
             var model = new ItemPickupViewModel();
             List<ItemDonatedSold> furnitureItems = context.ItemsDonatedSold.ToList();
