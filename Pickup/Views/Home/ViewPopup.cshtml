@@ -9,7 +9,7 @@
     <style>
         body {
             color: #000;
-            font-family: verdana;
+            font-family: arial;
             text-transform: uppercase;
         }
 
@@ -17,8 +17,11 @@
             border-width: 0 0 1px 0;
             border-color: #ccc;
             border-style: solid;
-            font-size: 16px;
+            font-size: 23px;
+            font-weight: bold;
+            text-transform: capitalize;
             display: inline-flex;
+            padding-left: 7px;
         }
 
         #donor-instructions {
@@ -44,7 +47,7 @@
             height: 10.5in;
             margin: auto;
             border: 1px solid #999;
-            background: #fff url('heplogo.png') no-repeat 10px 20px;
+            background: #fff url('/images/heplogoprintout.png') no-repeat 10px 20px;
         }
 
         ul {
@@ -105,19 +108,19 @@
         }
 
         #donor-firstname, #donor-lastname {
-            width: 2.55in;
+            width: 2.35in;
         }
 
         #donor-address {
-            width: 6.5in;
+            width: 6.3in;
         }
 
         #donor-city {
-            width: 170px;
+            width: 225px;
         }
 
         #donor-phone {
-            width: 140px;
+            width: 180px;
         }
 
         #donor-zip {
@@ -201,8 +204,8 @@
                 <p class="donor-info">
 
                     Address: <span class="info" id="donor-address">
-                    @Model.Address.Street @if (Model.Address.Apartment != null) {
-                        <span># @Model.Address.Apartment</span>
+                    @Model.Address.Street  @if (Model.Address.Apartment != null) {
+                        @:#@Model.Address.Apartment
                     }
                     </span>
                 </p>
@@ -210,20 +213,28 @@
                 <p class="donor-info">
 
                     City: <span class="info" id="donor-city">
-                    @Model.Address.City
+                        @Model.Address.City
                     </span>
 
                     ZIP: <span class="info" id="donor-zip">
-                    @Model.Address.ZIP
+                        @Model.Address.ZIP
                     </span>
 
+                    <span>Call en route: </span><input type="checkbox"
+                                                       @if (Model.PickupOrDelivery.CallEnRoute) { @: checked="checked"
+                                                       } id="call-donor">
+                </p>
+                <p class="donor-info">
 
                     Phone: <span class="info" name="donor-phone" id="donor-phone">
-                    @Model.DonorCustomer.PhoneNumber
+                        @Model.DonorCustomer.PhoneNumber
                     </span>
-                    @if (Model.PickupOrDelivery.CallEnRoute) {
-                            <span>Call en route: </span><input type="checkbox" checked="checked" id = "call-donor" > }
-                     </p>
+
+                    2nd Phone: <span class="info" name="donor-phone" id="donor-phone2">
+                        @Model.DonorCustomer.PhoneNumberTwo
+                    </span>
+
+                </p>
 
 
 
