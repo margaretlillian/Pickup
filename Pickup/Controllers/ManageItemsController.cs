@@ -47,5 +47,11 @@ namespace Pickup.Controllers
             }
             return View(model);
         }
+
+        public IActionResult AddItem()
+        {
+            AddItemViewModel model = new AddItemViewModel(context.ItemCategories.ToList());
+            return View(model);
+        }
     }
 }
