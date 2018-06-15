@@ -53,5 +53,24 @@ namespace Pickup.Controllers
             AddItemViewModel model = new AddItemViewModel(context.ItemCategories.ToList());
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Additem(AddItemViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ItemCategory itemCategory = context.ItemCategories.Single(category => category.ID == model.CategoryID);
+                ItemDonatedSold item = new ItemDonatedSold()
+                {
+                    Name = model.Name,
+                    ItemCategory = itemCategory
+                };
+                context.ItemsDonatedSold.Add(item);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }
