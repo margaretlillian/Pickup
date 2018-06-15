@@ -14,6 +14,7 @@ namespace Pickup.Models.ManageItemsViewModels
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Category")]
         public int CategoryID { get; set; }
         public List<SelectListItem> Categories { get; set; }
 
