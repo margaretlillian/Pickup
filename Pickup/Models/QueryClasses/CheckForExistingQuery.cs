@@ -29,7 +29,7 @@ namespace Pickup.Models.QueryClasses
         { return context.BlacklistedDonors.Where(b => b.DonorCustomerID == id).FirstOrDefault(); }
 
         internal IList<ItemsAndPickupOrDelivery> GetItemsPD(ApplicationDbContext context, int id)
-        { return context.ItemsPickupsDeliveries.Where(fpd => fpd.PickupDeliveryID == id).ToList(); }
+        { return context.ItemsPickupsDeliveries.Where(ipd => ipd.PickupDeliveryID == id).ToList(); }
 
         internal bool GetBlackoutDay(ApplicationDbContext context, string date)
         { return context.BlackoutDays.Any(d => d.DateBlackedOut.ToShortDateString() == date);   }

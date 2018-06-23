@@ -200,7 +200,8 @@ namespace Pickup.Controllers
             if (pd == null)
                 return View("ErrorPage");
 
-            var model = new ItemPickupViewModel();
+            var model = new ItemPickupViewModel() {
+            PickupID = pid};
             List<ItemDonatedSold> furnitureItems = context.ItemsDonatedSold.ToList();
             List<ItemsAndPickupOrDelivery> selectedPieces = context.ItemsPickupsDeliveries.Where(f => f.PickupDeliveryID == pd.ID).ToList();
             List<ItemQuantityList> quantityListItems = new List<ItemQuantityList>();
@@ -228,27 +229,20 @@ namespace Pickup.Controllers
         [Route("/EditItems")]
         public IActionResult EditItems(ItemPickupViewModel model)
         {
-            var existingItems = context.ItemsPickupsDeliveries
-                .Where(f => f.PickupDeliveryID == model.PickupID).ToList();
             foreach (CategoryBlock categoryBlock in model.FurnitureList)
             {
-                List<ItemQuantityList> selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
-                foreach (ItemQuantityList furniturePiece in selectedFurniture)
+                IList<ItemsAndPickupOrDelivery> existingItems = query.GetItemsPD(context, model.PickupID);
+                foreach (var item in existingItems)
                 {
+                    context.ItemsPickupsDeliveries.Remove(item);
 
-                    ItemsAndPickupOrDelivery furnitureDonationPickup = new ItemsAndPickupOrDelivery
-                    {
-                        PickupDeliveryID = model.PickupID,
-                        ItemID = furniturePiece.ID,
-                        Quantity = furniturePiece.Quantity
-                    };
-                    context.Attach(furnitureDonationPickup);
                 }
             }
             context.SaveChanges();
-            return Redirect("/View?id=" + model.PickupID);
+            return RedirectToAction("View", "Home", new { id = model.PickupID });
 
         }
+    }
 
     }
-}
+

@@ -36,7 +36,7 @@ namespace Pickup.Controllers
         {
             PickupOrDelivery individual = context.PickupsDeliveries.Where(p => p.ID == id).FirstOrDefault();
             if (individual == null)
-                return Redirect("/");
+              return View("ErrorPage");
 
             var results = query.CreateQuery(context).Cast<ViewInformationViewModel>().Where(p => p.PickupOrDelivery.ID == id).FirstOrDefault();
             results.Furniture = query.CreateFurnitureListQuery(context, id);
