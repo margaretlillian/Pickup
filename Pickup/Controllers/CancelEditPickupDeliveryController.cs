@@ -229,13 +229,22 @@ namespace Pickup.Controllers
         [Route("/EditItems")]
         public IActionResult EditItems(ItemPickupViewModel model)
         {
+            foreach (var existingItem in query.GetItemsPD(context, model.PickupID)) {
+                context.ItemsPickupsDeliveries.Remove(existingItem);
+                context.SaveChanges();
+            }
             foreach (CategoryBlock categoryBlock in model.FurnitureList)
             {
-                IList<ItemsAndPickupOrDelivery> existingItems = query.GetItemsPD(context, model.PickupID);
-                foreach (var item in existingItems)
+                var selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
+                foreach (var furniturePiece in selectedFurniture)
                 {
-                    context.ItemsPickupsDeliveries.Remove(item);
-
+                    ItemsAndPickupOrDelivery furnitureDonationPickup = new ItemsAndPickupOrDelivery
+                    {
+                        PickupDeliveryID = model.PickupID,
+                        ItemID = furniturePiece.ID,
+                        Quantity = furniturePiece.Quantity
+                    };
+                    context.Add(furnitureDonationPickup);
                 }
             }
             context.SaveChanges();
