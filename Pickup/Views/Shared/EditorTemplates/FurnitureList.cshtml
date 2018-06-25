@@ -1,9 +1,6 @@
 ﻿@model Pickup.Models.PickupDeliveryViewModels.ItemQuantityList
+
 <li>
-    <div class="numbers-row">
-    @Html.TextBoxFor(x => x.Quantity, new { @class = "quantity" })
         @Html.LabelFor(x => x.Quantity, Model.Name, new { @class = "furn-item" })
-    @Html.HiddenFor(x => x.ID)
-</div>
 </li>
 

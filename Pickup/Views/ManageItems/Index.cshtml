@@ -1,4 +1,4 @@
-﻿
+﻿@model Pickup.Models.PickupDeliveryViewModels.ItemPickupViewModel
 
 <h2> Manage Items </h2>
 
@@ -7,5 +7,16 @@
     <li><a asp-controller="ManageItems" asp-action="CreateCategory">Create category</a></li>
 </ul>
 
-<h3>Categories and Items </h3>
-<p>Each category will expand a list of items in said category.</p>
+<hr />
+
+@for (int i = 0; i < Model.FurnitureList.Count; i++)
+{
+    <h3>@Model.FurnitureList[i].Category.Name</h3>
+        <ul>
+   @for (int j = 0; j < Model.FurnitureList[i].Furniture.Count; j++)
+   {
+       <li>@Model.FurnitureList[i].Furniture[j].Name</li>
+
+   }
+        </ul>
+}

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.ManageItemsViewModels;
+using Pickup.Models.PickupDeliveryViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +24,26 @@ namespace Pickup.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+
+            var model = new ItemPickupViewModel();
+            var furnitureItems = context.ItemsDonatedSold.ToList();
+            var quantityListItems = new List<ItemQuantityList>();
+            foreach (var item in furnitureItems)
+            {
+                quantityListItems.Add(new ItemQuantityList()
+                {
+                    CategoryID = item.ItemCategoryID,
+                    Name = item.Name
+                });
+            }
+            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.ItemCategories
+                                                         select new CategoryBlock
+                                                         {
+                                                             Category = fc,
+                                                             Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
+                                                         }).ToList();
+            model.FurnitureList = itemsInCategoryBlock;
+            return View(model);
         }
 
         public IActionResult CreateCategory()
