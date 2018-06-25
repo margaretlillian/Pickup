@@ -64,7 +64,7 @@ namespace Pickup.Controllers
         }
 
         [Route("/EditCustomer")]
-        public IActionResult EditCustomer(int customerId)
+        public IActionResult EditCustomer(int customerId, int pickupId)
         {
             ViewBag.Title = "Edit Customer Information";
             ViewBag.Button = ViewBag.Title;
@@ -73,7 +73,8 @@ namespace Pickup.Controllers
             if (donorCustomer == null)
                 return View("ErrorPage");
 
-            CustomerViewModel model = new CustomerViewModel() { CustomerId = donorCustomer.ID,
+            CustomerViewModel model = new CustomerViewModel() { PickupID = pickupId,
+            CustomerId = donorCustomer.ID,
             FirstName = donorCustomer.FirstName,
             LastName = donorCustomer.LastName,
             PhoneNumber = PhoneNumberFormatter.FormatPhoneNumber(donorCustomer.PhoneNumber),
@@ -99,7 +100,7 @@ namespace Pickup.Controllers
 
                 context.SaveChanges();
 
-            return Redirect("/");
+            return RedirectToAction("Index", new { pickupId = model.PickupID });
         }
 
         [Route("/EditAddress")]
@@ -238,13 +239,13 @@ namespace Pickup.Controllers
                 var selectedFurniture = categoryBlock.Furniture.Where(y => y.Quantity > 0).ToList();
                 foreach (var furniturePiece in selectedFurniture)
                 {
-                    ItemsAndPickupOrDelivery furnitureDonationPickup = new ItemsAndPickupOrDelivery
+                    ItemsAndPickupOrDelivery itemsAndPickupOrDelivery = new ItemsAndPickupOrDelivery
                     {
                         PickupDeliveryID = model.PickupID,
                         ItemID = furniturePiece.ID,
                         Quantity = furniturePiece.Quantity
                     };
-                    context.Add(furnitureDonationPickup);
+                    context.Add(itemsAndPickupOrDelivery);
                 }
             }
             context.SaveChanges();

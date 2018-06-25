@@ -15,6 +15,9 @@ namespace Pickup.Models.PickupDeliveryViewModels
             [HiddenInput(DisplayValue = false)]
             public int CustomerId { get; set; }
 
+            [HiddenInput(DisplayValue = false)]
+            public int PickupID { get; set; }
+
             [Required]
             [Display(Name = "Address")]
             public string Street { get; set; }
