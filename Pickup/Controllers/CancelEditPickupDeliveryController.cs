@@ -100,11 +100,11 @@ namespace Pickup.Controllers
 
                 context.SaveChanges();
 
-            return RedirectToAction("Index", new { pickupId = model.PickupID });
+            return RedirectToAction("Index", new { pid = model.PickupID });
         }
 
         [Route("/EditAddress")]
-        public IActionResult EditAddress(int addressId)
+        public IActionResult EditAddress(int addressId, int pickupId)
         {  ViewBag.Title = "Edit Address Information";
             ViewBag.Button = ViewBag.Title;
 
@@ -114,6 +114,7 @@ namespace Pickup.Controllers
 
             AddressViewModel model = new AddressViewModel()
             {
+            PickupID = pickupId,
             AddressId = address.ID,
             Street = address.Street,
             Apartment = address.Apartment,
@@ -143,7 +144,7 @@ namespace Pickup.Controllers
 
             context.SaveChanges();
 
-            return Redirect("/");
+            return RedirectToAction("Index", new { pid = model.PickupID });
         }
 
 
@@ -188,7 +189,7 @@ namespace Pickup.Controllers
 
             context.SaveChanges();
 
-            return Redirect("/");
+            return RedirectToAction("Index", new { pid = model.PickupId });
         }
 
         [Route("/EditItems")]
@@ -249,7 +250,7 @@ namespace Pickup.Controllers
                 }
             }
             context.SaveChanges();
-            return RedirectToAction("View", "Home", new { id = model.PickupID });
+            return RedirectToAction("Index", new { pid = model.PickupID });
 
         }
     }
