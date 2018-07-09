@@ -91,8 +91,17 @@ namespace Pickup.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
-                       
+           
+            if (model.FullName != user.FullName)
+            {
+                user.FullName = model.FullName;
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting full name for user with ID '{user.Id}'.");
+                }
 
+            }
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

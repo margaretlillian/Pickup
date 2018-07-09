@@ -177,10 +177,10 @@ namespace Pickup.Controllers
             if (query.GetPickupOrDelivery(context, pickupId) == null || query.GetItemsPD(context, pickupId).Count > 0)
                 return View("ErrorPage");
 
-            var model = new ItemPickupViewModel();
-            var furnitureItems = context.ItemsDonatedSold.ToList();
-            var quantityListItems = new List<ItemQuantityList>();
-            foreach (var item in furnitureItems)
+            ItemPickupViewModel model = new ItemPickupViewModel();
+            List<ItemDonatedSold> furnitureItems = context.ItemsDonatedSold.ToList();
+            List<ItemQuantityList> quantityListItems = new List<ItemQuantityList>();
+            foreach (ItemDonatedSold item in furnitureItems)
             {
                 quantityListItems.Add(new ItemQuantityList()
                 {
@@ -190,11 +190,11 @@ namespace Pickup.Controllers
                     Quantity = 0
                 });
             }
-            IList<CategoryBlock> itemsInCategoryBlock = (from fc in context.ItemCategories
+            IList<CategoryBlock> itemsInCategoryBlock = (from itemCat in context.ItemCategories
                                           select new CategoryBlock
                                           {
-                                              Category = fc,
-                                              Furniture = quantityListItems.Where(f => f.CategoryID == fc.ID).ToList()
+                                              Category = itemCat,
+                                              Furniture = quantityListItems.Where(item => item.CategoryID == itemCat.ID).ToList()
                                           }).ToList();
             model.FurnitureList = itemsInCategoryBlock;
             return View("PickupDelivery/ItemPickup", model);
