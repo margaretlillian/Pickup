@@ -95,7 +95,7 @@ namespace Pickup.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult CreateUser(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -114,9 +114,9 @@ namespace Pickup.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> CreateUser(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -125,15 +125,10 @@ namespace Pickup.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, model.RoleID);
                     _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return Redirect("/");
                 }
                 AddErrors(result);
             }
