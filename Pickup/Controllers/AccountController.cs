@@ -99,7 +99,7 @@ namespace Pickup.Controllers
         public IActionResult CreateUser(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            var roles = context.Roles.ToList();
+            var roles = context.Roles.Where(r => r.Name != "SuperAdmin").ToList();
             RegisterViewModel model = new RegisterViewModel()
             {
                 Roles = roles.Select(r =>
