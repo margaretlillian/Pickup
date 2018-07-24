@@ -8,11 +8,13 @@ using Pickup.Models;
 using Pickup.Models.QueryClasses;
 using Pickup.Models.PickupDeliveryViewModels;
 using Pickup.Services;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Pickup.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class CancelEditPickupDeliveryController : Controller
     {
         private readonly ApplicationDbContext context;

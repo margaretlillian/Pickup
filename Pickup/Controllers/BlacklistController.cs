@@ -15,7 +15,7 @@ using Pickup.Models.SearchViewModels;
 
 namespace Pickup.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Employee")]
     public class BlacklistController : Controller
     {
         private readonly ApplicationDbContext context;

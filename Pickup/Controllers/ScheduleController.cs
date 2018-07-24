@@ -15,7 +15,7 @@ using Pickup.QueryClasses;
 
 namespace Pickup.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Employee,Volunteer")]
     public class ScheduleController : Controller
     {
         private readonly ApplicationDbContext context;
