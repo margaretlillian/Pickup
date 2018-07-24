@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.AccountViewModels;
 using Pickup.Services;
@@ -20,6 +21,7 @@ namespace Pickup.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -29,12 +31,14 @@ namespace Pickup.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext applicationDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            context = applicationDbContext;
         }
 
         [TempData]
@@ -91,11 +95,22 @@ namespace Pickup.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        [Authorize(Roles = "Admin, SuperAdmin")]
+        public IActionResult CreateUser(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            var roles = context.Roles.ToList();
+            RegisterViewModel model = new RegisterViewModel()
+            {
+                Roles = roles.Select(r =>
+            new SelectListItem
+            {
+                Value = r.Name,
+                Text = r.Name
+            })
+            };
+
+            return View(model);
         }
 
         [HttpPost]
