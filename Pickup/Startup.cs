@@ -23,6 +23,45 @@ namespace Pickup
 
         public IConfiguration Configuration { get; }
 
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+
+            IdentityResult roleResult;
+
+            var superAdminRoleCheck = await RoleManager.RoleExistsAsync("SuperAdmin");
+            if (!superAdminRoleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+            }
+            ApplicationUser superUser = await UserManager.FindByEmailAsync("admin@admin.admin");
+            var SuperUser = new ApplicationUser();
+            await UserManager.AddToRoleAsync(superUser, "SuperAdmin");
+
+            var adminRoleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!adminRoleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            var employeeRoleCheck = await RoleManager.RoleExistsAsync("Employee");
+            if (!employeeRoleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+
+            var volunteerRoleCheck = await RoleManager.RoleExistsAsync("Volunteer");
+            if (!volunteerRoleCheck)
+            {
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Volunteer"));
+            }
+
+
+
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -40,7 +79,7 @@ namespace Pickup
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -63,6 +102,8 @@ namespace Pickup
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            CreateUserRoles(services).Wait();
+
         }
     }
 }

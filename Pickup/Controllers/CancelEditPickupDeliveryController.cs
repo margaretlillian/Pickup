@@ -48,7 +48,7 @@ namespace Pickup.Controllers
             if (model != null)
             return View(model);
 
-            return Redirect("/");
+            return View("ErrorPage");
         }
 
         [HttpPost]
