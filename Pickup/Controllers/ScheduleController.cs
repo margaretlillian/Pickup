@@ -29,6 +29,9 @@ namespace Pickup.Controllers
         [Route("/")]
         public IActionResult HomePage()
         {
+            if (User.IsInRole("SuperAdmin"))
+                return RedirectToAction("Index", "Admin");
+
             IOrderedEnumerable<CalendarViewModel> results = query.CreateScheduleQuery(context, DateTime.Today.ToShortDateString());
             return View(results);
         }

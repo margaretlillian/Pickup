@@ -93,50 +93,7 @@ namespace Pickup.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Admin,SuperAdmin")]
-        public IActionResult CreateUser(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            var roles = context.Roles.Where(r => r.Name != "SuperAdmin").ToList();
-            RegisterViewModel model = new RegisterViewModel()
-            {
-                Roles = roles.Select(r =>
-            new SelectListItem
-            {
-                Value = r.Name,
-                Text = r.Name
-            })
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin,SuperAdmin")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateUser(RegisterViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, model.RoleID);
-                    _logger.LogInformation("User created a new account with password.");
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToAction("Success");
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -256,6 +213,9 @@ namespace Pickup.Controllers
         [HttpGet]
         public IActionResult AccessDenied()
         {
+            if (User.IsInRole("SuperAdmin"))
+                return RedirectToAction("Index", "Admin");
+
             return View();
         }
 
