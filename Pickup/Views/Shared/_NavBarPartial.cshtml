@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Pickup.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+    <nav id="top">
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+        <ul id="navigation-bar">
+
+            @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+            {
+        <li><a asp-controller="PickupDelivery" asp-action="Customer">New Pickup/Delivery</a></li>
+            <li><a asp-controller="Blacklist" asp-action="Index">Blacklist</a></li>
+            }
+
+            <li><a asp-controller="Schedule" asp-action="Index">Schedule Matrix</a></li>
+
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+    {
+        <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
+}
+
+        </ul>
+
+
+            }
+        
+        </nav>
