@@ -1,0 +1,11 @@
+﻿@model ApplicationUser
+
+<h2>Confirm Deactivation</h2>
+
+<form method="post">
+    <input asp-for="@Model.Id" type="hidden" />
+    <p>Are you sure you want to deactivate @Model.UserName? This cannot be undone!</p>
+    <p><a asp-controller="Admin" asp-action="Index">I've changed my mind</a></p>
+    <button type="submit">Deactivate User </button>
+
+</form>

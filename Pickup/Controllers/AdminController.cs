@@ -95,9 +95,43 @@ namespace Pickup.Controllers
                 return View(usersInRole);
             }
 
-            return Redirect("ManageUsers");
+            return Redirect("Index");
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Deactivate(string userId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null || currentUser == user)
+                return Redirect("/");
+            return View(user);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Deactivate(ApplicationUser user)
+        {
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(user.Id);
+            if (ModelState.IsValid)
+            {
+                var oldRole = await _userManager.GetRolesAsync(currentUser);
+                foreach (var thing in oldRole)
+                {
+                    if (thing == "SuperAdmin")
+                        return Redirect("/");
+
+                    await _userManager.RemoveFromRoleAsync(currentUser, thing);
+                }
+                return Redirect("/");
+            }
+            return View();
+
+
+        }
+
 
         public IActionResult Success()
         {
