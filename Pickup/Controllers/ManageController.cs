@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.ManageViewModels;
 using Pickup.Services;
@@ -20,6 +21,7 @@ namespace Pickup.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -34,13 +36,16 @@ namespace Pickup.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext applicationDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            context = applicationDbContext;
+
         }
 
         [TempData]

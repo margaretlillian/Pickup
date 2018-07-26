@@ -14,7 +14,7 @@ namespace Pickup.Controllers
     {
 
 
-    [Authorize]
+    [Authorize(Roles = "Admin,SuperAdmin,Employee,Volunteer")]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext context;
