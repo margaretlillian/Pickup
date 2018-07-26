@@ -118,12 +118,12 @@ namespace Pickup.Controllers
             if (ModelState.IsValid)
             {
                 var oldRole = await _userManager.GetRolesAsync(currentUser);
-                foreach (var thing in oldRole)
+                foreach (var specificRole in oldRole)
                 {
-                    if (thing == "SuperAdmin")
+                    if (specificRole == "SuperAdmin")
                         return Redirect("/");
 
-                    await _userManager.RemoveFromRoleAsync(currentUser, thing);
+                    await _userManager.RemoveFromRoleAsync(currentUser, specificRole);
                 }
                 return Redirect("/");
             }
