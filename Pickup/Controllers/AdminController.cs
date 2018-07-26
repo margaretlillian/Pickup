@@ -10,9 +10,10 @@ using Microsoft.Extensions.Logging;
 using Pickup.Data;
 using Pickup.Models;
 using Pickup.Models.AccountViewModels;
+using Pickup.Models.AdminViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+//  1c9b3d12-6f57-48b5-b8c8-3bd121d44dd6
 namespace Pickup.Controllers
 {
     [Authorize(Roles = "Admin,SuperAdmin")]
@@ -75,6 +76,27 @@ namespace Pickup.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public IActionResult ManageUsers(string roleId)
+        {
+            if (roleId != "1c9b3d12-6f57-48b5-b8c8-3bd121d44dd6")
+            {
+                var usersInRole = (from ur in context.UserRoles
+                             join u in context.Users on ur.UserId equals u.Id
+                             where ur.RoleId == roleId
+                             select new ViewUsersViewModel()
+                             {
+                                 Email = u.Email,
+                                 Username = u.UserName,
+                                 UserId = u.Id
+
+                             }).ToList();
+                return View(usersInRole);
+            }
+
+            return Redirect("ManageUsers");
+
         }
 
         public IActionResult Success()
