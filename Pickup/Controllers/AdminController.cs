@@ -33,8 +33,8 @@ namespace Pickup.Controllers
         }
         // GET: /<controller>/
         public IActionResult Index()
-        {
-            return View();
+        { var roles = context.Roles.ToList();
+            return View(roles);
         }
         [HttpGet]
         public IActionResult CreateUser(string returnUrl = null)
