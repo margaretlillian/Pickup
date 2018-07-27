@@ -62,7 +62,7 @@ namespace Pickup.Controllers
             pickupOrDelivery.Cancelled = true;
 
             context.SaveChanges();
-            return Redirect("/");
+            return RedirectToAction("Index", new { pid = pickupOrDelivery.ID });
         }
 
         [Route("/EditCustomer")]
@@ -102,7 +102,7 @@ namespace Pickup.Controllers
 
                 context.SaveChanges();
 
-            return RedirectToAction("Index", new { pid = model.PickupID });
+            return RedirectToAction("View", "Home", new { pid = model.PickupID });
         }
 
         [Route("/EditAddress")]
@@ -146,7 +146,7 @@ namespace Pickup.Controllers
 
             context.SaveChanges();
 
-            return RedirectToAction("Index", new { pid = model.PickupID });
+            return RedirectToAction("View", "Home", new { pid = model.PickupID });
         }
 
 
@@ -191,7 +191,7 @@ namespace Pickup.Controllers
 
             context.SaveChanges();
 
-            return RedirectToAction("Index", new { pid = model.PickupId });
+            return RedirectToAction("View", "Home", new { pid = model.PickupId });
         }
 
         [Route("/EditItems")]
@@ -252,7 +252,7 @@ namespace Pickup.Controllers
                 }
             }
             context.SaveChanges();
-            return RedirectToAction("Index", new { pid = model.PickupID });
+            return RedirectToAction("View", "Home", new { pid = model.PickupID });
 
         }
     }

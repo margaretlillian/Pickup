@@ -11,5 +11,6 @@ namespace Pickup.Models.SearchViewModels
         public IList<Address> Addresses { get; set; }
 
         public bool IsBlacklisted { get; set; }
+        public string Reason { get; set; }
     }
 }

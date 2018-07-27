@@ -18,13 +18,15 @@ namespace Pickup.Models.QueryClasses
             List<CustomerSearchResults> searchResults = new List<CustomerSearchResults>();
             foreach (var person in donorCustomers)
             {
-                if (query.GetBlacklistedCustomerById(context, person.ID) != null)
+                var blacklist = query.GetBlacklistedCustomerById(context, person.ID);
+                if (blacklist != null)
                 {
                     searchResults.Add(new CustomerSearchResults
                     {
                         DonorCustomer = person,
                         Addresses = null,
-                        IsBlacklisted = true
+                        IsBlacklisted = true,
+                        Reason = blacklist.Reason
                     });
                 }
                 else
